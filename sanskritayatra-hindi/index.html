@@ -2963,11 +2963,11 @@ function render(){
   app.appendChild(masthead);
 
   const langRow=document.createElement('div'); langRow.className='btnrow'; langRow.style.margin='0 0 14px';
-  const enBtn=document.createElement('button'); enBtn.type='button'; enBtn.className='btn ghost'; enBtn.textContent='🇬🇧 English meanings';
-  enBtn.title='अंग्रेज़ी मदद वाली कॉपी खोलो';
+  const enBtn=document.createElement('button'); enBtn.type='button'; enBtn.className='btn ghost'; enBtn.textContent='🇬🇧 Learn in English';
+  enBtn.title='Open Learn in English';
   enBtn.onclick=()=>{ window.location.href=OTHER_HREF; };
   const hiBtn=document.createElement('button'); hiBtn.type='button'; hiBtn.className='btn'; hiBtn.textContent='🇮🇳 हिन्दी में सीखें';
-  hiBtn.title='तुम हिन्दी-मदद वाली कॉपी पर हो';
+  hiBtn.title='तुम हिन्दी में सीखें पर हो';
   langRow.appendChild(enBtn); langRow.appendChild(hiBtn);
   app.appendChild(langRow);
 
