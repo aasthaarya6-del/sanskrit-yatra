@@ -94,6 +94,15 @@ body.music-on .float-notes{display:block;}
   padding:14px 18px;margin-bottom:16px;font-size:16px;line-height:1.55;font-weight:700;
 }
 .welcomebox strong{color:var(--grape);}
+.sarvam-desk{
+  background:#eef8ff;border:3px solid var(--peacock);border-radius:22px;
+  padding:14px 18px;margin-bottom:16px;
+}
+.sarvam-desk h3{font-family:'Fredoka',sans-serif;margin:0 0 6px;font-size:20px;}
+.sarvam-desk textarea{
+  width:100%;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;margin:8px 0;
+  font-family:'Nunito','Noto Sans Devanagari',sans-serif;font-size:16px;font-weight:700;min-height:84px;resize:vertical;
+}
 .overallbar{height:14px;background:#fff;border:3px solid var(--ink);border-radius:999px;overflow:hidden;margin-bottom:6px;}
 .overallbar>div{height:100%;background:var(--rainbow);transition:width .4s ease;}
 .progress-caption{font-size:14px;color:var(--ink-soft);font-weight:800;margin-bottom:0;}
@@ -377,7 +386,7 @@ button.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
 <body>
 <div class="float-notes" aria-hidden="true"><i>♪</i><i>♫</i><i>🎵</i><i>🪷</i><i>🦚</i><i>♪</i></div>
 <div class="wrap" id="app"></div>
-<script src="../sarvam.js"></script>
+<script src="sarvam.js"></script>
 <script>
 /* ===================== DATA ===================== */
 const ONES=["शून्यम्","एकम्","द्वे","त्रीणि","चत्वारि","पञ्च","षट्","सप्त","अष्ट","नव"];
@@ -3241,6 +3250,7 @@ function render(){
     ? `<strong>Garden map complete!</strong> You cleared all ${STORY_LEVELS.length} levels. Replay any level, hang out in the Story shelf, or tap <strong>Start again</strong> to reset and clear the whole map from Level 1. Use <strong>Free play</strong> if you want every level open, or <strong>Locked path</strong> to open them in order. New levels will arrive as you grow.<br><br><strong>Mayura the peacock</strong> and <strong>Shuka the parrot</strong> are your travel buddies. Tap them. Tiny Sanskrit. Enormous sparkle.`
     : `<strong>Sanskrit Yatra — a garden adventure.</strong> Music plays softly — tap <strong>🎵 Music on</strong> if you want it quiet. Choose <strong>Locked path</strong> to finish one level 🦚 before the next opens, or <strong>Free play</strong> to jump anywhere. Each level uses LSRW: <strong>Listen</strong> → <strong>Speak</strong> → <strong>Read</strong> → <strong>Write</strong>. A glowing 🔊 is a new word. Open <strong>श्लोकाः</strong> for tiny Panchatantra rhymes you can chant.<br><br><strong>Mayura the peacock</strong> and <strong>Shuka the parrot</strong> walk with you. Tap them. Then stand up and say the words — Sanskrit likes movers.`;
   app.appendChild(welcome);
+  if(window.Sarvam) Sarvam.mountDesk(app, COPY_ID, speak);
   const musicRow=document.createElement('div'); musicRow.className='btnrow'; musicRow.style.margin='0 0 16px';
   const bigMusic=document.createElement('button');
   bigMusic.type='button';

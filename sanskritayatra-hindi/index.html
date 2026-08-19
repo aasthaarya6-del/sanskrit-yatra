@@ -94,6 +94,15 @@ body.music-on .float-notes{display:block;}
   padding:14px 18px;margin-bottom:16px;font-size:16px;line-height:1.55;font-weight:700;
 }
 .welcomebox strong{color:var(--grape);}
+.sarvam-desk{
+  background:#eef8ff;border:3px solid var(--peacock);border-radius:22px;
+  padding:14px 18px;margin-bottom:16px;
+}
+.sarvam-desk h3{font-family:'Fredoka',sans-serif;margin:0 0 6px;font-size:20px;}
+.sarvam-desk textarea{
+  width:100%;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;margin:8px 0;
+  font-family:'Nunito','Noto Sans Devanagari',sans-serif;font-size:16px;font-weight:700;min-height:84px;resize:vertical;
+}
 .overallbar{height:14px;background:#fff;border:3px solid var(--ink);border-radius:999px;overflow:hidden;margin-bottom:6px;}
 .overallbar>div{height:100%;background:var(--rainbow);transition:width .4s ease;}
 .progress-caption{font-size:14px;color:var(--ink-soft);font-weight:800;margin-bottom:0;}
@@ -377,7 +386,7 @@ button.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
 <body>
 <div class="float-notes" aria-hidden="true"><i>♪</i><i>♫</i><i>🎵</i><i>🪷</i><i>🦚</i><i>♪</i></div>
 <div class="wrap" id="app"></div>
-<script src="../sarvam.js"></script>
+<script src="sarvam.js"></script>
 <script>
 /* ===================== DATA ===================== */
 const ONES=["शून्यम्","एकम्","द्वे","त्रीणि","चत्वारि","पञ्च","षट्","सप्त","अष्ट","नव"];
@@ -3239,6 +3248,7 @@ function render(){
     ? `<strong>बगीचे का नक्शा पूरा!</strong> तुमने सभी ${STORY_LEVELS.length} स्तर पूरे कर लिए। कोई भी स्तर फिर खेलो, <strong>कथाएँ</strong> में बैठो, या <strong>फिर से शुरू</strong> से सब तारे मिटाओ। सारे स्तर एक साथ चाहिए तो <strong>सब खुले</strong> दबाओ; एक-एक करके खोलने हों तो <strong>क्रम से</strong> रखो। बड़े होने पर नए स्तर आएँगे।<br><br><strong>मयूर</strong> और <strong>शुक</strong> साथी हैं। उन्हें दबाओ। छोटी संस्कृत, बड़ी खुशी।`
     : `<strong>संस्कृत यात्रा — बगीचे का खेल।</strong> संगीत चल रहा है। शांत चाहिए तो <strong>🎵 संगीत चालू</strong> दबाओ। <strong>क्रम से</strong> खेलोगे तो एक स्तर 🦚 पूरा करने पर अगला खुलेगा। चाहो तो <strong>सब खुले</strong> से कहीं भी जा सकते हो। हर स्तर में चार काम हैं: <strong>सुनो</strong> → <strong>बोलो</strong> → <strong>पढ़ो</strong> → <strong>लिखो</strong>। चमकता 🔊 नया शब्द है। पंचतंत्र के छोटे श्लोक <strong>श्लोकाः</strong> में हैं।<br><br><strong>मयूर</strong> और <strong>शुक</strong> साथ चलते हैं। उन्हें दबाओ। फिर खड़े होकर शब्द बोलो — संस्कृत बोलने से ही आती है।`;
   app.appendChild(welcome);
+  if(window.Sarvam) Sarvam.mountDesk(app, COPY_ID, speak);
   const musicRow=document.createElement('div'); musicRow.className='btnrow'; musicRow.style.margin='0 0 16px';
   const bigMusic=document.createElement('button');
   bigMusic.type='button';
