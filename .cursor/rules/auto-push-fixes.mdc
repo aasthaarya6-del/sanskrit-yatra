@@ -1,0 +1,14 @@
+---
+description: After a fix, commit and push to origin main without waiting to be asked.
+alwaysApply: true
+---
+
+# Auto-push after fixes
+
+When you finish a bugfix, copy tweak, or other working change in this repo:
+
+1. Commit the relevant files with a short why-focused message.
+2. Push to `origin` on the current branch (`main`) immediately.
+3. Do not wait for a separate “push” or “commit” message.
+
+Do not force-push. Do not skip hooks. Do not commit secrets (`.env`, credentials). If push fails, say so and stop.

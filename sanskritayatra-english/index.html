@@ -1244,24 +1244,7 @@ function sanskritForTTS(text){
   let t=toDevanagariSpeech(text);
   t=t.replace(/ं(?=\s|$|[।॥,.!?;:])/g,'म्');
   t=t.replace(/ः/g,'ह');
-  const RESP={
-    'अस्ति':'अस् ति','अस्मि':'अस् मि','असि':'अ सि','सन्ति':'सन् ति','स्मः':'स्म ह',
-    'नमस्ते':'न मस् ते','धन्यवादह':'धन्य वा द ह','पुनर्मिलामह':'पुनर् मिला मह',
-    'वेदार्कह':'वे दार् क ह','मयूरह':'म यू र ह','शुकह':'शु क ह',
-    'पञ्चवर्षीयह':'पञ्च वर्षीय ह','नववर्षीया':'नव वर्षी या','दशवर्षीया':'दश वर्षी या',
-    'क्रीडामि':'क्री डा मि','पश्यति':'प श्य ति','वदति':'व द ति','ददाति':'द दा ति',
-    'नृत्यति':'नृ त्य ति','गृह्णाति':'गृह्णा ति','खादति':'खा द ति','पिबति':'पि ब ति',
-    'उद्याने':'उद्या ने','कक्षायां':'कक्षा याम्','सरसि':'सर सि','जले':'ज ले',
-    'भूमौ':'भू मौ','आकाशे':'आका शे','वृक्षे':'वृ क्षे','गृहे':'गृ हे',
-    'मयूराय':'मयू राय','गवाक्षात्':'गवाक्षात्','उपरि':'उ प रि','अधुना':'अधु ना'
-  };
-  t=t.split(/(\s+)/).map(part=>{
-    const core=part.replace(/[।॥,.!?;:]+$/,'');
-    const tail=part.slice(core.length);
-    return (RESP[core]||core)+tail;
-  }).join('');
   t=t.replace(/[।॥]/g,'। ');
-  t=t.replace(/([^\s,।])\s+(?=[^\s])/g,'$1, ');
   return t.replace(/\s+/g,' ').trim();
 }
 function prepSanskritSpeech(text, indic){
@@ -1479,10 +1462,10 @@ function pumpSpeak(my){
   const indic=!!(voice && isIndicVoice(voice));
   const u=new SpeechSynthesisUtterance(prepSanskritSpeech(Speak.queue.shift(), indic));
   u.lang = 'hi-IN';
-  u.rate = Math.max(0.42, Math.min(0.72, Speak.rate));
+  u.rate = Math.max(0.6, Math.min(1.05, Speak.rate));
   u.pitch = 1.08;
   if(voice) u.voice=voice;
-  u.onend=()=>setTimeout(()=>pumpSpeak(my), 280);
+  u.onend=()=>setTimeout(()=>pumpSpeak(my), 80);
   u.onerror=()=>setTimeout(()=>pumpSpeak(my), 80);
   try{ window.speechSynthesis.speak(u); }
   catch(e){ pumpSpeak(my); }
@@ -1601,7 +1584,7 @@ const STORY_LEVELS=LEVELS.filter(m=>m.level);
 const state = {
   current:'namaste',
   done:new Set(),
-  rate:0.62,
+  rate:0.88,
   justCleared:null,
   lockHint:null,
   confirmReset:false,
@@ -1618,7 +1601,7 @@ function loadProgress(){
     if(state.done.size && !state.done.has('namaste')) state.done.add('namaste');
     if(d.current && LEVELS.some(m=>m.id===d.current)) state.current=d.current;
     if(typeof d.locksOn==='boolean') state.locksOn=d.locksOn;
-    if(typeof d.rate==='number' && d.rate>0) state.rate = d.rate>=0.75 ? 0.64 : Math.min(d.rate, 0.64);
+    if(typeof d.rate==='number' && d.rate>0) state.rate = d.rate < 0.58 ? 0.72 : 0.88;
     if(typeof d.musicOn==='boolean') state.musicOn=d.musicOn;
   }catch(e){}
 }
@@ -2158,7 +2141,7 @@ function renderSpeakAlong(card, phrases){
     const hear=document.createElement('button'); hear.className='btn ghost'; hear.textContent='🔊 Hear';
     hear.onclick=()=>speak(ph.sa);
     const slow=document.createElement('button'); slow.className='btn ghost'; slow.textContent='🐢 Slow';
-    slow.onclick=()=>speak(ph.sa, 0.55);
+    slow.onclick=()=>speak(ph.sa, 0.7);
     const said=document.createElement('button'); said.className='btn'; said.textContent='I said it ✓';
     const mic=document.createElement('button'); mic.className='btn ghost'; mic.textContent=canListen()?'🎤 I will say it':'🎤 Practise';
     const fb=document.createElement('div'); fb.className='qfeedback';
@@ -2195,7 +2178,7 @@ function renderEarPick(card, items){
     prog.textContent=`Listen ${idx+1} of ${items.length}`;
     box.appendChild(prog);
     const play=document.createElement('button'); play.className='btn'; play.textContent='🔊 Play';
-    play.onclick=()=>speak(item.say, Math.min(state.rate, 0.7));
+    play.onclick=()=>speak(item.say, state.rate);
     box.appendChild(play);
     const fb=document.createElement('div'); fb.className='qfeedback';
     item.opts.forEach((opt,i)=>{
@@ -2226,7 +2209,7 @@ function renderChant(card, parts, heading, help, meanings){
     let i=0;
     const step=()=>{
       if(i>=parts.length) return;
-      speak(parts[i], Math.min(state.rate, 0.65), ()=>setTimeout(()=>{ i++; step(); }, 220));
+      speak(parts[i], state.rate, ()=>setTimeout(()=>{ i++; step(); }, 140));
     };
     step();
   };
@@ -2282,7 +2265,7 @@ function renderListenAll(card, words){
     let i=0;
     const step=()=>{
       if(i>=words.length) return;
-      speak(words[i], Math.min(state.rate, 0.68), ()=>setTimeout(()=>{ i++; step(); }, 280));
+      speak(words[i], state.rate, ()=>setTimeout(()=>{ i++; step(); }, 140));
     };
     step();
   };
@@ -2347,9 +2330,9 @@ function renderShlokaCard(card, shloka, opts){
     <div class="shloka-en">${shloka.en}</div>`;
   const row=document.createElement('div'); row.className='btnrow'; row.style.marginTop='8px';
   const hear=document.createElement('button'); hear.className='btn'; hear.textContent='🔊 Hear the shloka';
-  hear.onclick=()=>speak(shloka.speak, Math.min(state.rate, 0.62));
+  hear.onclick=()=>speak(shloka.speak, state.rate);
   const slow=document.createElement('button'); slow.className='btn ghost'; slow.textContent='🐢 Slow chant';
-  slow.onclick=()=>speak(shloka.speak, 0.48);
+  slow.onclick=()=>speak(shloka.speak, 0.72);
   row.appendChild(hear); row.appendChild(slow);
   box.appendChild(row);
   const moral=document.createElement('div'); moral.className='moral';
@@ -2789,7 +2772,7 @@ function renderKatha(root){
   if(story.act) actBox(card, story.act);
   phase(card,'L','1 👂 Listen','Play the whole passage. Get the gist first. Act along if you like — Sanskrit likes movers.');
   const listenRow=document.createElement('div'); listenRow.className='btnrow';
-  const speakStory=()=>speak(story.text.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.55));
+  const speakStory=()=>speak(story.text.replace(/\s+/g,' ').trim(), state.rate);
   const spkBtn=document.createElement('button'); spkBtn.className='btn'; spkBtn.textContent='🔊 Listen to the whole story';
   spkBtn.onclick=speakStory;
   listenRow.appendChild(spkBtn);
@@ -2805,7 +2788,7 @@ function renderKatha(root){
     card.appendChild(song);
     const songRow=document.createElement('div'); songRow.className='btnrow';
     const hearSong=document.createElement('button'); hearSong.className='btn ghost'; hearSong.textContent='🔊 Hear the song';
-    hearSong.onclick=()=>speak(story.song.verses.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.72));
+    hearSong.onclick=()=>speak(story.song.verses.replace(/\s+/g,' ').trim(), state.rate);
     songRow.appendChild(hearSong);
     card.appendChild(songRow);
     renderSpeakAlong(card, story.song.lines);
@@ -3056,12 +3039,12 @@ function render(){
   const slowBtn=document.createElement('button'); slowBtn.className='btn ghost'; slowBtn.type='button'; slowBtn.textContent='🐢 Slow';
   const normBtn=document.createElement('button'); normBtn.className='btn'; normBtn.type='button'; normBtn.textContent='🚶 Normal';
   function syncSpeed(){
-    const slow=state.rate<0.58;
+    const slow=state.rate<0.8;
     slowBtn.className='btn'+(slow?'':' ghost');
     normBtn.className='btn'+(slow?' ghost':'');
   }
-  slowBtn.onclick=()=>{ state.rate=0.48; syncSpeed(); saveProgress(); };
-  normBtn.onclick=()=>{ state.rate=0.64; syncSpeed(); saveProgress(); };
+  slowBtn.onclick=()=>{ state.rate=0.72; syncSpeed(); saveProgress(); };
+  normBtn.onclick=()=>{ state.rate=0.88; syncSpeed(); saveProgress(); };
   syncSpeed();
   const musicBtn=document.createElement('button');
   musicBtn.type='button';
