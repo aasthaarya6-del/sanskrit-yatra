@@ -1,0 +1,3134 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>संस्कृत यात्रा — मज़ेदार संस्कृत सीखो</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;700;800&family=Noto+Sans+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2d2450;
+  --ink-soft:#5c5478;
+  --card:#fffdf8;
+  --sky:#7ec8ef;
+  --sun:#ffd45c;
+  --peach:#f08a72;
+  --berry:#e85a9a;
+  --grass:#2a9d8f;
+  --grape:#6d5ce0;
+  --leaf:#6fcf7a;
+  --saffron:#e8a03a;
+  --peacock:#1f8a7a;
+  --shadow: 4px 4px 0 rgba(47,40,84,0.16);
+  --rainbow:linear-gradient(90deg,#e07090 0%,#e8a03a 18%,#f4c95d 36%,#2a9d8f 54%,#3d7ea6 72%,#6d5ce0 88%,#e07090 100%);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:'Nunito','Noto Sans Devanagari',sans-serif;
+  background:
+    linear-gradient(180deg, rgba(232,160,58,0.18) 0%, rgba(244,201,93,0.14) 18%, transparent 36%),
+    radial-gradient(ellipse at 18% 8%, rgba(255,236,210,0.95) 0 180px, transparent 181px),
+    radial-gradient(ellipse at 88% 12%, rgba(232,247,242,0.85) 0 200px, transparent 201px),
+    linear-gradient(180deg,#fff4e8 0%,#f6eefe 42%,#e7f7f2 100%);
+}
+body::before,body::after{position:fixed;pointer-events:none;z-index:0;line-height:1;}
+body::before{content:"🦚"; top:14px;left:12px;font-size:44px;opacity:0.28;}
+body::after{content:"🪷"; bottom:16px;right:12px;font-size:48px;opacity:0.3;}
+.wrap{max-width:920px;margin:0 auto;padding:22px 16px 80px;position:relative;z-index:1;}
+.wrap::before{
+  content:"✨  🦚  🪷  ✨";
+  display:block;text-align:center;letter-spacing:0.55em;
+  font-size:16px;margin:0 0 12px;opacity:0.72;
+}
+.masthead{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(var(--card),var(--card)) padding-box, var(--rainbow) border-box;
+  border:4px solid transparent;border-radius:28px;
+  padding:16px 20px;box-shadow:var(--shadow);margin-bottom:16px;
+}
+.masthead h1{
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(26px,6vw,42px);
+  margin:0;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.masthead h1 span{color:var(--saffron);}
+.masthead .sub{font-size:15px;color:var(--ink-soft);font-weight:700;margin-top:4px;}
+.otto{
+  margin:8px 0 16px;padding:10px 14px;background:#fff8ef;
+  border:2px dashed #e8c9a8;border-radius:18px;
+  font-size:15px;font-weight:700;line-height:1.45;
+}
+.otto strong{color:#c47a3a;}
+.buddy{
+  font-size:52px;line-height:1;filter:drop-shadow(3px 3px 0 rgba(43,37,80,0.12));
+  animation:bob 2.8s ease-in-out infinite;cursor:pointer;
+}
+.buddies{display:flex;align-items:flex-end;gap:4px;}
+.buddy.peacock{font-size:58px;animation-delay:.4s;}
+.float-notes{display:none;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+body.music-on .float-notes{display:block;}
+.float-notes i{
+  position:absolute;bottom:-40px;font-style:normal;font-size:22px;opacity:0.38;
+  animation:riseNote 10s linear infinite;color:var(--grape);
+}
+.float-notes i:nth-child(1){left:6%; animation-duration:11s;}
+.float-notes i:nth-child(2){left:22%; animation-duration:8s; animation-delay:1.2s; font-size:18px;}
+.float-notes i:nth-child(3){left:40%; animation-duration:12s; animation-delay:2s;}
+.float-notes i:nth-child(4){left:58%; animation-duration:9s; animation-delay:.6s; font-size:26px;}
+.float-notes i:nth-child(5){left:74%; animation-duration:10s; animation-delay:1.8s;}
+.float-notes i:nth-child(6){left:88%; animation-duration:13s; animation-delay:2.4s; font-size:16px;}
+@keyframes riseNote{
+  0%{transform:translateY(0) rotate(0deg);opacity:0;}
+  12%{opacity:0.4;}
+  100%{transform:translateY(-110vh) rotate(18deg);opacity:0;}
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.rainbowbar{
+  height:10px;width:128px;border-radius:999px;overflow:hidden;margin-bottom:8px;
+  border:2px solid var(--ink); background:var(--rainbow);
+}
+.welcomebox{
+  background:#f3edff;border:3px solid var(--grape);border-radius:22px;
+  padding:14px 18px;margin-bottom:16px;font-size:16px;line-height:1.55;font-weight:700;
+}
+.welcomebox strong{color:var(--grape);}
+.overallbar{height:14px;background:#fff;border:3px solid var(--ink);border-radius:999px;overflow:hidden;margin-bottom:6px;}
+.overallbar>div{height:100%;background:var(--rainbow);transition:width .4s ease;}
+.progress-caption{font-size:14px;color:var(--ink-soft);font-weight:800;margin-bottom:0;}
+.progress-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.progress-tools .btn{padding:7px 14px;font-size:13px;}
+.journey{
+  display:flex;overflow-x:auto;gap:12px;padding:18px 10px 22px;margin-bottom:6px;scrollbar-width:thin;
+  background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:var(--shadow);position:relative;
+}
+.journey::before{
+  content:"";position:absolute;left:10px;right:10px;top:50%;height:10px;
+  transform:translateY(-50%);border-radius:999px;background:var(--rainbow);opacity:0.95;pointer-events:none;
+}
+.stamp{
+  flex:0 0 auto;width:108px;height:124px;border-radius:22px 22px 48px 48px;border:3px solid var(--ink);
+  background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;font-weight:800;text-align:center;padding:18px 6px 10px;
+  color:var(--ink); transition:transform .15s ease; position:relative;z-index:1;box-shadow:var(--shadow);
+}
+.stamp:nth-child(7n+1){background:#ffe4f0;}
+.stamp:nth-child(7n+2){background:#ffe8cc;}
+.stamp:nth-child(7n+3){background:#fff4b0;}
+.stamp:nth-child(7n+4){background:#d4f8e4;}
+.stamp:nth-child(7n+5){background:#d0f0ff;}
+.stamp:nth-child(7n+6){background:#e6dcff;}
+.stamp:nth-child(7n+7){background:#ffd8ee;}
+.stamp:hover{transform:translateY(-4px) scale(1.04);}
+.stamp .icon{font-size:26px;margin-bottom:2px;}
+.stamp .stampen{font-size:10px;font-weight:700;opacity:0.8;margin-top:1px;}
+.stamp.active{border-color:var(--berry);color:var(--berry);box-shadow:0 0 0 4px rgba(232,90,154,0.28);}
+.stamp.done{color:#1f8a72;}
+.stamp.done::after{content:"🦚";position:absolute;top:-10px;right:-4px;width:26px;height:26px;font-size:18px;display:flex;align-items:center;justify-content:center;}
+.stamp .lv{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  background:var(--peacock);color:#fff;font-size:10px;font-weight:800;
+  padding:2px 7px;border-radius:999px;border:2px solid var(--ink);white-space:nowrap;
+}
+.stamp.locked{opacity:0.5;cursor:not-allowed;filter:grayscale(.35);}
+.stamp.locked:hover{transform:none;}
+.stamp.extra{border-style:dashed;background:#fff;}
+.levelchip{
+  display:inline-block;font-size:13px;font-weight:800;letter-spacing:0.02em;
+  background:var(--grape);color:#fff;border:2.5px solid var(--ink);border-radius:999px;
+  padding:4px 12px;margin-bottom:8px;
+}
+.levelchip.extra{background:var(--peach);}
+.lockhint{
+  background:#fff3d6;border:3px dashed var(--sun);border-radius:16px;
+  padding:10px 14px;margin:0 0 14px;font-weight:800;font-size:15px;
+}
+.level-up{position:fixed;inset:0;background:rgba(43,37,80,0.5);z-index:80;display:flex;align-items:center;justify-content:center;padding:18px;}
+.level-up-card{
+  background:var(--card);border:4px solid var(--ink);border-radius:28px;
+  padding:28px 22px;max-width:420px;width:100%;text-align:center;box-shadow:var(--shadow);animation:pop .35s ease;
+}
+.level-up-card .burst{font-size:52px;line-height:1;margin-bottom:8px;}
+.level-up-card h3{font-family:'Fredoka',sans-serif;font-size:28px;margin:0 0 6px;}
+.level-up-card p{font-weight:800;color:var(--ink-soft);margin:0 0 16px;line-height:1.45;}
+@keyframes pop{from{transform:scale(.82);opacity:0}to{transform:scale(1);opacity:1}}
+.card{
+  background:linear-gradient(var(--card),var(--card)) padding-box, var(--rainbow) border-box;
+  border:4px solid transparent;border-radius:28px;padding:24px 24px 26px;box-shadow:var(--shadow);margin-bottom:18px;
+}
+.card h2{font-family:'Fredoka','Noto Sans Devanagari',sans-serif;font-size:clamp(24px,4vw,34px);margin:0 0 6px;}
+.card .tagline{color:var(--ink-soft);font-size:16px;margin-bottom:16px;font-weight:700;}
+.section-label{
+  display:inline-block;font-size:13px;letter-spacing:0.02em;font-weight:800;
+  color:#fff;background:var(--grape);margin:20px 0 12px;padding:6px 12px;border-radius:999px;border:2px solid var(--ink);
+}
+.section-label:first-of-type{margin-top:4px;}
+.tiles{display:flex;flex-wrap:wrap;gap:10px;}
+.tile{
+  display:flex;align-items:center;gap:8px;background:#fff;border:3px solid var(--ink);border-radius:18px;
+  padding:10px 12px;cursor:pointer;font-weight:800;font-size:16px;
+  transition:transform .12s ease; box-shadow:3px 3px 0 rgba(43,37,80,0.08);
+}
+.tile:hover{background:#fff6d6;transform:translateY(-2px);}
+.tile .en{font-weight:700;color:var(--ink-soft);font-size:13px;}
+.tile .rom{font-weight:700;color:var(--peacock);font-size:12px;}
+.tile.swatch{padding-left:10px;}
+.swatchdot{width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);display:inline-block;}
+table.conj{width:100%;border-collapse:separate;border-spacing:0;margin-top:6px;font-size:16px;overflow:hidden;border-radius:16px;border:3px solid var(--ink);}
+table.conj th{text-align:left;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:var(--peacock);padding:10px 10px;}
+table.conj td{padding:10px;border-bottom:2px solid #f0ecff;background:#fff;}
+table.conj tr:last-child td{border-bottom:none;}
+table.conj td.pron{font-weight:800;width:110px;}
+table.conj tr:hover td{background:#fff8e8;}
+.audio-td{cursor:pointer;width:44px;}
+button.btn{
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:16px;
+  background:var(--grape);color:#fff;border:3px solid var(--ink);border-radius:999px;
+  padding:11px 20px;cursor:pointer;box-shadow:4px 4px 0 rgba(47,40,84,0.18);
+}
+button.btn:hover{background:var(--berry);transform:translateY(-1px);}
+button.btn.ghost{background:#fff;color:var(--ink);border:3px solid var(--ink);}
+button.btn.ghost:hover{background:var(--sun);color:var(--ink);}
+button.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.spk{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;border:2.5px solid var(--ink);
+  background:var(--sun);cursor:pointer;font-size:15px;flex:0 0 auto;
+  vertical-align:middle;margin-left:4px;box-shadow:3px 3px 0 rgba(47,40,84,0.14);
+}
+.spk:hover{background:#ffe27a;transform:scale(1.08);}
+.spk.first-spk{animation:pulse 1.6s ease-in-out infinite;background:#ffe14a;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,209,102,0.7)}50%{box-shadow:0 0 0 6px rgba(255,209,102,0)}}
+.deword{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;}
+.deword .de{color:var(--peacock);font-family:'Noto Sans Devanagari',sans-serif;}
+.gloss{color:var(--ink-soft);font-weight:700;font-size:0.92em;white-space:normal;}
+.qwrap{background:#fbf4ee;border:2px dashed #e8c9b8;border-radius:20px;padding:16px 18px;margin-top:10px;}
+.qprompt{font-weight:800;font-size:18px;margin-bottom:12px;line-height:1.45;}
+.qopt{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  width:100%;text-align:left;background:#fff;border:3px solid var(--ink);
+  border-radius:16px;padding:11px 14px;margin-bottom:8px;cursor:pointer;font-size:16px;
+  font-family:'Nunito','Noto Sans Devanagari',sans-serif;font-weight:800;
+}
+.qopt:hover{background:#fff3d6;}
+.qopt.correct{background:#d8ffef;border-color:var(--grass);}
+.qopt.incorrect{background:#ffe0ea;border-color:var(--berry);}
+.qopt:disabled{cursor:default;}
+.qfeedback{font-size:15px;font-weight:800;margin-top:8px;}
+.qfeedback.ok{color:#0f8f84;}
+.qfeedback.bad{color:var(--berry);}
+.qfeedback.try{color:#b56a2c;}
+.progressline{font-size:13px;color:var(--ink-soft);margin-bottom:8px;font-weight:800;}
+.fillrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:16px;font-weight:700;}
+.fillrow input{
+  border:3px solid var(--ink);border-radius:12px;background:#fff;
+  font-family:'Fredoka','Noto Sans Devanagari',sans-serif;font-size:16px;font-weight:700;width:160px;padding:6px 8px;text-align:center;color:var(--ink);
+}
+.fillrow input:focus{outline:none;border-color:var(--berry);background:#fff8e8;}
+.fillrow input.ok{border-color:var(--grass);color:#0f8f84;background:#edfffb;}
+.fillrow input.bad{border-color:var(--berry);color:var(--berry);background:#fff0f6;}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.matchcol{display:flex;flex-direction:column;gap:8px;}
+.matchitem{
+  background:#fff;border:3px solid var(--ink);border-radius:16px;padding:10px 12px;
+  cursor:pointer;font-size:15px;font-weight:800;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.matchitem.sel{border-color:var(--sun);background:#fff3d6;}
+.matchitem.paired{border-color:var(--grass);background:#d8ffef;color:#0f8f84;cursor:default;}
+.matchitem.wrongflash{border-color:var(--berry);background:#ffe0ea;}
+.flashcard{
+  background:linear-gradient(180deg,#fffefb 0%,#f6ecd4 100%);
+  border:4px solid var(--ink);border-radius:28px;min-height:200px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  cursor:pointer;font-family:'Fredoka','Noto Sans Devanagari',sans-serif;font-size:32px;text-align:center;padding:20px;
+  box-shadow:var(--shadow);margin-bottom:16px;user-select:none;
+}
+.flashcard .hint{font-family:'Nunito',sans-serif;font-size:14px;color:var(--ink-soft);margin-top:10px;font-weight:800;}
+.flashnav{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink-soft);font-weight:800;}
+.passage{
+  background:#fffdf8;border:2px solid #eadfc8;border-radius:20px;
+  padding:22px 24px;font-size:22px;line-height:2;margin-bottom:12px;font-weight:600;
+  font-family:'Noto Sans Devanagari',sans-serif;text-align:justify;
+}
+.passage p{margin:0 0 1em;}
+.passage p:last-child{margin-bottom:0;}
+.story-shelf-label{font-family:'Fredoka',sans-serif;font-size:18px;margin:4px 0 8px;}
+.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:0 0 16px;}
+.story-card{
+  text-align:left;background:#fff;border:3px solid var(--ink);border-radius:18px;
+  padding:12px 14px;cursor:pointer;font-family:'Nunito',sans-serif;
+  box-shadow:3px 3px 0 rgba(43,37,80,0.08);
+}
+.story-card:nth-child(6n+1){background:#fff3b8;}
+.story-card:nth-child(6n+2){background:#ffd6ea;}
+.story-card:nth-child(6n+3){background:#c8f5dc;}
+.story-card:nth-child(6n+4){background:#c8ecff;}
+.story-card:nth-child(6n+5){background:#ffe0c4;}
+.story-card:nth-child(6n+6){background:#e0d4ff;}
+.story-card:hover{filter:brightness(1.03);transform:translateY(-2px);}
+.story-card.on{border-color:var(--berry);box-shadow:0 0 0 4px rgba(232,90,154,0.25);}
+.story-card .st{font-family:'Fredoka',sans-serif;font-size:16px;font-weight:700;display:block;margin-bottom:4px;}
+.story-card .sb{font-size:13px;font-weight:700;color:var(--ink-soft);line-height:1.35;display:block;}
+.songbox{
+  background:#f7f1e8;border:2px dashed #e5d7b4;border-radius:20px;
+  padding:16px 18px;margin:0 0 16px;white-space:pre-line;
+  font-family:'Noto Sans Devanagari',sans-serif;font-size:20px;font-weight:700;line-height:1.7;
+}
+.shloka-card{
+  background:linear-gradient(180deg,#fff8e4 0%,#f7ead0 100%);
+  border:3px solid var(--ink);border-radius:22px;padding:16px 18px;margin:12px 0 16px;
+  box-shadow:3px 3px 0 rgba(43,37,80,0.08);
+}
+.shloka-card .sh-kicker{
+  font-size:13px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;
+  color:#9a4b00;margin:0 0 6px;
+}
+.shloka-card h3{font-family:'Fredoka',sans-serif;font-size:20px;margin:0 0 8px;}
+.shloka-lines{
+  font-family:'Noto Sans Devanagari',sans-serif;font-size:clamp(20px,4vw,26px);
+  font-weight:700;line-height:1.85;text-align:center;margin:8px 0 10px;
+}
+.shloka-rom{text-align:center;font-weight:800;color:var(--peacock);font-size:14px;margin:0 0 8px;}
+.shloka-en{text-align:center;font-weight:700;color:var(--ink-soft);font-size:15px;margin:0 0 10px;line-height:1.45;}
+.moral{
+  background:#e8f7f0;border:3px dashed var(--peacock);border-radius:16px;
+  padding:12px 14px;font-weight:800;font-size:15px;line-height:1.5;margin:8px 0 0;
+}
+.moral strong{color:#1f8a7a;}
+.actbox{
+  background:#fff0f6;border:3px dashed var(--berry);border-radius:16px;
+  padding:12px 14px;margin:10px 0 14px;font-weight:800;font-size:15px;line-height:1.5;
+}
+.glossary-panel{background:#f4f0f8;border:2px solid #e2d8c8;border-radius:20px;padding:14px 16px;margin:0 0 16px;}
+.glossary-panel h3{font-family:'Fredoka',sans-serif;font-size:18px;margin:0 0 4px;}
+.glossary-panel .hint{font-size:14px;font-weight:700;color:var(--ink-soft);margin:0 0 12px;}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 12px;}
+.glossary-item{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #d8d0f5;border-radius:12px;padding:8px 10px;font-size:15px;font-weight:700;}
+.glossary-item strong{color:var(--peacock);font-family:'Noto Sans Devanagari',sans-serif;}
+.glossary-item .en{color:var(--ink-soft);font-weight:700;}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;background:var(--grass);color:#fff;
+  font-size:15px;font-weight:800;padding:8px 14px;border-radius:999px;margin-top:8px;border:3px solid var(--ink);
+}
+.explainer{background:#eef6f2;border:2px solid #c9dfd4;padding:14px 16px;border-radius:18px;font-size:16px;color:var(--ink);margin-bottom:16px;line-height:1.55;font-weight:700;}
+.explainer strong{color:#1f8a7a;}
+.tipbox{background:#f7f1e0;border:2px solid #e5d7b4;border-radius:18px;padding:14px 16px;margin-bottom:16px;font-size:16px;line-height:1.55;font-weight:700;}
+.tipbox strong{color:#9a4b00;}
+.note{font-size:15px;color:var(--ink-soft);margin:0 0 10px;font-weight:700;line-height:1.5;}
+.summarybox{background:#fff;border:3px solid var(--ink);border-radius:18px;padding:16px 18px;margin-top:14px;}
+.summaryrow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:2px solid #f0ecff;font-size:15px;font-weight:800;}
+.summaryrow:last-child{border-bottom:none;}
+.weak{color:var(--berry);font-weight:800;}
+.strong{color:#007a62;font-weight:800;}
+.speedbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.speedbar .lbl{font-size:12px;font-weight:800;color:var(--ink-soft);}
+.speedbar .btn{padding:7px 12px;font-size:13px;}
+.recapcard{border-color:#e8c9b8;background:#fbf4ee;}
+.speaklist{display:flex;flex-direction:column;gap:10px;}
+.speakrow{background:#fff;border:3px solid var(--ink);border-radius:18px;padding:12px 14px;}
+.speakrow .line-de{font-family:'Noto Sans Devanagari',sans-serif;font-size:22px;font-weight:700;}
+.speakrow .line-en{color:var(--ink-soft);font-size:14px;font-weight:700;margin:4px 0 10px;}
+.speakrow .listening{background:var(--berry)!important;color:#fff;}
+.lsrw-rail{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 16px;}
+.lsrw-pill{font-size:13px;font-weight:800;padding:7px 12px;border-radius:999px;border:2.5px solid var(--ink);box-shadow:2px 2px 0 rgba(43,37,80,0.08);}
+.lsrw-pill.L{background:#8fd6ff;}
+.lsrw-pill.S{background:#ffe14a;}
+.lsrw-pill.R{background:#7ee8a8;}
+.lsrw-pill.W{background:#ffb089;}
+.phase{margin:22px 0 12px;padding:12px 14px;border-radius:16px;border:3px solid var(--ink);font-family:'Fredoka',sans-serif;font-size:18px;font-weight:700;}
+.phase .phase-blurb{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--ink-soft);margin-top:4px;}
+.phase.L{background:#eaf4f8;}
+.phase.S{background:#f8f3e6;}
+.phase.R{background:#eaf5ef;}
+.phase.W{background:#f8eee8;}
+@media(max-width:600px){
+  .matchgrid{grid-template-columns:1fr;}
+  .card{padding:18px 14px;}
+  .buddy{font-size:40px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .buddy,.spk.first-spk,body::before,.float-notes i{animation:none;}
+  .float-notes{display:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="float-notes" aria-hidden="true"><i>♪</i><i>♫</i><i>🎵</i><i>🪷</i><i>🦚</i><i>♪</i></div>
+<div class="wrap" id="app"></div>
+<script>
+/* ===================== DATA ===================== */
+const ONES=["शून्यम्","एकम्","द्वे","त्रीणि","चत्वारि","पञ्च","षट्","सप्त","अष्ट","नव"];
+const TEENS=["दश","एकादश","द्वादश","त्रयोदश","चतुर्दश","पञ्चदश","षोडश","सप्तदश","अष्टादश","नवदश"];
+const TENS={20:"विंशतिः",30:"त्रिंशत्",40:"चत्वारिंशत्",50:"पञ्चाशत्",60:"षष्टिः",70:"सप्ततिः",80:"अशीतिः",90:"नवतिः"};
+const TENS_STEM={20:"विंशतिः",30:"त्रिंशत्",40:"चत्वारिंशत्",50:"पञ्चाशत्",60:"षष्टिः",70:"सप्ततिः",80:"अशीतिः",90:"नवतिः"};
+const COMPOUND_PREFIX=["","एक","द्वा","त्रयो","चतुर्","पञ्च","षड्","सप्त","अष्टा","नव"];
+function numberWord(n){
+  n=Number(n);
+  if(n<=9) return ONES[n];
+  if(n<=19) return TEENS[n-10];
+  if(n===100) return "शतम्";
+  const t=Math.floor(n/10)*10, u=n%10;
+  if(u===0) return TENS[t];
+  if(t===20) return COMPOUND_PREFIX[u]+"विंशतिः";
+  if(t===30) return (u===1?"एक":u===2?"द्वा":u===8?"अष्टा":ONES[u].replace(/म्$/,"").replace(/े$/,"े"))+"त्रिंशत्";
+  return ONES[u]+" च "+TENS[t];
+}
+function numberWordBig(n){
+  n=Number(n);
+  if(n<=100) return numberWord(n);
+  if(n<1000){
+    const h=Math.floor(n/100), rem=n%100;
+    const hundreds=["","शतम्","द्विशतम्","त्रिशतम्","चतुःशतम्","पञ्चशतम्","षट्शतम्","सप्तशतम्","अष्टशतम्","नवशतम्"];
+    return hundreds[h]+(rem?(" "+numberWord(rem)):"");
+  }
+  if(n<10000){
+    const th=Math.floor(n/1000), rem=n%1000;
+    const thousands=["","सहस्रम्","द्विसहस्रम्","त्रिसहस्रम्","चतुःसहस्रम्","पञ्चसहस्रम्","षट्सहस्रम्","सप्तसहस्रम्","अष्टसहस्रम्","नवसहस्रम्"];
+    return thousands[th]+(rem?(" "+numberWordBig(rem)):"");
+  }
+  return String(n);
+}
+
+const GREETINGS=[
+  ["नमस्ते","namaste","नमस्कार"],
+  ["नमस्कारः","namaskarah","नमस्कार (आदर से)"],
+  ["धन्यवादः","dhanyavadah","धन्यवाद"],
+  ["आम्","am","हाँ"],
+  ["न","na","नहीं"],
+  ["कृपया","kripaya","कृपया"],
+  ["पुनर्मिलामः","punarmilamah","फिर मिलेंगे"],
+  ["स्वागतम्","svagatam","स्वागत"]
+];
+const INTRO_NAME=[["मम नाम","mama nama","मेरा नाम है"],["अहम्","aham","मैं"],["वेदार्कः","vedarkah","वेदार्क"],["ऋषिका","rishika","ऋषिका"],["अर्जुनः","arjunah","अर्जुन"],["काव्या","kavya","काव्या"]];
+const INTRO_AGE=[["वर्षीयः","varshiyah","साल का (लड़का)"],["वर्षीया","varshiya","साल की (लड़की)"],["पञ्च","pancha","पाँच"],["दश","dasha","दस"],["एकादश","ekadasha","ग्यारह"],["द्वादश","dvadasha","बारह"]];
+const INTRO_CLASS=[["कक्षा","kaksha","कक्षा"],["पञ्चमी कक्षा","panchami kaksha","कक्षा 5"],["षष्ठी कक्षा","shashthi kaksha","कक्षा 6"],["सप्तमी कक्षा","saptami kaksha","कक्षा 7"]];
+const INTRO_RELIGION=[["धर्मः","dharmah","धर्म"],["हिन्दू","hindu","हिन्दू"],["मुस्लिम","muslim","मुस्लिम"],["ख्रीष्टीयः","khrishtiyah","ईसाई"],["सिखः","sikhah","सिख"],["बौद्धः","bauddhah","बौद्ध"]];
+const INTRO_HOBBIES=[["रुचिः","ruchih","शौक"],["पठनम्","pathanam","पढ़ना"],["चित्रकला","chitrakala","चित्र बनाना"],["नृत्यम्","nrityam","नृत्य"],["गानम्","ganam","गाना"],["क्रीडा","krida","खेल"]];
+const INTRO_EXTRA=[["अहं भारतात् आगच्छामि।","aham bharatat agacchami","मैं भारत से आता/आती हूँ।"],["मम प्रियः वर्णः","mama priyah varnah","मेरा पसंदीदा रंग"]];
+const COLORS=[
+  ["रक्तः","raktah","लाल","#c1272d"],["नीलः","nilah","नीला","#2856a8"],["हरितः","haritah","हरा","#3a7d5c"],
+  ["पीतः","pitah","पीला","#e0b23a"],["नारङ्गः","narangah","नारंगी","#e07a2c"],["धूम्रः","dhumrah","धूसर","#8a8f96"],
+  ["गुलाबी","gulabi","गुलाबी","#e07fa0"],["कपिलः","kapilah","भूरा","#7a5230"],["कृष्णः","krishnah","काला","#1e2a38"],
+  ["श्वेतः","shvetah","सफ़ेद","#f7f4ec"],["हरिद्वर्णः","haridvarnah","सुनहरा","#c9a227"]
+];
+const ADJ_PAIRS=[
+  ["महान्","mahan","बड़ा","लघुः","laghuh","छोटा"],
+  ["पुरातनः","puratanah","पुराना","नूतनः","nutanah","नया"],
+  ["शीघ्रः","shighrah","तेज़","मन्दः","mandah","धीमा"],
+  ["उष्णः","ushnah","गर्म","शीतः","shitah","ठंडा"],
+  ["सुन्दरः","sundarah","सुंदर","असुन्दरः","asundarah","सुंदर नहीं"],
+  ["उच्चः","ucchah","ऊँचा / ज़ोर","मृदुः","mriduh","मृदु / शांत"]
+];
+const FAMILY=[
+  ["कुटुम्बम्","kutumbam","परिवार"],["पिता","pita","पिता"],["माता","mata","माता"],
+  ["भ्राता","bhrata","भाई"],["भगिनी","bhagini","बहन"],["पितामहः","pitamahah","दादा"],
+  ["पितामही","pitamahi","दादी"],["मातुलः","matulah","मामा"],["पितृव्यः","pitrivyah","चाचा"],
+  ["पुत्रः","putrah","बेटा"],["पुत्री","putri","बेटी"],["मातापितरौ","matapitarau","माता-पिता"],["बालकाः","balakah","बच्चे"]
+];
+const PRONOUNS=[
+  ["अहम्","aham","मैं"],["त्वम्","tvam","तुम (एक)"],["सः","sah","वह (लड़का)"],["सा","sa","वह (लड़की)"],["तत्","tat","वह / यह"],
+  ["वयम्","vayam","हम"],["यूयम्","yuyam","तुम सब"],["ते","te","वे"]
+];
+const ASMI_ROWS=[
+  ["अहम्","अस्मि","मैं हूँ","aham asmi"],
+  ["त्वम्","असि","तुम हो","tvam asi"],
+  ["सः / सा / तत्","अस्ति","वह है","sah asti"],
+  ["वयम्","स्मः","हम हैं","vayam smah"],
+  ["यूयम्","स्थ","तुम सब हो","yuyam stha"],
+  ["ते","सन्ति","वे हैं","te santi"]
+];
+const VERB_ROWS=[
+  ["अहम्","गच्छामि","पठामि","खादामि","मैं जाता/पढ़ता/खाता हूँ"],
+  ["त्वम्","गच्छसि","पठसि","खादसि","तुम जाते/पढ़ते/खाते हो"],
+  ["सः","गच्छति","पठति","खादति","वह जाता/पढ़ता/खाता है"],
+  ["वयम्","गच्छामः","पठामः","खादामः","हम जाते/पढ़ते/खाते हैं"],
+  ["यूयम्","गच्छथ","पठथ","खादथ","तुम सब जाते/पढ़ते/खाते हो"],
+  ["ते","गच्छन्ति","पठन्ति","खादन्ति","वे जाते/पढ़ते/खाते हैं"]
+];
+
+const SHLOKAS=[
+  {
+    id:'udyama',
+    title:'केवल चाहना नहीं, करना',
+    kicker:'पंचतंत्र · प्रयास',
+    lines:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः ।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः ॥',
+    rom:'udyamena hi sidhyanti karyani na manorathaih\nna hi suptasya simhasya pravishanti mukhe mrigah',
+    speak:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।',
+    en:'काम से काम बनता है — सपनों से नहीं। हिरण सोते शेर के मुँह में नहीं घुसते।',
+    moral:'पानी की इच्छा से घड़ा नहीं भरता। करने से भरता है। उठो और कोशिश करो।',
+    chant:['उद्यमेन','हि','सिध्यन्ति','कार्याणि','न','मनोरथैः'],
+    missing:{q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','सिंहस्य'], a:0, audio:'कार्याणि'},
+    act:'पहली पंक्ति गाते हुए जगह पर कूच करो। दूसरी पर सोते शेर का आसन। (खर्राटे वैकल्पिक।)'
+  },
+  {
+    id:'samhati',
+    title:'साथ में हम बलवान',
+    kicker:'पंचतंत्र · एकता',
+    lines:'अल्पानामपि वस्तूनां संहतिः कार्यसाधिका ।\nतॄणैर्गुणत्वमापन्नैर्बध्यन्ते मत्तदन्तिनः ॥',
+    rom:'alpanam api vastunam samhatih karyasadhika\ntrinair gunatvam apannair badhyante mattadantinah',
+    speak:'अल्पानामपि वस्तूनां संहतिः कार्यसाधिका। तॄणैर्गुणत्वमापन्नैर्बध्यन्ते मत्तदन्तिनः।',
+    en:'छोटी चीज़ें भी साथ मिलकर काम पूरा करती हैं। घास की रस्सी जंगली हाथी बाँध सकती है।',
+    moral:'एक तिनका कमज़ोर। दोस्तों का गुच्छा बलवान। साथ रहो।',
+    chant:['अल्पानामपि','वस्तूनां','संहतिः','कार्यसाधिका'],
+    missing:{q:'अल्पानामपि वस्तूनां ___ कार्यसाधिका।', opts:['संहतिः','सिंहस्य','मनोरथैः'], a:0, audio:'संहतिः'},
+    act:'किसी का हाथ (या कोहनी) पकड़ो और संहतिः कहते हुए उछलो। इस शब्द का अर्थ “साथ रहना” है।'
+  },
+  {
+    id:'priya',
+    title:'मधुर वचन मुफ़्त हैं',
+    kicker:'पंचतंत्र · वाणी',
+    lines:'प्रियवाक्यप्रदानेन सर्वे तुष्यन्ति जन्तवः ।\nतस्मात् तदेव वक्तव्यं वचने का दरिद्रता ॥',
+    rom:'priyavakya-pradanena sarve tushyanti jantavah\ntasmat tad eva vaktavyam vachane ka daridrata',
+    speak:'प्रियवाक्यप्रदानेन सर्वे तुष्यन्ति जन्तवः। तस्मात् तदेव वक्तव्यं वचने का दरिद्रता।',
+    en:'मधुर वचन हर प्राणी को सुखी करते हैं। इसलिए बोलो। वाणी में गरीब क्यों बनो?',
+    moral:'अच्छे शब्द का दाम नहीं। खर्च करो। शुक को भी तारीफ़ पसंद है।',
+    chant:['प्रियवाक्यप्रदानेन','सर्वे','तुष्यन्ति','जन्तवः'],
+    missing:{q:'प्रियवाक्यप्रदानेन सर्वे ___ जन्तवः।', opts:['तुष्यन्ति','पतन्ति','खादन्ति'], a:0, audio:'तुष्यन्ति'},
+    act:'मुस्कुराओ, हाथ हिलाओ, और पहली पंक्ति पौधे, पालतू, या थोड़े उलझे बड़े से कहो।'
+  },
+  {
+    id:'mitram',
+    title:'मुसीबत में मित्र',
+    kicker:'पंचतंत्र · मित्रता',
+    lines:'आपत्काले तु संप्राप्ते यन्मित्रं मित्रमेव तत् ।',
+    rom:'apatkale tu sampraapte yan mitram mitram eva tat',
+    speak:'आपत्काले तु संप्राप्ते यन्मित्रं मित्रमेव तत्।',
+    en:'जब मुसीबत आए, जो साथ रहे वही सच्चा मित्र है।',
+    moral:'मित्र आम बाँटता है। सच्चा मित्र आखिरी आम भी बाँटता है।',
+    chant:['आपत्काले','तु','संप्राप्ते','यन्मित्रं','मित्रमेव','तत्'],
+    missing:{q:'आपत्काले तु संप्राप्ते यन्मित्रं ___ तत्।', opts:['मित्रमेव','सिंहमेव','आम्रमेव'], a:0, audio:'मित्रमेव'},
+    act:'दिल पर हाथ रखो और मित्रम् तीन बार बोलो। फिर एक सच्चे मित्र का नाम ज़ोर से लो।'
+  },
+  {
+    id:'simha',
+    title:'शेर का राज्याभिषेक नहीं होता',
+    kicker:'पंचतंत्र · साहस',
+    lines:'नाभिषेको न संस्कारः सिंहस्य क्रियते वने ।\nविक्रमार्जितसत्त्वस्य स्वयमेव मृगेन्द्रता ॥',
+    rom:'nabhisheko na samskarah simhasya kriyate vane\nvikramarjita-sattvasya svayam eva mrigendrata',
+    speak:'नाभिषेको न संस्कारः सिंहस्य क्रियते वने। विक्रमार्जितसत्त्वस्य स्वयमेव मृगेन्द्रता।',
+    en:'वन में शेर का राज्याभिषेक कोई नहीं करता। वीरता ही उसे पशुओं का राजा बनाती है।',
+    moral:'बहादुर होने के लिए पदक का इंतज़ार नहीं। अभ्यास करो। फिर चमकोगे।',
+    chant:['नाभिषेको','न','संस्कारः','सिंहस्य','क्रियते','वने'],
+    missing:{q:'नाभिषेको न संस्कारः ___ क्रियते वने।', opts:['सिंहस्य','मयूरस्य','शुकस्य'], a:0, audio:'सिंहस्य'},
+    act:'शेर की तरह सीधे खड़े हो (फर्नीचर पर दहाड़ मत)। पहली पंक्ति बोलो। फिर छोटी गर्व भरी सहमति।'
+  }
+];
+function shlokaById(id){ return SHLOKAS.find(s=>s.id===id); }
+
+const STORIES=[
+  {
+    id:'vedark',
+    title:'वेदार्कः और आम',
+    blurb:'वेदार्कः, एक बगीचा, एक गोल आम।',
+    shloka:'udyama',
+    act:'आम तोड़ने का नाटक। सूँघो। मयूर के साथ बाँटो (भले कमरे में केवल मोर-इमोजी हो)।',
+    text:`नमस्ते। मम नाम वेदार्कः अस्ति। अहं पञ्चवर्षीयः अस्मि। अहं उद्याने क्रीडामि। तत्र एकं पीतं आम्रं अस्ति।
+
+वेदार्कः आम्रं पश्यति। सः वदति — “इदं सुन्दरं आम्रम् अस्ति।” सः आम्रं न केवलं खादति। सः मयूराय अपि ददाति। मयूरः नृत्यति।`,
+    lines:[
+      {sa:"नमस्ते। मम नाम वेदार्कः अस्ति।", en:"नमस्ते। मेरा नाम वेदार्कः है।"},
+      {sa:"अहं पञ्चवर्षीयः अस्मि।", en:"मैं पाँच साल का हूँ।"},
+      {sa:"अहं उद्याने क्रीडामि।", en:"मैं बगीचे में खेलती हूँ।"},
+      {sa:"तत्र एकं पीतं आम्रं अस्ति।", en:"वहाँ एक पीला आम है।"},
+      {sa:"इदं सुन्दरं आम्रम् अस्ति।", en:"यह सुंदर आम है।"},
+      {sa:"सः मयूराय अपि ददाति।", en:"वह मोर को भी देता है।"}
+    ],
+    glossary:[["नमस्ते","नमस्कार"],["नाम","नाम"],["वेदार्कः","वेदार्कः"],["अस्ति","है"],["उद्यानम्","बगीचा"],["आम्रम्","आम"],["पीतम्","पीला"],["सुन्दरम्","सुंदर"],["ददाति","देता है"],["मयूरः","मोर"],["नृत्यति","नाचता है"]],
+    questions:[
+      {q:"वेदार्कः कतिवर्षीयः अस्ति?",opts:["पञ्च","दश","द्वादश"],a:0, audio:"वेदार्कः पञ्चवर्षीयः अस्ति"},
+      {q:"उद्याने किं अस्ति?",opts:["आम्रम्","गजः","नौका"],a:0, audio:"आम्रम्"},
+      {q:"आम्रस्य वर्णः कः?",opts:["रक्तः","पीतः","नीलः"],a:1, audio:"पीतम्"},
+      {q:"मयूरः किं करोति?",opts:["खादति","नृत्यति","पतति"],a:1, audio:"नृत्यति"}
+    ],
+    shuka:'वेदार्कः ने आम पाया और बाँटा। बाँटना एक महाशक्ति है। इससे मोर नाचते भी हैं। विज्ञान।'
+  },
+  {
+    id:'rishika',
+    title:'ऋषिका नमस्ते कहती है',
+    blurb:'ऋषिका अपना परिचय देती है — नाम, कक्षा, एक ज़ोरदार तोता।',
+    shloka:'priya',
+    act:'खड़े हो। वेदार्क-ढर्रे में अपना नाम: मम नाम … अस्ति। फिर झुको। दूसरी बार मसखरा तोता-आवाज़ हो तो और चमक।',
+    text:`नमस्ते। मम नाम ऋषिका अस्ति। अहं एकादशवर्षीया अस्मि। अहं पञ्चम्यां कक्षायां अस्मि। मम रुचिः गानम् अस्ति।
+
+ऋषिका शुकं पश्यति। सा वदति — “त्वं मित्रम् असि।” शुकः वदति — “आम्। त्वम् अपि मित्रम् असि। मम नाम शुकः अस्ति।” द्वे अपि हसतः।`,
+    lines:[
+      {sa:"नमस्ते। मम नाम ऋषिका अस्ति।", en:"नमस्ते। मेरा नाम ऋषिका है।"},
+      {sa:"अहं एकादशवर्षीया अस्मि।", en:"मैं ग्यारह साल की हूँ।"},
+      {sa:"अहं पञ्चम्यां कक्षायां अस्मि।", en:"मैं कक्षा 5 में हूँ।"},
+      {sa:"मम रुचिः गानम् अस्ति।", en:"मेरा शौक गाना है।"},
+      {sa:"त्वं मित्रम् असि।", en:"तुम मित्र हो।"}
+    ],
+    glossary:[["ऋषिका","ऋषिका"],["एकादश","ग्यारह"],["कक्षा","कक्षा"],["रुचिः","शौक"],["गानम्","गाना"],["मित्रम्","मित्र"],["हसतः","दोनों हँसते हैं"]],
+    questions:[
+      {q:"ऋषिकायाः नाम किम्?",opts:["वेदार्कः","ऋषिका","काव्या"],a:1, audio:"ऋषिका"},
+      {q:"सा कस्यां कक्षायां अस्ति?",opts:["पञ्चम्याम्","षष्ठ्याम्","सप्तम्याम्"],a:0, audio:"पञ्चम्यां कक्षायाम्"},
+      {q:"तस्याः रुचिः का?",opts:["पठनम्","गानम्","नृत्यम्"],a:1, audio:"गानम्"}
+    ],
+    shuka:'ऋषिका ने कहा मैं मित्र हूँ। मैंने कहा वह मित्र है। इसे कूटनीति कहते हैं। और यह सच भी है।'
+  },
+  {
+    id:'modaka',
+    title:'शुक और मोदक',
+    blurb:'एक तोता मोदक चाहता है। मोदक की अपनी राय है।',
+    act:'पेट सहलाओ और अहं मोदकं इच्छामि बोलो। फिर मयूर की तरह सिर हिलाओ: न तु मोदकः।',
+    text:`अहं शुकः अस्मि। अहं हरितः अस्मि। मम प्रियं भोजनं मोदकः अस्ति।
+
+अद्य एकः मोदकः मेजे अस्ति। शुकः वदति — “अहं मोदकं इच्छामि।” मयूरः वदति — “त्वं शुकः असि, न तु मोदकः।” शुकः हसति। सः मोदकं खादति। तत् मधुरं अस्ति।`,
+    lines:[
+      {sa:"अहं शुकः अस्मि।", en:"मैं शुक हूँ।"},
+      {sa:"अहं हरितः अस्मि।", en:"मैं हरा हूँ।"},
+      {sa:"मम प्रियं भोजनं मोदकः अस्ति।", en:"मेरा पसंदीदा भोजन मोदक है।"},
+      {sa:"अहं मोदकं इच्छामि।", en:"मैं मोदक चाहता हूँ।"},
+      {sa:"त्वं शुकः असि, न तु मोदकः।", en:"तुम तोता हो, मोदक नहीं।"}
+    ],
+    glossary:[["शुकः","तोता"],["हरितः","हरा"],["मोदकः","मोदक"],["इच्छामि","मैं चाहता हूँ"],["हसति","हँसता है"],["मधुरम्","मीठा"]],
+    questions:[
+      {q:"शुकस्य वर्णः कः?",opts:["रक्तः","हरितः","कृष्णः"],a:1, audio:"हरितः"},
+      {q:"शुकः किम् इच्छति?",opts:["मोदकम्","जलम्","पुस्तकम्"],a:0, audio:"मोदकम्"},
+      {q:"मयूरः किं वदति?",opts:["शुकः मोदकः अस्ति","त्वं शुकः असि","अहं खादामि"],a:1, audio:"त्वं शुकः असि"}
+    ],
+    shuka:'मैं तोता हूँ। मैं मोदक नहीं। यह ज़रूरी जानकारी है। और मोदक मैंने खा लिया।'
+  },
+  {
+    id:'padma',
+    title:'काव्या और लाल कमल',
+    blurb:'काव्या, एक तालाब, एक कमल, एक बहुत गर्वीला मेंढक।',
+    shloka:'simha',
+    act:'काल्पनिक कमल पर मेंढक बनकर बैठो। अहं राजा अस्मि बोलो। मयूर आए तो (धीरे) छप-छप।',
+    text:`काव्या सरः पश्यति। सरसि एकं रक्तं पद्मं अस्ति। तत् सुन्दरं अस्ति। एकः मण्डूकः पद्मस्य उपरि उपविशति। सः वदति — “अहं राजा अस्मि।”
+
+काव्या हसति। मयूरः आगच्छति। सः वदति — “त्वं मण्डूकः असि।” मण्डूकः हसति। सः जले पतति। पद्मं शान्तं अस्ति।`,
+    lines:[
+      {sa:"काव्या सरः पश्यति।", en:"काव्या तालाब देखती है।"},
+      {sa:"सरसि एकं रक्तं पद्मं अस्ति।", en:"तालाब में एक लाल कमल है।"},
+      {sa:"एकः मण्डूकः पद्मस्य उपरि उपविशति।", en:"कमल पर एक मेंढक बैठता है।"},
+      {sa:"अहं राजा अस्मि।", en:"मैं राजा हूँ।"},
+      {sa:"त्वं मण्डूकः असि।", en:"तुम मेंढक हो।"}
+    ],
+    glossary:[["काव्या","काव्या"],["सरस्","तालाब"],["पद्मम्","कमल"],["रक्तम्","लाल"],["मण्डूकः","मेंढक"],["राजा","राजा"],["उपविशति","बैठता है"],["पतति","गिरता है"]],
+    questions:[
+      {q:"का पश्यति?",opts:["वेदार्कः","काव्या","ऋषिका"],a:1, audio:"काव्या"},
+      {q:"पद्मस्य वर्णः कः?",opts:["नीलः","रक्तः","श्वेतः"],a:1, audio:"रक्तम्"},
+      {q:"मण्डूकः किं वदति?",opts:["अहं राजा अस्मि","अहं मीनः अस्मि","अहं पद्मम् अस्मि"],a:0, audio:"अहं राजा अस्मि"}
+    ],
+    shuka:'मेंढक ने राजा की अर्ज़ी दी। तालाब ने जवाब नहीं दिया। गुरुत्वाकर्षण ने दिया। असली राजा (श्लोक देखो) कमाते हैं।'
+  },
+  {
+    id:'kakaha',
+    title:'चतुर कौआ',
+    blurb:'एक प्यासा कौआ, एक घड़ा, और कंकड़ों का ढेर।',
+    shloka:'udyama',
+    act:'घड़े में कंकड़ डालने का नाटक। हर कंकड़ के बाद सिध्यन्ति बोलो। अंत में काल्पनिक कप पीओ।',
+    text:`एकः काकः अस्ति। सः तृषितः अस्ति। सः घटं पश्यति। घटे अल्पं जलं अस्ति।
+
+काकः न केवलं इच्छति। सः पाषाणान् आनयति। सः पाषाणान् घटे क्षिपति। जलं ऊर्ध्वं आगच्छति। काकः जलं पिबति। सः हृष्टः अस्ति।`,
+    lines:[
+      {sa:"एकः काकः अस्ति।", en:"एक कौआ है।"},
+      {sa:"सः तृषितः अस्ति।", en:"वह प्यासा है।"},
+      {sa:"घटे अल्पं जलं अस्ति।", en:"घड़े में थोड़ा पानी है।"},
+      {sa:"सः पाषाणान् घटे क्षिपति।", en:"वह घड़े में कंकड़ डालता है।"},
+      {sa:"काकः जलं पिबति।", en:"कौआ पानी पीता है।"}
+    ],
+    glossary:[["काकः","कौआ"],["तृषितः","प्यासा"],["घटः","घड़ा"],["जलम्","पानी"],["पाषाणः","कंकड़ / पत्थर"],["पिबति","पीता है"],["हृष्टः","खुश"]],
+    questions:[
+      {q:"काकः कीदृशः अस्ति?",opts:["तृषितः","क्रुद्धः","निद्रालुः"],a:0, audio:"तृषितः"},
+      {q:"सः किं क्षिपति?",opts:["पुष्पाणि","पाषाणान्","फलानि"],a:1, audio:"पाषाणान्"},
+      {q:"अन्ते काकः किं करोति?",opts:["जलं पिबति","नृत्यति","पतति"],a:0, audio:"पिबति"}
+    ],
+    shuka:'प्यास प्लस कंकड़ बराबर विज्ञान। चाहना प्लस बैठना बराबर अभी भी प्यासा कौआ। श्लोक देखो।'
+  },
+  {
+    id:'kapota',
+    title:'दो बकरे',
+    blurb:'पतला पुल। दो ज़िद्दी बकरे। गणित हो जाता है।',
+    shloka:'samhati',
+    act:'दरवाज़े की ओर चलो। रुको। दूसरे “बकरे” (भाई-बहन, कुर्सी, बहुत धैर्यवान बड़े) को पहले जाने दो। झुको। छप-छप मना।',
+    text:`नद्याः उपरि एका तनुः सेतुः अस्ति। द्वौ अजौ सेतौ मिलतः। एकः वदति — “अहं प्रथमः।” अपरः वदति — “न, अहं प्रथमः।”
+
+तौ न मिलतः। तौ कलहतः। सेतुः कम्पते। द्वौ अपि जले पततः। मत्स्याः हसन्ति।`,
+    lines:[
+      {sa:"नद्याः उपरि एका तनुः सेतुः अस्ति।", en:"नदी पर एक पतला पुल है।"},
+      {sa:"द्वौ अजौ सेतौ मिलतः।", en:"पुल पर दो बकरे मिलते हैं।"},
+      {sa:"अहं प्रथमः।", en:"मैं पहला हूँ।"},
+      {sa:"द्वौ अपि जले पततः।", en:"दोनों पानी में गिरते हैं।"}
+    ],
+    glossary:[["नदी","नदी"],["सेतुः","पुल"],["अजः","बकरा"],["प्रथमः","पहला"],["पततः","दोनों गिरते हैं"],["मत्स्यः","मछली"]],
+    questions:[
+      {q:"सेतौ कौ स्तः?",opts:["द्वौ अजौ","द्वौ गजौ","द्वौ शुके"],a:0, audio:"द्वौ अजौ"},
+      {q:"तौ किं वदतः?",opts:["अहं लघुः","अहं प्रथमः","अहं हरितः"],a:1, audio:"अहं प्रथमः"},
+      {q:"अन्ते किं भवति?",opts:["तौ नृत्यतः","तौ जले पततः","सेतुः खादति"],a:1, audio:"पततः"}
+    ],
+    shuka:'बारी-बारी संहतिः है — साथ रहना। नदी में गिरना छप-छप है। महाशक्ति चुनो।'
+  },
+  {
+    id:'kapih',
+    title:'अर्जुन और टोपी',
+    blurb:'अर्जुन, एक लाल टोपी, एक पेड़, और चतुर अदला-बदली।',
+    act:'काल्पनिक टोपी पहनो। एक “बंदर” (बाद में तुम) चुराता है। अपनी टोपी नीचे फेंको। नकलची को देखो। अपने दिमाग को झुको।',
+    text:`अर्जुनः रक्तं टोपिं धारयति। एकः वानरः टोपिं पश्यति। वानरः टोपिं गृह्णाति। सः वृक्षे उपविशति।
+
+अर्जुनः न क्रुध्यति। सः हसति। सः स्वस्य टोपिं भूमौ क्षिपति। वानरः अपि टोपिं क्षिपति। अर्जुनः टोपिं गृह्णाति। द्वौ अपि हसतः।`,
+    lines:[
+      {sa:"अर्जुनः रक्तं टोपिं धारयति।", en:"अर्जुन लाल टोपी पहनता है।"},
+      {sa:"वानरः टोपिं गृह्णाति।", en:"बंदर टोपी ले लेता है।"},
+      {sa:"सः वृक्षे उपविशति।", en:"वह पेड़ पर बैठता है।"},
+      {sa:"वानरः अपि टोपिं क्षिपति।", en:"बंदर भी टोपी फेंकता है।"}
+    ],
+    glossary:[["अर्जुनः","अर्जुन"],["टोपिः","टोपी"],["वानरः","बंदर"],["वृक्षः","पेड़"],["गृह्णाति","लेता है"],["क्षिपति","फेंकता है"]],
+    questions:[
+      {q:"कः टोपिं धारयति?",opts:["शुकः","अर्जुनः","मयूरः"],a:1, audio:"अर्जुनः"},
+      {q:"टोपेः वर्णः कः?",opts:["नीलः","रक्तः","पीतः"],a:1, audio:"रक्तम्"},
+      {q:"कः टोपिं गृह्णाति?",opts:["मयूरः","वानरः","काकः"],a:1, audio:"वानरः"}
+    ],
+    shuka:'नकल से बंदर सीखते हैं। तोते भी। अर्जुन ने दिमाग लगाया, चिल्लाहट नहीं। मैं सहमत हूँ। ज़्यादातर।'
+  },
+  {
+    id:'dashama',
+    title:'ऋषिका आम गिनती है',
+    blurb:'ऋषिका गिनती है। एक तोता “मदद” करता है। गणित स्वादिष्ट हो जाता है।',
+    act:'उँगली पर संस्कृत में दस तक गिनो। एक उँगली छिपाओ। नव! बोलो। काल्पनिक आम खाओ। उँगली मत खाओ।',
+    text:`उद्याने दश आम्राणि सन्ति। ऋषिका गणयति — एकम्, द्वे, त्रीणि, चत्वारि, पञ्च। शुकः गणयति — षट्, सप्त, अष्ट, नव, दश।
+
+शुकः एकं आम्रं खादति। अधुना नव आम्राणि सन्ति। ऋषिका हसति। सा वदति — “त्वं गणकः असि, अपि च भक्षकः।”`,
+    lines:[
+      {sa:"उद्याने दश आम्राणि सन्ति।", en:"बगीचे में दस आम हैं।"},
+      {sa:"ऋषिका गणयति।", en:"ऋषिका गिनती है।"},
+      {sa:"शुकः एकं आम्रं खादति।", en:"शुक एक आम खाता है।"},
+      {sa:"अधुना नव आम्राणि सन्ति।", en:"अब नौ आम हैं।"}
+    ],
+    glossary:[["दश","दस"],["आम्राणि","आम"],["ऋषिका","ऋषिका"],["गणयति","गिनती है"],["नव","नौ"],["भक्षकः","खाने वाला"]],
+    questions:[
+      {q:"का गणयति?",opts:["वेदार्कः","ऋषिका","काव्या"],a:1, audio:"ऋषिका"},
+      {q:"प्रथमतः कति आम्राणि?",opts:["नव","दश","एकम्"],a:1, audio:"दश"},
+      {q:"अन्ते कति आम्राणि?",opts:["दश","नव","शून्यम्"],a:1, audio:"नव"}
+    ],
+    shuka:'गिनना ईमानदार है। गिनते हुए खाना भी ईमानदार है। बस कम लोकप्रिय। ऋषिका मुझे अभी भी पसंद करती है। शायद।'
+  },
+  {
+    id:'pataka',
+    title:'अर्जुन और पीली पतंग',
+    blurb:'अर्जुन, हवा, डोर, और चाँद चाहने वाली पतंग।',
+    act:'काल्पनिक डोर पकड़ो। खींचो। पतंग थोड़ी जाने दो। फिर गृहं गच्छावः बोलो और रसोई चलो। चाँद रुक सकता है। नाश्ता नहीं।',
+    text:`अर्जुनः पताकां चालयति। आकाशे एका पीता पताका उड्डयते। सा चन्द्रं पश्यति। सा वदति — “अहं चन्द्रं गच्छामि।”
+
+वायुः मन्दः अस्ति। पताका निम्नं आगच्छति। अर्जुनः रज्जुं गृह्णाति। सः वदति — “गृहं गच्छावः।” पताका अपि गच्छति। चन्द्रः स्मयते।`,
+    lines:[
+      {sa:"अर्जुनः पताकां चालयति।", en:"अर्जुन पतंग उड़ाता है।"},
+      {sa:"आकाशे एका पीता पताका उड्डयते।", en:"आकाश में एक पीली पतंग उड़ती है।"},
+      {sa:"अहं चन्द्रं गच्छामि।", en:"मैं चाँद पर जा रहा हूँ।"},
+      {sa:"गृहं गच्छावः।", en:"चलो घर चलें।"}
+    ],
+    glossary:[["अर्जुनः","अर्जुन"],["पताका","पतंग"],["उड्डयते","उड़ती है"],["चन्द्रः","चाँद"],["वायुः","हवा"],["रज्जुः","डोर"],["गृहम्","घर"]],
+    questions:[
+      {q:"कः पताकां चालयति?",opts:["शुकः","अर्जुनः","मण्डूकः"],a:1, audio:"अर्जुनः"},
+      {q:"पताका कीदृशी?",opts:["रक्ता","पीता","कृष्णा"],a:1, audio:"पीता"},
+      {q:"वायुः कीदृशः?",opts:["शीघ्रः","मन्दः","उष्णः"],a:1, audio:"मन्दः"}
+    ],
+    shuka:'चाँद रुक सकता है। घर में नाश्ता है। पतंग मान गई। समझदार पतंग। समझदार अर्जुन।'
+  },
+  {
+    id:'mitram',
+    title:'वन के मित्र',
+    blurb:'वेदार्कः, ऋषिका, एक मोर, एक तोता — एक छोटा नियम: दयालु बनो।',
+    shloka:'mitram',
+    act:'एक व्यक्ति (या तकिया) ढूँढ़ो। त्वं मित्रम् असि बोलो। जवाब का इंतज़ार। अगर तकिया है, उसके लिए बोलो। तकिए शर्मीले होते हैं।',
+    text:`वने वेदार्कः च ऋषिका च क्रीडतः। मयूरः च शुकः च अपि वसतः। ते सर्वे मित्राणि सन्ति। मयूरः नृत्यति। शुकः वदति। ते गायतः।
+
+वेदार्कः वदति — “वयं मित्राणि स्मः।” ऋषिका वदति — “आम्। आपत्काले अपि वयं मित्राणि स्मः।” सिंहः अपि आगच्छति। सः न गर्जति। सः स्मयते। वने शान्तिः अस्ति।`,
+    lines:[
+      {sa:"वने वेदार्कः च ऋषिका च क्रीडतः।", en:"वेदार्कः और ऋषिका वन में खेलते हैं।"},
+      {sa:"ते सर्वे मित्राणि सन्ति।", en:"वे सब मित्र हैं।"},
+      {sa:"वयं मित्राणि स्मः।", en:"हम मित्र हैं।"},
+      {sa:"वने शान्तिः अस्ति।", en:"वन में शांति है।"}
+    ],
+    song:{
+      title:'हम मित्र हैं',
+      verses:`वयं मित्राणि स्मः।
+त्वं मित्रम् असि।
+अहं मित्रम् अस्मि।
+वनं सुन्दरं अस्ति।`,
+      lines:[
+        {sa:"वयं मित्राणि स्मः।", en:"हम मित्र हैं।"},
+        {sa:"त्वं मित्रम् असि।", en:"तुम मित्र हो।"},
+        {sa:"अहं मित्रम् अस्मि।", en:"मैं मित्र हूँ।"},
+        {sa:"वनं सुन्दरं अस्ति।", en:"वन सुंदर है।"}
+      ]
+    },
+    glossary:[["वनम्","वन"],["वेदार्कः","वेदार्कः"],["ऋषिका","ऋषिका"],["मित्रम्","मित्र"],["गायतः","दोनों गाते हैं"],["शान्तिः","शांति"],["सिंहः","शेर"]],
+    questions:[
+      {q:"के क्रीडतः?",opts:["वेदार्कः च ऋषिका च","काकः च अजः च","मण्डूकः च चन्द्रः च"],a:0, audio:"वेदार्कः च ऋषिका च"},
+      {q:"मयूरः किं करोति?",opts:["गर्जति","नृत्यति","पिबति"],a:1, audio:"नृत्यति"},
+      {q:"सिंहः किं करोति?",opts:["गर्जति","स्मयते","पतति"],a:1, audio:"स्मयते"}
+    ],
+    shuka:'इस बगीचे का वन-नियम छोटा है: मित्र बनो। शेर को भी पत्र मिल गया। वेदार्कः और ऋषिका ने लिखा।'
+  },
+  {
+    id:'varsha',
+    title:'बारिश की तस्वीरें',
+    blurb:'बारिश, रंग, और एक मोर जो पहले से तैयार था।',
+    shloka:'priya',
+    act:'बाहर न जा सको तो कमरे में दो कदम नाचो। अहम् अपि नृत्यामि बोलो। यहाँ घर के अंदर बारिश-नृत्य जायज़ है।',
+    text:`अद्य वर्षा अस्ति। आकाशः धूम्रः अस्ति। वेदार्कः च ऋषिका च गृहे स्तः। ते चित्रं लिखतः। वेदार्कः रक्तं लिखति। ऋषिका नीलं लिखति।
+
+मयूरः वर्षायां नृत्यति। तस्य वर्णाः बहवः सन्ति — नीलः, हरितः, पीतः, रक्तः। शुकः गवाक्षात् पश्यति। सः वदति — “अहम् अपि नृत्यामि... गृहे।”`,
+    lines:[
+      {sa:"अद्य वर्षा अस्ति।", en:"आज बारिश है।"},
+      {sa:"वेदार्कः च ऋषिका च चित्रं लिखतः।", en:"वेदार्कः और ऋषिका चित्र बनाते हैं।"},
+      {sa:"मयूरः वर्षायां नृत्यति।", en:"मोर बारिश में नाचता है।"},
+      {sa:"अहम् अपि नृत्यामि।", en:"मैं भी नाचता हूँ।"}
+    ],
+    glossary:[["वर्षा","बारिश"],["वेदार्कः","वेदार्कः"],["ऋषिका","ऋषिका"],["चित्रम्","चित्र"],["लिखतः","दोनों चित्र बनाते हैं"],["बहवः","बहुत"],["गवाक्षः","खिड़की"]],
+    questions:[
+      {q:"अद्य किं अस्ति?",opts:["हिमम्","वर्षा","चन्द्रः"],a:1, audio:"वर्षा"},
+      {q:"के चित्रं लिखतः?",opts:["अर्जुनः च शुकः च","वेदार्कः च ऋषिका च","मण्डूकः च सिंहः च"],a:1, audio:"वेदार्कः च ऋषिका च"},
+      {q:"मयूरः कुत्र नृत्यति?",opts:["गृहे","वर्षायाम्","नौकायाम्"],a:1, audio:"वर्षायाम्"}
+    ],
+    shuka:'घर के अंदर नाचना भी गिना जाता है। मैंने नियम देखे। मैंने नियम लिखे। नियम मैं हूँ।'
+  }
+];
+
+const SPEAK_PHRASES={
+  namaste:[
+    {sa:"नमस्ते।", en:"नमस्कार।"},
+    {sa:"मम नाम वेदार्कः अस्ति।", en:"मेरा नाम वेदार्कः है।"},
+    {sa:"अहं शुकः अस्मि।", en:"मैं शुक हूँ।"},
+    {sa:"धन्यवादः।", en:"धन्यवाद।"},
+    {sa:"पुनर्मिलामः।", en:"फिर मिलेंगे।"}
+  ],
+  asmi:[
+    {sa:"अहम् अस्मि।", en:"मैं हूँ।"},
+    {sa:"त्वम् असि।", en:"तुम हो।"},
+    {sa:"सः बालकः अस्ति।", en:"वह लड़का है।"},
+    {sa:"मम शुकः अस्ति।", en:"मेरा तोता है।"}
+  ],
+  parichaya:[
+    {sa:"मम नाम वेदार्कः अस्ति।", en:"मेरा नाम वेदार्कः है।"},
+    {sa:"अहं पञ्चवर्षीयः अस्मि।", en:"मैं पाँच साल का हूँ।"},
+    {sa:"अहं षष्ठ्यां कक्षायां अस्मि।", en:"मैं कक्षा 6 में हूँ।"},
+    {sa:"मम रुचिः पठनम् अस्ति।", en:"मेरा शौक पढ़ना है।"},
+    {sa:"अहं भारतात् आगच्छामि।", en:"मैं भारत से आता/आती हूँ।"}
+  ],
+  varnah:[
+    {sa:"मम प्रियः वर्णः नीलः अस्ति।", en:"मेरा पसंदीदा रंग नीला है।"},
+    {sa:"शुकः हरितः अस्ति।", en:"तोता हरा है।"},
+    {sa:"पद्मं रक्तं अस्ति।", en:"कमल लाल है।"},
+    {sa:"आम्रं पीतं अस्ति।", en:"आम पीला है।"}
+  ],
+  visheshanam:[
+    {sa:"गृहं महत् अस्ति।", en:"घर बड़ा है।"},
+    {sa:"शुकः लघुः अस्ति।", en:"तोता छोटा है।"},
+    {sa:"जलं शीतं अस्ति।", en:"पानी ठंडा है।"},
+    {sa:"तत् सुन्दरं अस्ति।", en:"वह सुंदर है।"}
+  ],
+  sankhya:[
+    {sa:"अहं दशवर्षीयः अस्मि।", en:"मैं दस साल का/की हूँ।"},
+    {sa:"दश आम्राणि सन्ति।", en:"दस आम हैं।"},
+    {sa:"एकविंशतिः।", en:"इक्कीस।"}
+  ],
+  sankhya100:[
+    {sa:"शतम्।", en:"सौ।"},
+    {sa:"द्विशतम्।", en:"दो सौ।"},
+    {sa:"सहस्रम्।", en:"एक हज़ार।"}
+  ],
+  kutumbam:[
+    {sa:"अयम् मम पिता।", en:"यह मेरे पिता हैं।"},
+    {sa:"मम भगिनी अस्ति।", en:"मेरी बहन है।"},
+    {sa:"कुटुम्बं महत् अस्ति।", en:"परिवार बड़ा है।"},
+    {sa:"मम मातुः नाम काव्या अस्ति।", en:"मेरी माँ का नाम काव्या है।"}
+  ],
+  sarvanama:[
+    {sa:"अहं बालिका अस्मि।", en:"मैं लड़की हूँ।"},
+    {sa:"त्वं मित्रम् असि।", en:"तुम मित्र हो।"},
+    {sa:"सः मम भ्राता अस्ति।", en:"वह मेरे भाई हैं।"},
+    {sa:"वयम् मित्राणि स्मः।", en:"हम मित्र हैं।"}
+  ],
+  dhatu:[
+    {sa:"अहं गृहं गच्छामि।", en:"मैं घर जाता/जाती हूँ।"},
+    {sa:"त्वं पुस्तकम् पठसि।", en:"तुम किताब पढ़ते/पढ़ती हो।"},
+    {sa:"सः आम्रं खादति।", en:"वह आम खाता है।"},
+    {sa:"वयम् क्रीडामः।", en:"हम खेलते हैं।"}
+  ]
+};
+
+const RECAP={
+  asmi:[
+    {q:'"नमस्ते" का अर्थ है...', opts:['अलविदा','नमस्कार','कृपया'], a:1, audio:'नमस्ते'},
+    {q:'कैसे कहते हैं "धन्यवाद"?', opts:['कृपया','धन्यवादः','आम्'], a:1, audio:'धन्यवादः'},
+    {q:'"मम नाम वेदार्कः अस्ति" का अर्थ है...', opts:['मैं वेदार्कः हूँ।','मेरा नाम वेदार्कः है।','मेरी वेदार्कः है।'], a:1, audio:'मम नाम वेदार्कः अस्ति'}
+  ],
+  parichaya:[
+    {q:'"अस्ति" का अर्थ क्या है?', opts:['मैं जाता/जाती हूँ','है / मौजूद है','कृपया'], a:1, audio:'अस्ति'},
+    {q:'"अहं ___ वेदार्कः।" (मैं वेदार्कः हूँ) — क्रिया चुनो।', opts:['अस्मि','असि','सन्ति'], a:0},
+    {q:'संस्कृत में “मेरे पास है” अक्सर ऐसे आता है...', opts:['केवल एक खास have-क्रिया','मम … अस्ति (मेरा … है)','हमेशा अंग्रेज़ी have'], a:1}
+  ],
+  varnah:[
+    {q:'"मम नाम वेदार्कः अस्ति" का अर्थ है...', opts:['मैं वेदार्कः हूँ।','मेरा नाम वेदार्कः है।','मैं वेदार्कः खाता हूँ।'], a:1, audio:'मम नाम वेदार्कः अस्ति'},
+    {q:'"अहं पञ्चवर्षीयः अस्मि" का अर्थ है...', opts:['मैं कक्षा 5 में हूँ।','मैं पाँच साल का हूँ।','मेरे पाँच आम हैं।'], a:1, audio:'अहं पञ्चवर्षीयः अस्मि'},
+    {q:'"मम रुचिः पठनम् अस्ति" का अर्थ है...', opts:['मेरा शौक पढ़ना है।','मेरा नाम पठनम् है।','मेरा रंग पढ़ना है।'], a:0, audio:'मम रुचिः पठनम् अस्ति'}
+  ],
+  visheshanam:[
+    {q:'कौन सा रंग है "नीलः"?', opts:['लाल','नीला','हरा'], a:1, audio:'नीलः'},
+    {q:'"कृष्णः" का अर्थ है...', opts:['सफ़ेद','काला','भूरा'], a:1, audio:'कृष्णः'},
+    {q:'कैसे कहते हैं "पीला"?', opts:['पीतः','हरितः','धूम्रः'], a:0, audio:'पीतः'}
+  ],
+  sankhya:[
+    {q:'उलटा "महान्"?', opts:['लघुः','उष्णः','शीघ्रः'], a:0, audio:'महान्'},
+    {q:'"शीतः" का अर्थ है...', opts:['गर्म','ठंडा','तेज़'], a:1, audio:'शीतः'},
+    {q:'उलटा "शीघ्रः"?', opts:['मन्दः','महान्','नूतनः'], a:0, audio:'शीघ्रः'}
+  ],
+  sankhya100:[
+    {q:'"एकविंशतिः" क्या है?', opts:['12','21','30'], a:1, audio:'एकविंशतिः'},
+    {q:'कैसे कहते हैं 50?', opts:['पञ्चाशत्','पञ्चदश','पञ्च'], a:0, audio:'पञ्चाशत्'},
+    {q:'यह कौन सी संख्या है "सप्तदश"?', opts:['70','7','17'], a:2, audio:'सप्तदश'}
+  ],
+  kutumbam:[
+    {q:'कैसे कहते हैं 200?', opts:['द्विशतम्','द्विसहस्रम्','द्वे'], a:0, audio:'द्विशतम्'},
+    {q:'यह कौन सी संख्या है "पञ्चशतम्"?', opts:['50','500','5000'], a:1, audio:'पञ्चशतम्'},
+    {q:'कैसे कहते हैं 1000?', opts:['सहस्रम्','शतम्','दश'], a:0, audio:'सहस्रम्'}
+  ],
+  sarvanama:[
+    {q:'"भगिनी" का अर्थ है...', opts:['भाई','बहन','माता'], a:1, audio:'भगिनी'},
+    {q:'कैसे कहते हैं "माता-पिता"?', opts:['बालकाः','मातापितरौ','कुटुम्बम्'], a:1, audio:'मातापितरौ'},
+    {q:'"मातुलः" का अर्थ है...', opts:['मामा','बुआ / मौसी','चचेरा भाई-बहन'], a:0, audio:'मातुलः'}
+  ],
+  dhatu:[
+    {q:'"___ बालिका अस्मि।" (मैं लड़की हूँ)', opts:['त्वम्','अहम्','सः'], a:1},
+    {q:'"वयम्" का अर्थ है...', opts:['तुम सब','हम','वे'], a:1, audio:'वयम्'},
+    {q:'"सः" का अर्थ है...', opts:['वह (लड़की)','वह (लड़का)','हम'], a:1, audio:'सः'}
+  ],
+  katha:[
+    {q:'"त्वं ___।" (तुम जाते हो) — गम्', opts:['गच्छसि','गच्छति','गच्छामि'], a:0},
+    {q:'"वयम् ___।" (हम पढ़ते हैं)', opts:['पठामः','पठति','पठसि'], a:0},
+    {q:'"खादति" का अर्थ क्या है?', opts:['पीता है','खाता है','जाता है'], a:1, audio:'खादति'}
+  ]
+};
+
+const EAR_ITEMS={
+  namaste:[
+    {say:'नमस्ते', opts:['नमस्कार','अलविदा','कृपया'], a:0},
+    {say:'धन्यवादः', opts:['हाँ','धन्यवाद','नहीं'], a:1},
+    {say:'पुनर्मिलामः', opts:['स्वागत','फिर मिलेंगे','मैं हूँ'], a:1},
+    {say:'मम नाम वेदार्कः अस्ति', opts:['मैं वेदार्कः हूँ','मेरा नाम वेदार्कः है','मेरी वेदार्कः है'], a:1}
+  ],
+  asmi:[
+    {say:'अहम् अस्मि', opts:['मैं हूँ','तुम हो','वह है'], a:0},
+    {say:'त्वम् असि', opts:['मैं हूँ','तुम हो','वे हैं'], a:1},
+    {say:'सः अस्ति', opts:['हम हैं','वह है','मेरे पास है'], a:1},
+    {say:'मम शुकः अस्ति', opts:['मैं तोता हूँ','मेरा तोता है','तोता मैं हूँ'], a:1}
+  ],
+  parichaya:[
+    {say:'मम नाम वेदार्कः अस्ति', opts:['मैं वेदार्कः हूँ','मेरा नाम वेदार्कः है','मुझे वेदार्कः पसंद है'], a:1},
+    {say:'अहं पञ्चवर्षीयः अस्मि', opts:['मैं पाँच साल का हूँ','मैं कक्षा 5 में हूँ','मेरे पाँच शौक हैं'], a:0},
+    {say:'अहं षष्ठ्यां कक्षायां अस्मि', opts:['मैं छह साल का/की हूँ','मैं कक्षा 6 में हूँ','मेरा शौक कक्षा है'], a:1},
+    {say:'मम रुचिः पठनम् अस्ति', opts:['मेरा नाम पढ़ना है','मेरा शौक पढ़ना है','मेरा धर्म पढ़ना है'], a:1}
+  ],
+  varnah:[
+    {say:'हरितः', opts:['हरा','धूसर','पीला'], a:0},
+    {say:'श्वेतः', opts:['सफ़ेद','पीला','लाल'], a:0},
+    {say:'कृष्णः', opts:['भूरा','काला','धूसर'], a:1}
+  ],
+  visheshanam:[
+    {say:'लघुः', opts:['छोटा','ठंडा','ज़ोर'], a:0},
+    {say:'उष्णः', opts:['गर्म','पुराना','अच्छा'], a:0},
+    {say:'मृदुः', opts:['ज़ोर','मृदु / शांत','तेज़'], a:1}
+  ],
+  sankhya:[
+    {say:'पञ्चाशत्', opts:['15','50','5'], a:1},
+    {say:'सप्तदश', opts:['70','7','17'], a:2},
+    {say:'एकविंशतिः', opts:['12','21','30'], a:1}
+  ],
+  sankhya100:[
+    {say:'द्विशतम्', opts:['20','200','2000'], a:1},
+    {say:'सहस्रम्', opts:['100','1000','10'], a:1},
+    {say:'पञ्चशतम्', opts:['50','500','5000'], a:1}
+  ],
+  kutumbam:[
+    {say:'पिता', opts:['पिता','भाई','चाचा'], a:0},
+    {say:'माता', opts:['बुआ','माता','बहन'], a:1},
+    {say:'बालकाः', opts:['माता-पिता','बच्चे','परिवार'], a:1}
+  ],
+  sarvanama:[
+    {say:'अहम्', opts:['मैं','वह','हम'], a:0},
+    {say:'वयम्', opts:['तुम सब','हम','वे'], a:1},
+    {say:'त्वम्', opts:['वह','तुम (एक)','वे'], a:1}
+  ],
+  dhatu:[
+    {say:'अहं गच्छामि', opts:['मैं जाता/जाती हूँ','मैं पढ़ता हूँ','मैं खाता हूँ'], a:0},
+    {say:'त्वं पठसि', opts:['तुम जाते हो','तुम पढ़ते हो','वह पढ़ता है'], a:1},
+    {say:'वयम् खादामः', opts:['हम खाते हैं','तुम खाते हो','वे खाते हैं'], a:0}
+  ]
+};
+
+const WRITE_SENTENCES={
+  namaste:[
+    {en:'नमस्कार', answer:'namaste', also:['नमस्ते']},
+    {en:'धन्यवाद', answer:'dhanyavadah', also:['धन्यवादः','dhanyavadah','dhanyavaadah']},
+    {en:'मेरा नाम वेदार्कः है।', answer:'mama nama vedarkah asti', also:['मम नाम वेदार्कः अस्ति']}
+  ],
+  asmi:[
+    {en:'मैं हूँ।', answer:'aham asmi', also:['अहम् अस्मि','ahamasmi']},
+    {en:'तुम हो।', answer:'tvam asi', also:['त्वम् असि']},
+    {en:'वह लड़का है।', answer:'sah balakah asti', also:['सः बालकः अस्ति']}
+  ],
+  parichaya:[
+    {en:'मेरा नाम वेदार्कः है।', answer:'mama nama vedarkah asti', also:['मम नाम वेदार्कः अस्ति']},
+    {en:'मैं बारह साल की हूँ।', answer:'aham dvadashavarshiya asmi', also:['अहं द्वादशवर्षीया अस्मि']},
+    {en:'मेरा शौक पढ़ना है।', answer:'mama ruchih pathanam asti', also:['मम रुचिः पठनम् अस्ति']}
+  ],
+  varnah:[
+    {en:'नीला', answer:'nilah', also:['नीलः','nila']},
+    {en:'काला', answer:'krishnah', also:['कृष्णः','krsnah']},
+    {en:'कमल लाल है।', answer:'padmam raktam asti', also:['पद्मं रक्तं अस्ति']}
+  ],
+  visheshanam:[
+    {en:'छोटा (महान् का उलटा)', answer:'laghuh', also:['लघुः','laghu']},
+    {en:'घर बड़ा है।', answer:'griham mahat asti', also:['गृहं महत् अस्ति','grham mahat asti']}
+  ],
+  kutumbam:[
+    {en:'पिता', answer:'pita', also:['पिता']},
+    {en:'मेरी बहन है।', answer:'mama bhagini asti', also:['मम भगिनी अस्ति']}
+  ],
+  sarvanama:[
+    {en:'मैं', answer:'aham', also:['अहम्']},
+    {en:'वह मेरे भाई हैं।', answer:'sah mama bhrata asti', also:['सः मम भ्राता अस्ति']}
+  ],
+  dhatu:[
+    {en:'मैं घर जाता/जाती हूँ।', answer:'aham griham gacchami', also:['अहं गृहं गच्छामि']},
+    {en:'वह आम खाता है।', answer:'sah amram khadati', also:['सः आम्रं खादति']}
+  ]
+};
+
+const ENGLISH_WORDS = new Set([
+  "i","he","she","it","we","they","you","red","blue","green","yellow","white","black","brown",
+  "purple","pink","grey","gray","orange","hot","cold","fast","slow","big","small","old","new",
+  "good","bad","long","short","loud","quiet","beautiful","and","the","a","an","to","of","from",
+  "for","not","all","one","two","what","how","who","where","which","this","that","with","hello"
+]);
+const SANSKRIT_LEXICON = (()=>{
+  const s=new Set();
+  const add=w=>{ String(w||'').split(/[\s/।॥,]+/).forEach(p=>{
+    const k=String(p).trim();
+    if(k) s.add(k.toLowerCase());
+  });};
+  GREETINGS.concat(INTRO_NAME,INTRO_AGE,INTRO_CLASS,INTRO_RELIGION,INTRO_HOBBIES,INTRO_EXTRA,FAMILY,PRONOUNS)
+    .forEach(row=>row.forEach(add));
+  COLORS.forEach(c=>{add(c[0]);add(c[1]);});
+  ADJ_PAIRS.forEach(a=>{add(a[0]);add(a[1]);add(a[3]);add(a[4]);});
+  ASMI_ROWS.forEach(r=>r.forEach(add));
+  VERB_ROWS.forEach(r=>r.forEach(add));
+  ["नमस्ते","अहम्","अस्मि","असि","अस्ति","स्मः","स्थ","सन्ति","मम","नाम","कक्षा","रुचिः","गच्छामि","पठति","खादति","पिता","माता"].forEach(add);
+  for(let i=0;i<=100;i++) add(numberWord(i));
+  return s;
+})();
+
+/* ===================== AUDIO ===================== */
+let cachedVoices=[];
+let voicesReady=false;
+function refreshVoices(){
+  if(!window.speechSynthesis) return;
+  const v = window.speechSynthesis.getVoices();
+  if(v && v.length){ cachedVoices=v; voicesReady=true; }
+}
+refreshVoices();
+if(window.speechSynthesis){
+  window.speechSynthesis.onvoiceschanged = refreshVoices;
+}
+function isIndicVoice(v){
+  const lang=(v.lang||'').toLowerCase();
+  const name=(v.name||'').toLowerCase();
+  return lang.startsWith('sa') || lang.startsWith('hi') || /hindi|हिन्दी|devanagari|sanskrit/.test(name);
+}
+function isFemaleVoice(v){
+  const lang=(v.lang||'').toLowerCase();
+  const name=(v.name||'').toLowerCase();
+  if(/hemant|ravi|rishi|kumar|david|mark|george|daniel|guy|male|man\b/.test(name)) return false;
+  if((lang.startsWith('hi') || lang.startsWith('sa')) && /google/.test(name)) return true;
+  return /swara|kalpana|heera|neerja|vaani|vani|veena|female|woman|girl|zira|samantha|kendra|aria|natural/.test(name)
+    || /google हिन्दी|google hindi/.test(name);
+}
+function pickSanskritVoice(){
+  const score=v=>{
+    const lang=(v.lang||'').toLowerCase();
+    const name=(v.name||'').toLowerCase();
+    const female=isFemaleVoice(v);
+    const indic=isIndicVoice(v);
+    let n=0;
+    if(lang.startsWith('sa') && female) n=220;
+    else if(lang.startsWith('sa')) n=140;
+    else if(indic && female) n=200;
+    else if(lang==='hi-in' || lang.startsWith('hi')) n=female?190:70;
+    else if(/hindi|हिन्दी|devanagari/.test(name)) n=female?185:65;
+    else if(lang.startsWith('en-in') && female) n=45;
+    else if(female) n=20;
+    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 50);
+    return n;
+  };
+  let best=null, bestN=-1;
+  cachedVoices.forEach(v=>{ const n=score(v); if(n>bestN){ bestN=n; best=v; } });
+  return bestN>0 ? best : null;
+}
+function romanToDevanagari(raw){
+  let s=String(raw||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  if(!s.trim()) return '';
+  s=s.replace(/ā/g,'aa').replace(/ī/g,'ii').replace(/ū/g,'uu').replace(/ṛ|ṝ/g,'ri')
+    .replace(/ś|ṣ/g,'sh').replace(/ñ/g,'ny').replace(/ṅ/g,'ng').replace(/ṇ/g,'n')
+    .replace(/ṃ|ṁ/g,'m').replace(/ḥ/g,'h');
+  s=s.replace(/ah(?=\s|$|[.,!?;:।॥])/g,'aH');
+  const cons=[
+    ['ksh','क्ष'],['gy','ज्ञ'],['jn','ज्ञ'],
+    ['kh','ख'],['gh','घ'],['chh','छ'],['ch','च'],['jh','झ'],['th','थ'],['dh','ध'],
+    ['ph','फ'],['bh','भ'],['sh','श'],['ng','ङ'],
+    ['k','क'],['g','ग'],['c','च'],['j','ज'],['t','त'],['d','द'],['n','न'],
+    ['p','प'],['b','ब'],['m','म'],['y','य'],['r','र'],['l','ल'],['v','व'],['w','व'],['s','स'],['h','ह']
+  ];
+  const ind={'aa':'आ','ai':'ऐ','au':'औ','ii':'ई','ee':'ई','uu':'ऊ','oo':'ऊ','ri':'ऋ','a':'अ','i':'इ','u':'उ','e':'ए','o':'ओ'};
+  const mat={'aa':'ा','ai':'ै','au':'ौ','ii':'ी','ee':'ी','uu':'ू','oo':'ू','ri':'ृ','i':'ि','u':'ु','e':'े','o':'ो','a':''};
+  const vOrder=['ai','au','aa','ii','ee','uu','oo','ri','a','i','u','e','o'];
+  function grabCons(i){
+    for(let k=0;k<cons.length;k++){ if(s.startsWith(cons[k][0], i)) return cons[k]; }
+    return null;
+  }
+  function grabVow(i){
+    for(let k=0;k<vOrder.length;k++){ if(s.startsWith(vOrder[k], i)) return vOrder[k]; }
+    return '';
+  }
+  let out='', i=0;
+  while(i<s.length){
+    const ch=s[i];
+    if(/\s/.test(ch)){ out+=' '; i++; continue; }
+    if(ch==='H'){ out+='ः'; i++; continue; }
+    if(/[.,!?;:'"()।॥]/.test(ch)){ out+=ch; i++; continue; }
+    const c=grabCons(i);
+    if(c){
+      i+=c[0].length;
+      const v=grabVow(i);
+      if(v){ out+=c[1]+mat[v]; i+=v.length; }
+      else out+=c[1]+'्';
+      continue;
+    }
+    const v=grabVow(i);
+    if(v){ out+=ind[v]; i+=v.length; continue; }
+    i++;
+  }
+  return out;
+}
+function toDevanagariSpeech(text){
+  const ROMAN_SA={
+    mama:'मम', nama:'नाम', namaste:'नमस्ते', namaskarah:'नमस्कारः',
+    aham:'अहम्', asmi:'अस्मि', asi:'असि', asti:'अस्ति', tvam:'त्वम्',
+    vayam:'वयम्', sah:'सः', dhanyavadah:'धन्यवादः', punarmilamah:'पुनर्मिलामः',
+    vedark:'वेदार्कः', vedarkah:'वेदार्कः', rishika:'ऋषिका', shukah:'शुकः', mayurah:'मयूरः'
+  };
+  return String(text||'').split(/(\s+)/).map(part=>{
+    if(!part.trim() || /[\u0900-\u097F]/.test(part)) return part;
+    const m=part.match(/^([^a-zA-Zāīū]*)([a-zA-Zāīūṛśṣñṅṇṃṁḥ]+)([^a-zA-Z]*)$/);
+    if(m && ROMAN_SA[m[2].toLowerCase()]) return m[1]+ROMAN_SA[m[2].toLowerCase()]+m[3];
+    if(!/[a-zA-Zāīūṛśṣñṅṇṃṁḥ]/.test(part)) return part;
+    return romanToDevanagari(part) || part;
+  }).join('');
+}
+function englishPhonetic(dev){
+  let r=foldSa(dev);
+  r=r.replace(/aa/g,'AA').replace(/ai/g,'AI').replace(/au/g,'AU').replace(/ii/g,'II').replace(/uu/g,'UU');
+  r=r.replace(/a/g,'ah').replace(/e/g,'eh').replace(/o/g,'oh');
+  r=r.replace(/AA/g,'aah').replace(/AI/g,'ai').replace(/AU/g,'au').replace(/II/g,'ee').replace(/UU/g,'oo');
+  r=r.replace(/([aeiouh]{1,3})(?=[bcdfghjklmnpqrstvwxyz])/g,'$1-');
+  return r.replace(/mama/g,'mah-mah').replace(/mum/g,'mah');
+}
+function prepSanskritSpeech(text, indic){
+  let t=String(text||'').replace(/\s+/g,' ').trim();
+  if(!t) return t;
+  t=t.replace(/[।॥]/g,'। ');
+  t=toDevanagariSpeech(t);
+  if(indic) t=t.replace(/ः/g,'ह');
+  else t=englishPhonetic(t);
+  return t;
+}
+function chunkSaSpeech(text){
+  const t=String(text||'').replace(/\s+/g,' ').trim();
+  if(!t) return [];
+  const parts=t.split(/[।॥.!?]+/).map(s=>s.trim()).filter(Boolean);
+  const out=[];
+  parts.forEach(s=>{
+    if(s.length<=180){ out.push(s); return; }
+    let piece='';
+    s.split(/\s+/).forEach(w=>{
+      if(piece && (piece+' '+w).length>180){ out.push(piece); piece=w; }
+      else piece=piece?piece+' '+w:w;
+    });
+    if(piece) out.push(piece);
+  });
+  return out.length?out:[t];
+}
+const Speak={queue:[], token:0, onend:null, rate:0.82};
+
+const Music={ctx:null, master:null, bg:null, sfx:null, playing:false, timer:null, step:0, nextTime:0, speechOn:false, sfxDuckTimer:null, micMute:false};
+const SA=261.63, RE=293.66, GA=329.63, MA=349.23, PA=392.00, DHA=440.00, NI=493.88, SA2=523.25;
+const TUNE=[
+  [SA,0.7],[RE,0.7],[GA,0.7],[PA,1.1],[0,0.25],
+  [PA,0.55],[DHA,0.55],[SA2,1.2],[0,0.3],
+  [DHA,0.55],[PA,0.55],[GA,0.7],[RE,0.7],[SA,1.3],[0,0.4],
+  [SA,0.45],[GA,0.45],[PA,0.45],[DHA,0.9],[0,0.2],
+  [PA,0.7],[GA,0.7],[RE,0.7],[SA,1.4],[0,0.5]
+];
+function audioCtx(){
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC) return null;
+  if(!Music.ctx){
+    Music.ctx=new AC();
+    Music.master=Music.ctx.createGain();
+    Music.master.gain.value=0.32;
+    Music.master.connect(Music.ctx.destination);
+    Music.bg=Music.ctx.createGain();
+    Music.bg.gain.value=0.42;
+    Music.bg.connect(Music.master);
+    Music.sfx=Music.ctx.createGain();
+    Music.sfx.gain.value=0.85;
+    Music.sfx.connect(Music.ctx.destination);
+  }
+  return Music.ctx;
+}
+async function unlockAudio(){
+  const ctx=audioCtx();
+  if(!ctx) return null;
+  try{ if(ctx.state==='suspended') await ctx.resume(); }catch(e){}
+  return ctx;
+}
+function playAt(freq, when, dur, type, vol, dest){
+  const ctx=Music.ctx;
+  if(!ctx || !freq) return;
+  const v=vol||0.35;
+  const destNode=dest||Music.master;
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type=type||'triangle';
+  o.frequency.setValueAtTime(freq, when);
+  g.gain.setValueAtTime(0, when);
+  g.gain.linearRampToValueAtTime(v, when+0.03);
+  g.gain.linearRampToValueAtTime(0, when+dur);
+  o.connect(g); g.connect(destNode);
+  o.start(when); o.stop(when+dur+0.02);
+  const o2=ctx.createOscillator(), g2=ctx.createGain();
+  o2.type='sine';
+  o2.frequency.setValueAtTime(freq*2, when);
+  g2.gain.setValueAtTime(0, when);
+  g2.gain.linearRampToValueAtTime(v*0.18, when+0.03);
+  g2.gain.linearRampToValueAtTime(0, when+dur);
+  o2.connect(g2); g2.connect(destNode);
+  o2.start(when); o2.stop(when+dur+0.02);
+}
+function startBand(){
+  return unlockAudio().then((ctx)=>{
+    if(!ctx || !state.musicOn) return false;
+    if(Music.playing) return true;
+    Music.playing=true; Music.step=0;
+    document.body.classList.add('music-on');
+    const now=ctx.currentTime;
+    playAt(SA, now, 0.8, 'triangle', 0.16);
+    playAt(GA, now+0.1, 0.8, 'triangle', 0.1);
+    playAt(PA, now+0.18, 0.85, 'triangle', 0.12);
+    Music.nextTime=now+1.1;
+    (function pump(){
+      if(!Music.playing || !state.musicOn || !Music.ctx) return;
+      const t=Music.ctx.currentTime;
+      while(Music.nextTime < t+1.6){
+        const note=TUNE[Music.step%TUNE.length];
+        const f=note[0], beats=note[1];
+        if(f) playAt(f, Music.nextTime, Math.max(0.2, beats*0.55), 'triangle', 0.16, Music.bg);
+        Music.step++;
+        Music.nextTime+=beats*0.62;
+      }
+      Music.timer=setTimeout(pump, 160);
+    })();
+    return true;
+  }).catch(()=>false);
+}
+function stopBand(){
+  Music.playing=false;
+  if(Music.timer){ clearTimeout(Music.timer); Music.timer=null; }
+  document.body.classList.remove('music-on');
+}
+function setMusic(on){
+  state.musicOn=!!on;
+  saveProgress();
+  if(state.musicOn) return startBand();
+  stopBand();
+  return Promise.resolve(false);
+}
+function labelMusic(big){
+  if(state.musicOn) return big ? '🎵 संगीत चालू है — बंद करने के लिए दबाओ' : '🎵 संगीत चालू';
+  return big ? '🎵 संगीत बंद है — चलाने के लिए दबाओ' : '🎵 संगीत बंद';
+}
+function syncMusicButtons(){
+  document.querySelectorAll('[data-music-btn]').forEach(btn=>{
+    const big=btn.getAttribute('data-music-btn')==='big';
+    btn.textContent=labelMusic(big);
+    btn.className='btn'+(state.musicOn?'':' ghost');
+  });
+}
+function toggleMusic(){ setMusic(!state.musicOn).then(()=>syncMusicButtons()); }
+function ensureMusic(e){
+  if(!state.musicOn || Music.playing) return;
+  if(e && e.target && e.target.closest && e.target.closest('[data-music-btn]')) return;
+  startBand().then(ok=>{ if(ok) syncMusicButtons(); });
+}
+function applyBgGain(){
+  if(!Music.bg || !Music.ctx) return;
+  const target = Music.micMute ? 0.001 : (Music.speechOn ? 0.08 : 0.42);
+  Music.bg.gain.cancelScheduledValues(Music.ctx.currentTime);
+  Music.bg.gain.setTargetAtTime(target, Music.ctx.currentTime, 0.05);
+}
+function duckBand(down){
+  if(typeof down==='boolean') Music.speechOn=!!down;
+  applyBgGain();
+}
+function playNoiseClick(when, dur, vol){
+  const ctx=Music.ctx;
+  if(!ctx || !Music.sfx) return;
+  const n=Math.max(1, Math.floor(ctx.sampleRate*dur));
+  const buf=ctx.createBuffer(1, n, ctx.sampleRate);
+  const data=buf.getChannelData(0);
+  for(let i=0;i<n;i++) data[i]=(Math.random()*2-1)*Math.pow(1-i/n, 2.2);
+  const src=ctx.createBufferSource();
+  src.buffer=buf;
+  const hp=ctx.createBiquadFilter();
+  hp.type='highpass'; hp.frequency.value=1600;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(vol, when);
+  g.gain.exponentialRampToValueAtTime(0.001, when+dur);
+  src.connect(hp); hp.connect(g); g.connect(Music.sfx);
+  src.start(when); src.stop(when+dur+0.02);
+}
+function playSfx(kind){
+  if(!state.musicOn || Music.micMute) return;
+  unlockAudio().then((ctx)=>{
+    if(!ctx || !Music.sfx) return;
+    const t=ctx.currentTime;
+    const bus=Music.sfx;
+    if(Music.playing && !Music.speechOn){
+      duckBand(true);
+      if(Music.sfxDuckTimer) clearTimeout(Music.sfxDuckTimer);
+      Music.sfxDuckTimer=setTimeout(()=>{
+        Music.sfxDuckTimer=null;
+        if(!Music.speechOn) duckBand(false);
+      }, 240);
+    }
+    if(kind==='ok'){
+      playNoiseClick(t, 0.04, 0.45);
+      playAt(1047, t, 0.12, 'sine', 0.7, bus);
+      playAt(1319, t+0.08, 0.18, 'sine', 0.75, bus);
+    } else if(kind==='bad'){
+      playNoiseClick(t, 0.05, 0.4);
+      playAt(220, t, 0.16, 'square', 0.5, bus);
+      playAt(165, t+0.09, 0.2, 'square', 0.38, bus);
+    } else if(kind==='tap'){
+      playNoiseClick(t, 0.05, 0.7);
+      playAt(1568, t, 0.08, 'sine', 0.85, bus);
+      playAt(2093, t+0.03, 0.07, 'sine', 0.55, bus);
+    } else if(kind==='win'){
+      playNoiseClick(t, 0.06, 0.5);
+      [SA2,659.25,783.99,1046.5].forEach((f,i)=>playAt(f, t+i*0.1, 0.22, 'sine', 0.72, bus));
+    }
+  });
+}
+function stopSpeaking(){
+  Speak.token++;
+  Speak.queue=[];
+  Speak.onend=null;
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  Music.speechOn=false;
+  applyBgGain();
+}
+function pumpSpeak(my){
+  if(Speak.token!==my) return;
+  try{ if(window.speechSynthesis.paused) window.speechSynthesis.resume(); }catch(e){}
+  if(!Speak.queue.length){
+    Music.speechOn=false;
+    applyBgGain();
+    const cb=Speak.onend; Speak.onend=null;
+    if(cb) cb();
+    return;
+  }
+  const voice=pickSanskritVoice();
+  const indic=!!(voice && isIndicVoice(voice));
+  const u=new SpeechSynthesisUtterance(prepSanskritSpeech(Speak.queue.shift(), indic));
+  u.lang = indic ? ((voice.lang||'hi-IN')) : (voice && (voice.lang||'').toLowerCase().startsWith('en-in') ? 'en-IN' : 'hi-IN');
+  u.rate = Math.max(0.45, Math.min(0.92, Speak.rate));
+  u.pitch = 1.18;
+  if(voice && (indic || !cachedVoices.some(isIndicVoice))) u.voice=voice;
+  u.onend=()=>pumpSpeak(my);
+  u.onerror=()=>pumpSpeak(my);
+  try{ window.speechSynthesis.speak(u); }
+  catch(e){ pumpSpeak(my); }
+}
+function speakNow(text, rate, onend){
+  stopSpeaking();
+  const my=Speak.token;
+  Speak.rate=(rate!=null?rate:state.rate);
+  Speak.onend=onend||null;
+  Speak.queue=chunkSaSpeech(text);
+  if(!Speak.queue.length){ if(onend) onend(); return; }
+  Music.speechOn=true;
+  applyBgGain();
+  setTimeout(()=>pumpSpeak(my), 60);
+}
+function speak(text, rate, onend){
+  try{
+    if(!window.speechSynthesis){ return; }
+    refreshVoices();
+    if(voicesReady && cachedVoices.length){
+      speakNow(text, rate, onend);
+    } else {
+      let attempts=0;
+      const wait=setInterval(()=>{
+        refreshVoices();
+        attempts++;
+        if(voicesReady || attempts>12){
+          clearInterval(wait);
+          speakNow(text, rate, onend);
+        }
+      },150);
+    }
+  }catch(e){ console.warn('Speech not supported', e); }
+}
+document.addEventListener('click', (e)=>{
+  const b = e.target.closest('button.spk[data-say]');
+  if(!b) return;
+  e.preventDefault();
+  e.stopPropagation();
+  speak(b.getAttribute('data-say'));
+}, true);
+
+/* ===================== FIRST-USE AUDIO ===================== */
+let heardThisModule = new Set();
+function resetHeard(){ heardThisModule = new Set(); }
+function wordKey(w){
+  return foldSa(String(w||''));
+}
+function isFirstSa(word){
+  const k = wordKey(word);
+  if(!k) return false;
+  if(heardThisModule.has(k)) return false;
+  heardThisModule.add(k);
+  return true;
+}
+function markHeard(word){
+  const k = wordKey(word);
+  if(k) heardThisModule.add(k);
+}
+function escapeAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+function firstSpeakHTML(word, speakAs){
+  const say = speakAs || String(word).replace(/[.,!?;:।॥]+$/,'');
+  if(!isFirstSa(say)) return '';
+  return `<button class="spk first-spk" type="button" data-say="${escapeAttr(say)}" title="सुनो ${say}" aria-label="सुनो ${say}">🔊</button>`;
+}
+function saHTML(word, speakAs, meaning){
+  const say = speakAs || String(word).replace(/[.,!?;:।॥]+$/,'');
+  const first = isFirstSa(say);
+  const btn = first
+    ? `<button class="spk first-spk" type="button" data-say="${escapeAttr(say)}" title="सुनो ${say}" aria-label="सुनो ${say}">🔊</button>`
+    : '';
+  const g = meaning ? ` <span class="gloss">(= ${meaning})</span>` : '';
+  return `<span class="deword"><strong class="de">${word}</strong>${btn}</span>${g}`;
+}
+function glossHTML(word, en, speakAs){ return saHTML(word, speakAs, en); }
+function looksSanskrit(str){
+  const t = String(str||'').trim();
+  if(!t) return false;
+  if(/[\u0900-\u097F]/.test(t)) return true;
+  const parts = t.split(/[\s/]+/).filter(Boolean);
+  if(parts.some(p=>SANSKRIT_LEXICON.has(p.toLowerCase()) || SANSKRIT_LEXICON.has(foldSa(p)))) return true;
+  if(ENGLISH_WORDS.has(wordKey(t))) return false;
+  return SANSKRIT_LEXICON.has(t.toLowerCase());
+}
+function decorateQuotedSa(text){
+  return String(text).replace(/"([^"]+)"/g, (m, inner)=>{
+    if(looksSanskrit(inner)) return `"${saHTML(inner)}"`;
+    return m;
+  });
+}
+
+/* ===================== STATE ===================== */
+const LEVELS=[
+  {id:'namaste', level:1, icon:'🙏', label:'नमस्ते', en:'नमस्ते, मैं हूँ…'},
+  {id:'asmi', level:2, icon:'🗣️', label:'अस्मि', en:'होना / मेरे पास है'},
+  {id:'parichaya', level:3, icon:'🪪', label:'परिचयः', en:'यह मैं हूँ'},
+  {id:'varnah', level:4, icon:'🎨', label:'वर्णाः', en:'रंग'},
+  {id:'visheshanam', level:5, icon:'⚖️', label:'विशेषणम्', en:'विशेषण'},
+  {id:'sankhya', level:6, icon:'🔢', label:'सङ्ख्या', en:'संख्याएँ'},
+  {id:'sankhya100', level:7, icon:'💯', label:'शतम्+', en:'बड़ी संख्याएँ'},
+  {id:'kutumbam', level:8, icon:'👪', label:'कुटुम्बम्', en:'परिवार'},
+  {id:'sarvanama', level:9, icon:'👤', label:'सर्वनाम', en:'सर्वनाम'},
+  {id:'dhatu', level:10, icon:'📖', label:'धातवः', en:'क्रियाएँ'},
+  {id:'katha', level:11, icon:'📚', label:'कथा', en:'बच्चों की कथाएँ'},
+  {id:'challenge', level:12, icon:'🏆', label:'मयूर-कक्षः', en:'बॉस स्तर'},
+  {id:'stories', extra:true, icon:'📚', label:'कथा-पेटिका', en:'कहानी पेटिका'},
+  {id:'shloka', extra:true, icon:'📿', label:'श्लोकाः', en:'छोटे श्लोक'},
+  {id:'revision', extra:true, icon:'🎮', label:'क्रीडाङ्गणम्', en:'अभ्यास बाग'}
+];
+const SAVE_KEY='sanskritayatra-hi-levels-v1';
+const COPY_ID='hi';
+const OTHER_HREF='../sanskritayatra/';
+const STORY_LEVELS=LEVELS.filter(m=>m.level);
+const state = {
+  current:'namaste',
+  done:new Set(),
+  rate:0.82,
+  justCleared:null,
+  lockHint:null,
+  confirmReset:false,
+  locksOn:true,
+  storyId:'vedark',
+  musicOn:true,
+};
+function loadProgress(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(Array.isArray(d.done)) state.done=new Set(d.done);
+    if(state.done.size && !state.done.has('namaste')) state.done.add('namaste');
+    if(d.current && LEVELS.some(m=>m.id===d.current)) state.current=d.current;
+    if(typeof d.locksOn==='boolean') state.locksOn=d.locksOn;
+    if(typeof d.rate==='number' && d.rate>0) state.rate=d.rate;
+    if(typeof d.musicOn==='boolean') state.musicOn=d.musicOn;
+  }catch(e){}
+}
+function saveProgress(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({done:[...state.done], current:state.current, locksOn:state.locksOn, rate:state.rate, musicOn:state.musicOn}));
+  }catch(e){}
+}
+function levelById(id){ return LEVELS.find(m=>m.id===id); }
+function isUnlocked(id){
+  if(!state.locksOn) return true;
+  const m=levelById(id);
+  if(!m) return false;
+  if(m.extra) return state.done.has('namaste') || STORY_LEVELS.some(x=>state.done.has(x.id));
+  if(m.level===1) return true;
+  if(state.done.has(id)) return true;
+  const prev=LEVELS.find(x=>x.level===m.level-1);
+  if(prev && state.done.has(prev.id)) return true;
+  return STORY_LEVELS.some(x=>x.level>m.level && state.done.has(x.id));
+}
+function nextStoryLevel(id){
+  const m=levelById(id);
+  if(!m || !m.level) return null;
+  return LEVELS.find(x=>x.level===m.level+1) || null;
+}
+function goTo(id){
+  if(!isUnlocked(id)){
+    const m=levelById(id);
+    const prev=m && m.level ? LEVELS.find(x=>x.level===m.level-1) : LEVELS.find(x=>x.id==='namaste');
+    state.lockHint=prev
+      ? `🔒 स्तर ${m.level} सो रहा है। पहले स्तर ${prev.level} (${prev.en}) पूरा करो — तब मयूर फाटक खोलेगा।`
+      : '🔒 पहले स्तर 1 पूरा करो। शुक कतार में बहुत पागल है।';
+    playSfx('bad');
+    render();
+    return;
+  }
+  state.lockHint=null;
+  state.current=id;
+  saveProgress();
+  playSfx('tap');
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function markDone(id){
+  const wasNew=!state.done.has(id);
+  state.done.add(id);
+  saveProgress();
+  if(wasNew && levelById(id) && levelById(id).level){
+    state.justCleared=id;
+    playSfx('win');
+  }
+  render();
+}
+function resetProgress(){
+  state.done=new Set();
+  state.current='namaste';
+  state.justCleared=null;
+  state.lockHint=null;
+  state.confirmReset=false;
+  saveProgress();
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+loadProgress();
+
+/* ===================== HELPERS ===================== */
+function speakerBtn(text, extraClass){
+  const b=document.createElement('button');
+  b.className='spk'+(extraClass?' '+extraClass:''); b.type='button'; b.innerHTML='🔊';
+  b.title='उच्चारण सुनो';
+  b.setAttribute('aria-label','सुनो '+text);
+  b.onclick=(e)=>{e.stopPropagation(); speak(text);};
+  return b;
+}
+function firstSpeakerBtn(text){
+  if(!isFirstSa(text)) return null;
+  return speakerBtn(text, 'first-spk');
+}
+function makeTile(sa, en, opts){
+  opts = opts || {};
+  const t=document.createElement('div');
+  t.className='tile'+(opts.swatch?' swatch':'');
+  if(opts.hex){
+    const dot=document.createElement('span');
+    dot.className='swatchdot';
+    dot.style.background=opts.hex;
+    t.appendChild(dot);
+  }
+  const saEl=document.createElement('span');
+  saEl.textContent=opts.lead != null ? opts.lead : sa;
+  t.appendChild(saEl);
+  if(opts.rom){
+    const rom=document.createElement('span');
+    rom.className='rom';
+    rom.textContent=opts.rom;
+    t.appendChild(rom);
+  }
+  if(en){
+    const enEl=document.createElement('span');
+    enEl.className='en';
+    enEl.textContent=en;
+    t.appendChild(enEl);
+  }
+  const say = opts.say || sa;
+  t.onclick=()=>speak(say, opts.rate);
+  t.appendChild(speakerBtn(say));
+  markHeard(sa);
+  String(sa).split(/[\s/]+/).forEach(markHeard);
+  return t;
+}
+function renderQuiz(container, questions, onComplete){
+  let idx=0, score=0;
+  const box=document.createElement('div'); box.className='qwrap';
+  container.appendChild(box);
+  function show(){
+    box.innerHTML='';
+    if(idx>=questions.length){
+      box.innerHTML=`<div class="qfeedback ok">${score===questions.length
+        ? 'स्तर जाँच: पूरे अंक! मयूर ने छोटी सी मोर-चक्री की। '+score+'/'+questions.length+' ✓'
+        : 'स्तर जाँच हुई — '+score+'/'+questions.length+' सही। शुक तुम्हें अभी भी पसंद करता है। 🎉'}</div>`;
+      playSfx(score===questions.length?'win':'ok');
+      onComplete && onComplete(score, questions.length);
+      return;
+    }
+    const item=questions[idx];
+    const prog=document.createElement('div'); prog.className='progressline';
+    const frageLabel=document.createElement('span');
+    frageLabel.innerHTML=`जाँच ${idx+1} / ${questions.length} · ${saHTML('प्रश्नः','प्रश्नः','प्रश्न')}`;
+    prog.appendChild(frageLabel);
+    box.appendChild(prog);
+    const p=document.createElement('div'); p.className='qprompt';
+    p.innerHTML = decorateQuotedSa(item.q);
+    if(item.audio){
+      const qFirst = firstSpeakerBtn(item.audio);
+      if(qFirst) p.appendChild(qFirst);
+      else p.appendChild(speakerBtn(item.audio));
+    } else if(looksSanskrit(item.q)){
+      p.appendChild(speakerBtn(item.q));
+    }
+    box.appendChild(p);
+    const fb=document.createElement('div'); fb.className='qfeedback';
+    item.opts.forEach((opt,i)=>{
+      const b=document.createElement('button');
+      b.className='qopt';
+      const label=document.createElement('span'); label.textContent=opt;
+      b.appendChild(label);
+      if(looksSanskrit(opt)){
+        const first = firstSpeakerBtn(opt);
+        b.appendChild(first || speakerBtn(opt));
+      }
+      b.onclick=()=>{
+        [...box.querySelectorAll('.qopt')].forEach(x=>x.disabled=true);
+        if(i===item.a){ b.classList.add('correct'); fb.textContent=pickOne(SHUKA_YES); fb.className='qfeedback ok'; score++; playSfx('ok'); }
+        else{ b.classList.add('incorrect'); fb.textContent=pickOne(SHUKA_NO)+item.opts[item.a]; fb.className='qfeedback bad'; playSfx('bad');
+              [...box.querySelectorAll('.qopt')][item.a].classList.add('correct'); }
+        box.appendChild(fb);
+        setTimeout(()=>{ idx++; show(); }, 1100);
+      };
+      box.appendChild(b);
+    });
+  }
+  show();
+}
+function foldSa(s){
+  let t=String(s||'').toLowerCase().trim();
+  t=t.replace(/[\u0900-\u097F]+/g,(dev)=>{
+    const map={
+      'अ':'a','आ':'aa','इ':'i','ई':'ii','उ':'u','ऊ':'uu','ऋ':'ri','ए':'e','ऐ':'ai','ओ':'o','औ':'au',
+      'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'n','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'n',
+      'ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n',
+      'प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h',
+      'ा':'aa','ि':'i','ी':'ii','ु':'u','ू':'uu','ृ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au',
+      'ं':'m','ः':'h','्':'','।':'','॥':'','ँ':'m'
+    };
+    return [...dev].map(ch=>map[ch]||'').join('');
+  });
+  return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u')
+    .replace(/ṛ|ṝ/g,'ri').replace(/ś|ṣ/g,'sh')
+    .replace(/ñ|ṅ|ṇ/g,'n').replace(/ṃ|ṁ/g,'m').replace(/ḥ/g,'h')
+    .replace(/chh/g,'ch').replace(/aa/g,'a').replace(/ii/g,'i').replace(/uu/g,'u')
+    .replace(/[.,!?;:"'()।॥\-]/g,'').replace(/\s+/g,' ').trim();
+}
+function answersMatch(val, answer, also){
+  const v=foldSa(val);
+  if(!v) return false;
+  const cands=[answer].concat(also||[]);
+  return cands.some(c=>foldSa(c)===v);
+}
+function renderFillBlank(container, items){
+  const wrap=document.createElement('div');
+  items.forEach((it)=>{
+    const row=document.createElement('div'); row.className='fillrow';
+    const prefix=document.createElement('span');
+    const prefixWord = String(it.prefix||'').trim();
+    const PREFIX_EN={'अहम्':'मैं','त्वम्':'तुम','वयम्':'हम','सः':'वह (लड़का)','सा':'वह (लड़की)','यूयम्':'तुम सब'};
+    if(PREFIX_EN[prefixWord]){
+      prefix.innerHTML = glossHTML(prefixWord, PREFIX_EN[prefixWord]);
+    } else if(it.gloss){
+      prefix.innerHTML = `${it.prefix} <span class="gloss">(= ${it.gloss})</span>`;
+    } else if((!/\s/.test(prefixWord) && looksSanskrit(prefixWord))){
+      prefix.innerHTML = saHTML(prefixWord);
+    } else {
+      prefix.innerHTML = it.prefix;
+    }
+    row.appendChild(prefix);
+    const input=document.createElement('input'); input.placeholder='रोमन या देवनागरी'; input.autocomplete='off';
+    input.oninput=()=>{
+      if(!input.value.trim()){ input.classList.remove('ok','bad'); return; }
+      if(answersMatch(input.value, it.answer, it.also)){ input.classList.add('ok'); input.classList.remove('bad'); }
+      else{ input.classList.remove('ok'); input.classList.add('bad'); }
+    };
+    row.appendChild(input);
+    const rest=document.createElement('span'); rest.textContent=it.suffix||'';
+    row.appendChild(rest);
+    row.appendChild(speakerBtn(it.audioHint || it.answerDev || it.answer));
+    wrap.appendChild(row);
+  });
+  container.appendChild(wrap);
+}
+function renderMatch(container, pairs){
+  const grid=document.createElement('div'); grid.className='matchgrid';
+  const leftCol=document.createElement('div'); leftCol.className='matchcol';
+  const rightCol=document.createElement('div'); rightCol.className='matchcol';
+  const shuffledRight=[...pairs].sort(()=>Math.random()-0.5);
+  let selLeft=null, pairedCount=0;
+  pairs.forEach((p,i)=>{
+    const le=document.createElement('div'); le.className='matchitem';
+    const txt=document.createElement('span'); txt.textContent=p[0];
+    le.appendChild(txt);
+    if(looksSanskrit(p[0])){
+      const first = firstSpeakerBtn(p[0]);
+      le.appendChild(first || speakerBtn(p[0]));
+    }
+    le.onclick=(e)=>{
+      if(e.target.closest('.spk')) return;
+      if(le.classList.contains('paired')) return;
+      [...leftCol.children].forEach(c=>c.classList.remove('sel'));
+      le.classList.add('sel'); selLeft={idx:i, el:le};
+    };
+    leftCol.appendChild(le);
+  });
+  shuffledRight.forEach((p)=>{
+    const re=document.createElement('div'); re.className='matchitem'; re.textContent=p[1];
+    re.onclick=()=>{
+      if(re.classList.contains('paired') || !selLeft) return;
+      const correctIdx = pairs.findIndex(pp=>pp[1]===p[1]);
+      if(correctIdx===selLeft.idx){
+        re.classList.add('paired'); selLeft.el.classList.add('paired'); selLeft.el.classList.remove('sel');
+        pairedCount++;
+        if(pairedCount===pairs.length){
+          const done=document.createElement('div'); done.className='qfeedback ok'; done.textContent='सारे जोड़े सही! मयूर आम का पदक देना चाहता है। ✓';
+          grid.after(done);
+        }
+      } else {
+        re.classList.add('wrongflash'); selLeft.el.classList.add('wrongflash');
+        setTimeout(()=>{ re.classList.remove('wrongflash'); selLeft.el.classList.remove('wrongflash'); },500);
+      }
+      selLeft=null;
+    };
+    rightCol.appendChild(re);
+  });
+  grid.appendChild(leftCol); grid.appendChild(rightCol);
+  container.appendChild(grid);
+}
+function squeezeSa(s){
+  return foldSa(s)
+    .replace(/sh/g,'s').replace(/ch/g,'c').replace(/ph/g,'f').replace(/th/g,'t').replace(/dh/g,'d').replace(/bh/g,'b').replace(/gh/g,'g').replace(/kh/g,'k')
+    .replace(/w/g,'v').replace(/y/g,'i')
+    .replace(/[^a-z0-9]+/g,'').replace(/(.)\1+/g,'$1');
+}
+function editDist(a,b){
+  const m=a.length, n=b.length;
+  if(!m) return n; if(!n) return m;
+  const row=new Array(n+1);
+  for(let j=0;j<=n;j++) row[j]=j;
+  for(let i=1;i<=m;i++){
+    let prev=row[0]; row[0]=i;
+    for(let j=1;j<=n;j++){
+      const tmp=row[j];
+      row[j]=a[i-1]===b[j-1] ? prev : 1+Math.min(prev, row[j], row[j-1]);
+      prev=tmp;
+    }
+  }
+  return row[n];
+}
+function closeEnough(a,b){
+  if(!a || !b) return false;
+  if(a===b || a.includes(b) || b.includes(a)) return true;
+  const d=editDist(a,b), max=Math.max(a.length,b.length);
+  if(max<=5) return d<=2;
+  if(max<=8) return d<=3;
+  return d/max<=0.45;
+}
+const HEAR_STOP=new Set(['the','a','an','is','am','are','my','i','and','to','of','in','it','that','this','hai','hoon','ho','hain','ka','ki','ke','ek','main','mai','mein']);
+function tokensOf(s){
+  return foldSa(s).split(' ').filter(w=>w && !HEAR_STOP.has(w) && w.length>1);
+}
+const HEAR_ALIASES={
+  namaste:['namaste','namaskar','namaskaar','namastay','namastey','namasteh','नमस्कार','hi','नमस्ते','नमस्कार'],
+  dhanyavadah:['dhanyavad','dhanyavaad','dhanyavadah','shukriya','shukriyaa','thanks','धन्यवाद','thankyou','धन्यवाद','धन्यवादः'],
+  aham:['aham','ahaam','hum','main','mai','mein','i am','अहम्','मैं'],
+  asmi:['asmi','asmee','asme','hoon','hun','hu','am','अस्मि'],
+  asti:['asti','astee','aste','hai','is','अस्ति'],
+  mama:['mama','mera','meraa','my name','mera naam','मम'],
+  punarmilamah:['punarmilamah','punarmilama','phir milenge','alvida','अलविदा','goodbye','see you','पुनर्मिलामः']
+};
+function aliasKey(expected){
+  const f=foldSa(expected);
+  if(HEAR_ALIASES[f]) return f;
+  if(f.indexOf('namast')===0 || f.indexOf('namask')===0) return 'namaste';
+  if(f.indexOf('dhanyav')===0) return 'dhanyavadah';
+  if(f.indexOf('punarmil')===0) return 'punarmilamah';
+  if(f.indexOf('mama nam')===0 || f.indexOf('mam nam')===0) return 'mama';
+  if(f==='aham' || f==='aham asmi' || f.indexOf('aham')===0) return 'aham';
+  return '';
+}
+function heardMatches(heard, expected, expectedEn){
+  const h=foldSa(heard), e=foldSa(expected);
+  if(!h || !e) return false;
+  if(closeEnough(h,e) || closeEnough(squeezeSa(h), squeezeSa(e))) return true;
+  const key=aliasKey(expected);
+  if(key){
+    const pool=HEAR_ALIASES[key]||[];
+    const hs=squeezeSa(h);
+    if(pool.some(a=>{
+      const fa=foldSa(a), sa=squeezeSa(a);
+      return h===fa || hs===sa || h.includes(fa) || fa.includes(h) || closeEnough(hs,sa) || closeEnough(h,fa);
+    })) return true;
+  }
+  const ht=tokensOf(h), et=tokensOf(e);
+  if(et.length){
+    const hit=et.filter(t=>ht.some(x=>closeEnough(squeezeSa(x), squeezeSa(t)))).length;
+    if(hit/et.length>=0.45) return true;
+  }
+  if(expectedEn){
+    const en=foldSa(expectedEn), ens=squeezeSa(en), hs=squeezeSa(h);
+    if(closeEnough(h,en) || closeEnough(hs,ens)) return true;
+    const ent=tokensOf(en);
+    if(ent.length){
+      const hit=ent.filter(t=>ht.some(x=>closeEnough(squeezeSa(x), squeezeSa(t)))).length;
+      if(hit/ent.length>=0.5) return true;
+    }
+  }
+  return false;
+}
+function canListen(){
+  return !!(window.isSecureContext && (window.SpeechRecognition || window.webkitSpeechRecognition));
+}
+const Listen={rec:null, timer:null, snap:null, active:false, btn:null};
+function stopListen(){
+  Listen.active=false;
+  if(Listen.timer){ clearTimeout(Listen.timer); Listen.timer=null; }
+  if(Listen.snap){ clearTimeout(Listen.snap); Listen.snap=null; }
+  if(Listen.btn){ Listen.btn.classList.remove('listening'); Listen.btn=null; }
+  if(Listen.rec){
+    const r=Listen.rec; Listen.rec=null;
+    r.onresult=r.onerror=r.onend=null;
+    try{ r.abort(); }catch(e){}
+  }
+  Music.micMute=false;
+  applyBgGain();
+}
+function startListen(expected, expectedEn, btn, fb){
+  const Rec=window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!Rec || !window.isSecureContext){
+    fb.textContent='माइक के लिए https चाहिए (या “मैंने बोल दिया” दबाओ — वह भी गिना जाता है)।';
+    fb.className='qfeedback try';
+    return;
+  }
+  stopListen();
+  stopSpeaking();
+  Music.speechOn=false;
+  Music.micMute=true;
+  applyBgGain();
+
+  Listen.active=true;
+  Listen.btn=btn;
+  btn.classList.add('listening');
+  const cue=String(expected||'').replace(/[!.?।॥]+$/g,'').trim();
+  fb.textContent='सुन रहा हूँ… अभी “'+cue+'” बोलो!';
+  fb.className='qfeedback';
+
+  const alts=[];
+  let won=false;
+  let restarts=0;
+  const shortLine=foldSa(expected).split(' ').filter(Boolean).length<=2;
+  const finish=()=>{
+    if(!Listen.active) return;
+    const rec=Listen.rec;
+    Listen.active=false;
+    if(Listen.timer){ clearTimeout(Listen.timer); Listen.timer=null; }
+    if(Listen.snap){ clearTimeout(Listen.snap); Listen.snap=null; }
+    if(rec){
+      rec.onresult=rec.onerror=rec.onend=null;
+      try{ rec.stop(); }catch(e){}
+      Listen.rec=null;
+    }
+    btn.classList.remove('listening');
+    Listen.btn=null;
+    Music.micMute=false;
+    applyBgGain();
+    if(won) return;
+    if(alts.length){
+      fb.textContent='मैंने “'+alts[0]+'” सुना। हिम्मत अच्छी! “मैं बोलूँगा/बोलूँगी” फिर दबाओ, या “मैंने बोल दिया” — वह भी चलता है।';
+      fb.className='qfeedback try';
+    } else {
+      fb.textContent='पकड़ नहीं पाया। थोड़ा ज़ोर से बोलो, या “मैंने बोल दिया” दबाओ। वह भी गिना जाता है!';
+      fb.className='qfeedback try';
+    }
+  };
+  const succeed=(heard)=>{
+    if(won) return;
+    won=true;
+    const looksLike=foldSa(heard).indexOf(foldSa(cue))>=0;
+    fb.textContent= looksLike ? 'हाँ! मैंने सुना: “'+heard+'”। ✓' : 'हाँ! वह '+cue+' जैसा लगा। ✓';
+    fb.className='qfeedback ok';
+    finish();
+    playSfx('ok');
+  };
+  const scoreNow=()=>{
+    if(!Listen.active || won) return;
+    const hit=alts.find(a=>heardMatches(a, expected, expectedEn));
+    if(hit) succeed(hit);
+    else finish();
+  };
+  const bootRec=(lang)=>{
+    if(!Listen.active || won) return;
+    if(Listen.rec){
+      const old=Listen.rec;
+      old.onresult=old.onerror=old.onend=null;
+      try{ old.abort(); }catch(e){}
+      Listen.rec=null;
+    }
+    const r=new Rec();
+    Listen.rec=r;
+    r.lang=lang||'hi-IN';
+    r.interimResults=true;
+    r.continuous=false;
+    r.maxAlternatives=8;
+    try{
+      const GL=window.SpeechGrammarList||window.webkitSpeechGrammarList;
+      if(GL && cue){
+        const g=new GL();
+        const rom=foldSa(cue);
+        const bits=[cue, rom, 'नमस्ते', 'namaste', 'धन्यवादः', 'dhanyavadah', 'अहम्', 'aham', 'अस्मि', 'asmi']
+          .filter(Boolean).map(w=>w.replace(/[()|;<>]/g,'')).filter(w=>w);
+        g.addFromString('#JSGF V1.0; grammar word; public <word> = '+bits.join(' | ')+' ;', 1);
+        r.grammars=g;
+      }
+    }catch(e){}
+    r.onresult=(ev)=>{
+      if(!Listen.active || won) return;
+      for(let i=ev.resultIndex;i<ev.results.length;i++){
+        for(let j=0;j<ev.results[i].length;j++){
+          const t=ev.results[i][j].transcript;
+          if(t && alts.indexOf(t)<0) alts.push(t);
+        }
+      }
+      const hit=alts.find(a=>heardMatches(a, expected, expectedEn));
+      if(hit){ succeed(hit); return; }
+      if(shortLine && alts.length && !Listen.snap){
+        Listen.snap=setTimeout(()=>{
+          Listen.snap=null;
+          try{ if(Listen.rec) Listen.rec.stop(); }catch(e){}
+          scoreNow();
+        }, 220);
+      }
+    };
+    r.onerror=(ev)=>{
+      if(!Listen.active || won) return;
+      const err=ev && ev.error;
+      if(err==='no-speech' || err==='aborted') return;
+      if(err==='not-allowed' || err==='service-not-allowed'){
+        fb.textContent='माइक की अनुमति दो, या “मैंने बोल दिया” दबाओ। ज़ोर से बोलना भी गिना जाता है।';
+        fb.className='qfeedback try';
+        won=true;
+        finish();
+        return;
+      }
+      if(err==='audio-capture'){
+        fb.textContent='माइक नहीं मिला। पंक्ति बोलकर “मैंने बोल दिया” दबाओ।';
+        fb.className='qfeedback try';
+        won=true;
+        finish();
+      }
+    };
+    r.onend=()=>{
+      if(!Listen.active || won) return;
+      const hit=alts.find(a=>heardMatches(a, expected, expectedEn));
+      if(hit){ succeed(hit); return; }
+      if(Listen.snap) return;
+      if(shortLine){
+        if(alts.length){ finish(); return; }
+        if(restarts<1){
+          restarts++;
+          bootRec('hi-IN');
+          return;
+        }
+        finish();
+        return;
+      }
+      if(restarts<1){
+        restarts++;
+        bootRec('en-IN');
+        return;
+      }
+      finish();
+    };
+    try{ r.start(); }
+    catch(e){
+      fb.textContent='माइक की अनुमति दो, या बोलने के बाद “मैंने बोल दिया” दबाओ।';
+      fb.className='qfeedback try';
+      finish();
+    }
+  };
+  Listen.timer=setTimeout(scoreNow, shortLine?3000:7000);
+  bootRec('hi-IN');
+}
+function renderSpeakAlong(card, phrases){
+  if(!phrases || !phrases.length) return;
+  sectionLabel(card,'मेरे पीछे दोहराओ');
+  const note=document.createElement('p'); note.className='note';
+  note.textContent='पहले सुनो, फिर ज़ोर से बोलो। कंप्यूटर के कान थोड़े मसखरे हैं — अगर चूक जाए तो “मैंने बोल दिया” दबाओ। वह भी गिना जाता है। हिम्मत से बोलना ही असली बात है।';
+  card.appendChild(note);
+  const list=document.createElement('div'); list.className='speaklist';
+  phrases.forEach((ph)=>{
+    const row=document.createElement('div'); row.className='speakrow';
+    const line=document.createElement('div'); line.className='line-de'; line.textContent=ph.sa;
+    line.appendChild(speakerBtn(ph.sa));
+    row.appendChild(line);
+    const en=document.createElement('div'); en.className='line-en'; en.textContent=ph.en;
+    row.appendChild(en);
+    const btns=document.createElement('div'); btns.className='btnrow'; btns.style.marginTop='0';
+    const hear=document.createElement('button'); hear.className='btn ghost'; hear.textContent='🔊 सुनो';
+    hear.onclick=()=>speak(ph.sa);
+    const slow=document.createElement('button'); slow.className='btn ghost'; slow.textContent='🐢 धीरे';
+    slow.onclick=()=>speak(ph.sa, 0.55);
+    const said=document.createElement('button'); said.className='btn'; said.textContent='मैंने बोल दिया ✓';
+    const mic=document.createElement('button'); mic.className='btn ghost'; mic.textContent=canListen()?'🎤 मैं बोलूँगा/बोलूँगी':'🎤 अभ्यास';
+    const fb=document.createElement('div'); fb.className='qfeedback';
+    said.onclick=()=>{
+      stopListen();
+      fb.textContent='शाबाश। दो बार और बोलो — एक बार तोते जैसी आवाज़, एक बार मोर जैसी। ✓';
+      fb.className='qfeedback ok';
+      playSfx('ok');
+    };
+    mic.onclick=()=>startListen(ph.sa, ph.en, mic, fb);
+    btns.appendChild(hear); btns.appendChild(slow); btns.appendChild(said); btns.appendChild(mic);
+    row.appendChild(btns); row.appendChild(fb);
+    list.appendChild(row);
+  });
+  card.appendChild(list);
+}
+function renderEarPick(card, items){
+  if(!items || !items.length) return;
+  sectionLabel(card,'सुनो और चुनो');
+  const note=document.createElement('p'); note.className='note';
+  note.textContent='Play दबाओ, सुनो, फिर अर्थ चुनो। अभी वर्तनी मत देखो — यह केवल कानों का खेल है।';
+  card.appendChild(note);
+  const box=document.createElement('div'); box.className='qwrap';
+  card.appendChild(box);
+  let idx=0, score=0;
+  function show(){
+    box.innerHTML='';
+    if(idx>=items.length){
+      box.innerHTML=`<div class="qfeedback ok">कान: चालू। ${score}/${items.length} सही सुने। शुक प्रभावित है (और थोड़ा जलता भी है)। 👂</div>`;
+      return;
+    }
+    const item=items[idx];
+    const prog=document.createElement('div'); prog.className='progressline';
+    prog.textContent=`सुनो ${idx+1} / ${items.length}`;
+    box.appendChild(prog);
+    const play=document.createElement('button'); play.className='btn'; play.textContent='🔊 चलाओ';
+    play.onclick=()=>speak(item.say, Math.min(state.rate, 0.7));
+    box.appendChild(play);
+    const fb=document.createElement('div'); fb.className='qfeedback';
+    item.opts.forEach((opt,i)=>{
+      const b=document.createElement('button'); b.className='qopt';
+      const label=document.createElement('span'); label.textContent=opt;
+      b.appendChild(label);
+      b.onclick=()=>{
+        [...box.querySelectorAll('.qopt')].forEach(x=>x.disabled=true);
+        if(i===item.a){ b.classList.add('correct'); fb.textContent='हाँ — वह '+item.say+' था ✓ मयूर के पंखों ने लहरी की।'; fb.className='qfeedback ok'; score++; }
+        else { b.classList.add('incorrect'); fb.textContent='वह '+item.say+' था — चालाक था ना?'; fb.className='qfeedback bad';
+          [...box.querySelectorAll('.qopt')][item.a].classList.add('correct'); }
+        box.appendChild(fb);
+        setTimeout(()=>{ idx++; show(); }, 1100);
+      };
+      box.appendChild(b);
+    });
+  }
+  show();
+}
+function renderChant(card, parts, heading, help, meanings){
+  sectionLabel(card, heading || 'यह ढर्रा बोलो');
+  const note=document.createElement('p'); note.className='note';
+  note.textContent=help || 'Play the chant, then join in. Rhythm helps endings stick.';
+  card.appendChild(note);
+  const row=document.createElement('div'); row.className='btnrow';
+  const play=document.createElement('button'); play.className='btn'; play.textContent='🎵 मंत्र चलाओ — फिर साथ गाओ (मसखरा लगना अनुमति है)';
+  play.onclick=()=>{
+    let i=0;
+    const step=()=>{
+      if(i>=parts.length) return;
+      speak(parts[i], Math.min(state.rate, 0.65), ()=>setTimeout(()=>{ i++; step(); }, 220));
+    };
+    step();
+  };
+  const show=document.createElement('div'); show.className='tipbox'; show.style.marginTop='10px';
+  show.innerHTML=parts.map((p,i)=>saHTML(p, p, meanings && meanings[i])).join(' &nbsp;·&nbsp; ');
+  row.appendChild(play);
+  card.appendChild(row);
+  card.appendChild(show);
+}
+function renderRecap(root, moduleId){
+  const qs=RECAP[moduleId];
+  if(!qs) return;
+  const card=document.createElement('div'); card.className='card recapcard';
+  card.innerHTML=`<h2>हल्की दोहराई</h2><div class="tagline">थोड़ी सी दोहराई ताकि पुराने शब्द सिर में रहें। उत्तर ज़ोर से बोलो। शुक न देखने का नाटक करेगा।</div>`;
+  renderQuiz(card, qs, null);
+  root.appendChild(card);
+}
+function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+const SHUKA_YES=[
+  'हाँ! सम्यक् (= सही)! शुक ने छोटी तोता-नृत्य की। ✓',
+  'बिल्कुल। सम्यक् (= सही)। दिमाग ने मोर से हाई-फाइव किया। ✓',
+  'सही! सम्यक् (= सही)। विसर्ग भी मुस्कुरा रहे हैं। ✓',
+  'सम्यक् (= सही)! मयूर आम देता, पर शुक खा गया। ✓'
+];
+const SHUKA_NO=[
+  'ओह — शुक ने पलक झपकाई। उत्तर है ',
+  'लगभग! (तोते भी पूरे सही नहीं।) उत्तर है ',
+  'वह नहीं। सही है ',
+  'हाई-फाइव जितना पास, अंक जितना नहीं। उत्तर है '
+];
+const SHUKA_CHAT=['नमस्ते। अहं शुकः अस्मि।','अहं हरितः अस्मि।','मम प्रियं भोजनं मोदकः अस्ति।','वयं मित्राणि स्मः।','धन्यवादः।'];
+const MAYURA_CHAT=['नमस्ते। अहं मयूरः अस्मि।','अहं नृत्यामि।','वनं सुन्दरं अस्ति।','त्वं मित्रम् असि।','पुनर्मिलामः।'];
+function ottoSays(card, text){
+  const d=document.createElement('div'); d.className='otto';
+  d.innerHTML=`<strong>Shuka the parrot:</strong> ${text}`;
+  card.appendChild(d);
+}
+function lsrwRail(card){
+  const d=document.createElement('div'); d.className='lsrw-rail';
+  d.innerHTML=`
+    <span class="lsrw-pill L">1 👂 सुनो</span>
+    <span class="lsrw-pill S">2 🗣️ बोलो</span>
+    <span class="lsrw-pill R">3 📖 पढ़ो</span>
+    <span class="lsrw-pill W">4 ✍️ लिखो</span>`;
+  card.appendChild(d);
+}
+function phase(card, skill, title, blurb){
+  const p=document.createElement('div');
+  p.className='phase '+skill;
+  p.innerHTML=`<div>${title}</div>${blurb?`<div class="phase-blurb">${blurb}</div>`:''}`;
+  card.appendChild(p);
+}
+function renderListenAll(card, words){
+  const row=document.createElement('div'); row.className='btnrow';
+  const b=document.createElement('button'); b.className='btn'; b.textContent='🔊 सब चलाओ — केवल सुनो (झाँकना मना, इज्ज़त का खेल)';
+  b.onclick=()=>{
+    let i=0;
+    const step=()=>{
+      if(i>=words.length) return;
+      speak(words[i], Math.min(state.rate, 0.68), ()=>setTimeout(()=>{ i++; step(); }, 280));
+    };
+    step();
+  };
+  row.appendChild(b);
+  const tip=document.createElement('p'); tip.className='note';
+  tip.textContent='चाहो तो आँखें बंद करो। अक्षर देखने से पहले शब्दों का संगीत सुनो। (झाँकना बाद में। शुक देख रहा है। प्यार से।)';
+  card.appendChild(tip);
+  card.appendChild(row);
+}
+function renderWriteFromEnglish(card, items){
+  if(!items || !items.length) return;
+  sectionLabel(card,'संस्कृत लिखो');
+  const note=document.createElement('p'); note.className='note';
+  note.textContent='सरल रोमन अक्षरों में लिखो (namaste, aham asmi) या देवनागरी अगर आती हो। वर्तनी में हिम्मत चलती है। पहले खुद लिखो, फिर स्पीकर दबाओ।';
+  card.appendChild(note);
+  const wrap=document.createElement('div');
+  items.forEach((it)=>{
+    const row=document.createElement('div'); row.className='fillrow';
+    const lab=document.createElement('span'); lab.textContent=it.en+' →';
+    row.appendChild(lab);
+    const input=document.createElement('input');
+    input.placeholder='संस्कृत'; input.autocomplete='off';
+    input.style.width='min(100%, 280px)';
+    input.oninput=()=>{
+      if(!input.value.trim()){ input.classList.remove('ok','bad'); return; }
+      if(answersMatch(input.value, it.answer, it.also)){ input.classList.add('ok'); input.classList.remove('bad'); }
+      else { input.classList.remove('ok'); input.classList.add('bad'); }
+    };
+    row.appendChild(input);
+    row.appendChild(speakerBtn(it.also && it.also.find(x=>/[\u0900-\u097F]/.test(x)) || it.answer));
+    wrap.appendChild(row);
+  });
+  card.appendChild(wrap);
+}
+function moduleShell(title, tagline){
+  const card=document.createElement('div'); card.className='card';
+  const h=document.createElement('h2'); h.innerHTML=title;
+  const t=document.createElement('div'); t.className='tagline'; t.textContent=tagline;
+  card.appendChild(h); card.appendChild(t);
+  return card;
+}
+function explainer(card, html){
+  const e=document.createElement('div'); e.className='explainer'; e.innerHTML=html;
+  card.appendChild(e); return e;
+}
+function sectionLabel(card, text){
+  const l=document.createElement('div'); l.className='section-label'; l.textContent=text; card.appendChild(l); return l;
+}
+function actBox(card, text){
+  const d=document.createElement('div'); d.className='actbox';
+  d.innerHTML=`<strong>अभी करो:</strong> ${text}`;
+  card.appendChild(d); return d;
+}
+function renderShlokaCard(card, shloka, opts){
+  if(!shloka) return;
+  opts = opts || {};
+  const box=document.createElement('div'); box.className='shloka-card';
+  box.innerHTML=`<div class="sh-kicker">${shloka.kicker}</div>
+    <h3>${opts.heading || ('📿 '+shloka.title)}</h3>
+    <div class="shloka-lines">${shloka.lines.replace(/\n/g,'<br>')}</div>
+    <div class="shloka-rom">${shloka.rom.replace(/\n/g,' · ')}</div>
+    <div class="shloka-en">${shloka.en}</div>`;
+  const row=document.createElement('div'); row.className='btnrow'; row.style.marginTop='8px';
+  const hear=document.createElement('button'); hear.className='btn'; hear.textContent='🔊 श्लोक सुनो';
+  hear.onclick=()=>speak(shloka.speak, Math.min(state.rate, 0.62));
+  const slow=document.createElement('button'); slow.className='btn ghost'; slow.textContent='🐢 धीरे गाओ';
+  slow.onclick=()=>speak(shloka.speak, 0.48);
+  row.appendChild(hear); row.appendChild(slow);
+  box.appendChild(row);
+  const moral=document.createElement('div'); moral.className='moral';
+  moral.innerHTML=`<strong>शिक्षा:</strong> ${shloka.moral}`;
+  box.appendChild(moral);
+  card.appendChild(box);
+  if(!opts.quiet){
+    renderChant(card, shloka.chant, 'ताली बजाओ और गाओ — यही याद रखना है', 'तीन बार बोलो। दूसरी बार मज़ेदार आवाज़। तीसरी बार सुपरहीरो आवाज़।');
+    actBox(card, shloka.act);
+  }
+}
+function addNumberTry(card, max, wordFn){
+  sectionLabel(card,'कोई भी संख्या आज़माओ');
+  const tryNote=document.createElement('p'); tryNote.className='note';
+  tryNote.textContent='0 से '+max+' तक कोई संख्या लिखो — संस्कृत में देखो, फिर सुनो।';
+  card.appendChild(tryNote);
+  const tryRow=document.createElement('div'); tryRow.className='fillrow';
+  const tryInput=document.createElement('input');
+  tryInput.type='number'; tryInput.min='0'; tryInput.max=String(max); tryInput.placeholder='e.g. 12'; tryInput.style.width='110px';
+  tryRow.appendChild(tryInput);
+  const tryArrow=document.createElement('span'); tryArrow.textContent='→'; tryArrow.style.cssText='color:var(--ink-soft);';
+  tryRow.appendChild(tryArrow);
+  const tryWord=document.createElement('span');
+  tryWord.style.cssText="font-family:'Noto Sans Devanagari',sans-serif;font-weight:700;font-size:22px;color:var(--ink);min-width:140px;display:inline-block;";
+  tryWord.textContent='...';
+  tryRow.appendChild(tryWord);
+  const trySpk=document.createElement('button'); trySpk.className='spk'; trySpk.innerHTML='🔊'; trySpk.title='उच्चारण सुनो'; trySpk.disabled=true;
+  tryRow.appendChild(trySpk);
+  card.appendChild(tryRow);
+  function updateTryWord(){
+    const n=parseInt(tryInput.value,10);
+    if(isNaN(n) || n<0 || n>max){
+      tryWord.textContent = tryInput.value==='' ? '...' : 'कृपया 0–'+max;
+      tryWord.style.color = tryInput.value==='' ? 'var(--ink)' : 'var(--berry)';
+      trySpk.disabled=true;
+      return;
+    }
+    tryWord.textContent = wordFn(n);
+    tryWord.style.color='var(--ink)';
+    trySpk.disabled=false;
+  }
+  tryInput.oninput=updateTryWord;
+  trySpk.onclick=()=>{
+    const n=parseInt(tryInput.value,10);
+    if(!isNaN(n) && n>=0 && n<=max) speak(wordFn(n), 0.75);
+  };
+}
+
+/* ===================== LEVELS ===================== */
+function renderNamaste(root){
+  const card=moduleShell(`${saHTML('नमस्ते')} — नमस्ते, मैं हूँ…`,'सबसे छोटी काम की संस्कृत: नमस्ते, अपना नाम, धन्यवाद। अभी व्याकरण की तालिका नहीं। शुक हर दिन यहीं से शुरू करता है। (फिर आम।)');
+  lsrwRail(card);
+  explainer(card, `<strong>पहले पूरे छोटे वाक्य सीखो।</strong> अभी व्याकरण के नाम की चिंता मत करो। ${saHTML('अहम् अस्मि')} का अर्थ बस “मैं हूँ” है। ${saHTML('मम नाम')} का अर्थ “मेरा नाम” है। पूरी क्रिया ${saHTML('अस्ति')} अगले स्तर में मिलेगी, जब ये आसान लगें।<br><br><strong>देवनागरी</strong> (सुंदर अक्षर) और सरल रोमन वर्तनी दिखेगी। सुनने के लिए 🔊 दबाओ। चमकता स्पीकर नया शब्द है।`);
+  ottoSays(card, 'अगर <em>namaste</em> बोल सकते हो, मित्र बना सकते हो। अगर <em>mama nama</em> बोल सकते हो, मित्र <em>हो</em> सकते हो। हाथ जोड़ो। छोटे मोर की तरह झुको। स्तर 1 के लिए काफी है।');
+  actBox(card, 'खड़े हो। हाथ जोड़ो। पास वाले इंसान, पौधे, या हैरान सोफे से <em>नमस्ते</em> कहो। फिर अपने नाम के साथ <em>मम नाम … अस्ति</em> बोलो।');
+  phase(card,'L','1 👂 सुनो','नमस्ते-शब्द सुनो। हिन्दी अर्थ चुनो। अभी वर्तनी नहीं।');
+  renderListenAll(card, ['नमस्ते','धन्यवादः','आम्','न','कृपया','पुनर्मिलामः','मम नाम','अहम् अस्मि']);
+  renderEarPick(card, EAR_ITEMS.namaste);
+  phase(card,'S','2 🗣️ बोलो','ज़ोर से बोलो। नमस्ते कहते समय हाथ जोड़ो। वह भी गिना जाता है।');
+  renderChant(card, ['नमस्ते','मम नाम','अहम् अस्मि','धन्यवादः','पुनर्मिलामः'], 'गाओ: नमस्ते → नाम → फिर मिलेंगे', 'ताली: namaste — mama nama — aham asmi — dhanyavadah — punarmilamah।', ['नमस्कार','मेरा नाम','मैं हूँ','धन्यवाद','फिर मिलेंगे']);
+  renderSpeakAlong(card, SPEAK_PHRASES.namaste);
+  phase(card,'R','3 📖 पढ़ो','अब अक्षर देखो। ये तुम्हारे पहले संस्कृत मित्र हैं।');
+  sectionLabel(card,'काम के छोटे शब्द');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  GREETINGS.forEach(([sa,rom,en])=>tiles.appendChild(makeTile(sa, en, {rom})));
+  card.appendChild(tiles);
+  const tip=document.createElement('div'); tip.className='tipbox';
+  tip.innerHTML=`<strong>दो “मैं” वाक्य (जोड़े में रखो):</strong><br>
+  ${saHTML('मम नाम')} वेदार्कः ${saHTML('अस्ति')}. = मेरा नाम वेदार्कः है।<br>
+  ${saHTML('अहम्')} मयूरः ${saHTML('अस्मि')}. = मैं मयूर हूँ।<br><br>
+  अपने <em>नाम</em> के लिए ${saHTML('मम नाम')}। तुम कौन हो, उसके लिए ${saHTML('अहम् अस्मि')}।`;
+  card.appendChild(tip);
+  sectionLabel(card,'याद का जोड़ा');
+  renderMatch(card, [['नमस्ते','नमस्कार'],['धन्यवादः','धन्यवाद'],['आम्','हाँ'],['पुनर्मिलामः','see you again']]);
+  phase(card,'W','4 ✍️ लिखो','छोटे शब्द लिखो। छोटा अच्छा है। रोमन अक्षर भी चलेंगे।');
+  renderWriteFromEnglish(card, WRITE_SENTENCES.namaste);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'कैसे कहते हैं "नमस्कार"?', opts:['धन्यवादः','नमस्ते','कृपया'], a:1, audio:'नमस्ते'},
+    {q:'"मम नाम वेदार्कः अस्ति" का अर्थ है...', opts:['मैं वेदार्कः हूँ।','मेरा नाम वेदार्कः है।','मेरी वेदार्कः है।'], a:1, audio:'मम नाम वेदार्कः अस्ति'},
+    {q:'कैसे कहते हैं "धन्यवाद"?', opts:['आम्','न','धन्यवादः'], a:2, audio:'धन्यवादः'},
+    {q:'"पुनर्मिलामः" का अर्थ है...', opts:['स्वागत','फिर मिलेंगे','कृपया'], a:1, audio:'पुनर्मिलामः'},
+  ], (score,total)=>{ if(score>=total-1) markDone('namaste'); });
+  root.appendChild(card);
+}
+function renderAsmi(root){
+  renderRecap(root, 'asmi');
+  const card=moduleShell(`${glossHTML('अस्मि','मैं हूँ')} — होना (और “मेरे पास है”)`,'अहम् अस्मि पहले से आता है। अब देखो यह क्रिया तुम्हारे, मेरे, और शुक के दोस्तों के लिए कैसे बदलती है।');
+  lsrwRail(card);
+  explainer(card, `<strong>LSRW:</strong> पहले सुनो, फिर बोलो, फिर पढ़ो, फिर लिखो।<br><br>
+  संस्कृत की रोज़ की “होना” क्रिया है ${saHTML('अस्')} — अंग्रेज़ी “am / is / are” जैसी। शब्दकोश में लोग ${saHTML('अस्ति')} (वह है) कहते हैं।<br><br>
+  <strong>“have” की अलग रोज़ की क्रिया नहीं है।</strong> बच्चे “मेरा तोता है” ऐसे कहते हैं ${saHTML('मम शुकः अस्ति')} — “मेरा एक तोता मौजूद है”।`);
+  ottoSays(card, 'अगर <em>मैं हूँ</em> और <em>मेरा है</em> बोल सकते हो, तो अपना परिचय दे सकते हो <em>और</em> आमों पर इतर सकते हो। प्राथमिकताएँ।');
+  phase(card,'L','1 👂 सुनो','संस्कृत सुनो। हिन्दी अर्थ चुनो।');
+  renderListenAll(card, ['अहम् अस्मि','त्वम् असि','सः अस्ति','वयम् स्मः','मम शुकः अस्ति']);
+  renderEarPick(card, EAR_ITEMS.asmi);
+  phase(card,'S','2 🗣️ बोलो','अब मुँह। आसान लगे तब तक दोहराओ।');
+  renderChant(card, ['अहम् अस्मि','त्वम् असि','सः अस्ति','वयम् स्मः','यूयम् स्थ','ते सन्ति'], 'गाओ: अस् (होना)', 'ताली बजाओ और आवाज़ के साथ बोलो।', ['मैं हूँ','तुम हो','वह है','हम हैं','तुम सब हो','वे हैं']);
+  renderSpeakAlong(card, SPEAK_PHRASES.asmi);
+  phase(card,'R','3 📖 पढ़ो','अक्षर देखो। जो पहले सुना, उसे मिलाओ।');
+  sectionLabel(card,'अस् — होना');
+  const t1=document.createElement('table'); t1.className='conj';
+  t1.innerHTML=`<tr><th>${glossHTML('सर्वनाम','pronoun')}</th><th>रूप</th><th>हिन्दी</th><th></th></tr>`+
+    ASMI_ROWS.map(r=>`<tr><td class="pron">${r[0]}</td><td>${r[1]}</td><td class="en" style="color:var(--ink-soft);">${r[2]}</td><td class="audio-td"></td></tr>`).join('');
+  card.appendChild(t1);
+  [...t1.querySelectorAll('tr')].slice(1).forEach((tr,i)=>{
+    tr.querySelector('.audio-td').appendChild(speakerBtn(ASMI_ROWS[i][0].split('/')[0].trim()+' '+ASMI_ROWS[i][1]));
+  });
+  const usage=document.createElement('div'); usage.className='tipbox';
+  usage.innerHTML=`<strong>तो कौन सी कब?</strong><br>
+  ${saHTML('अस्ति')} परिवार — कोई <em>है</em> कौन/क्या।<br>
+  ${saHTML('मम … अस्ति')} — किसी के पास <em>है</em> (मौजूद है, और मेरा है)।`;
+  card.appendChild(usage);
+  phase(card,'W','4 ✍️ लिखो','अब कागज़ पर। रोमन अक्षर ठीक हैं।');
+  renderFillBlank(card,[
+    {prefix:'अहम्', answer:'asmi', also:['अस्मि'], suffix:'। (मैं हूँ)', audioHint:'अहम् अस्मि'},
+    {prefix:'त्वम्', answer:'asi', also:['असि'], suffix:'। (तुम हो)', audioHint:'त्वम् असि'},
+    {prefix:'सः', answer:'asti', also:['अस्ति'], suffix:'। (वह है)', audioHint:'सः अस्ति'},
+    {prefix:'वयम्', answer:'smah', also:['स्मः','smah','sma'], suffix:'। (हम हैं)', audioHint:'वयम् स्मः'},
+  ]);
+  renderWriteFromEnglish(card, WRITE_SENTENCES.asmi);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'"सः ___ बालकः।" (He is a boy)', opts:['अस्मि','अस्ति','सन्ति'], a:1},
+    {q:'"मम शुकः अस्ति" का अर्थ है...', opts:['मैं तोता हूँ।','मेरा तोता है।','तोते के पास मैं हूँ।'], a:1, audio:'मम शुकः अस्ति'},
+    {q:'"अस्मि" का अर्थ क्या है?', opts:['तुम हो','मैं हूँ','वे हैं'], a:1, audio:'अस्मि'},
+    {q:'"वयम् ___।" (हम हैं)', opts:['असि','स्मः','अस्ति'], a:1},
+  ], (score,total)=>{ if(score>=total-1) markDone('asmi'); });
+  root.appendChild(card);
+}
+function renderParichaya(root){
+  renderRecap(root, 'parichaya');
+  const card=moduleShell(`${glossHTML('परिचयः','परिचय')} — यह मैं हूँ`,'असली परिचय: नाम, उम्र, कक्षा, धर्म, शौक। पहले वेदार्कः की नकल। फिर अपने सच डालो। शुक तोता ही रहेगा।');
+  lsrwRail(card);
+  explainer(card, `<strong>यूँ अपना परिचय दो।</strong> छोटे वाक्य जोड़कर एक “यह मैं हूँ” बात बनाओ।<br>
+  ${saHTML('मम नाम वेदार्कः अस्ति।')} — नाम<br>
+  ${saHTML('अहं पञ्चवर्षीयः अस्मि।')} — उम्र (लड़का; लड़की: वर्षीया)<br>
+  ${saHTML('अहं षष्ठ्यां कक्षायां अस्मि।')} — कक्षा<br>
+  ${saHTML('अहं हिन्दू अस्मि।')} — धर्म (जो तुम्हारे लिए सच हो)<br>
+  ${saHTML('मम रुचिः पठनम् अस्ति।')} — शौक`);
+  ottoSays(card, 'धर्म और शौक निजी हैं। वाक्य का ढर्रा सीखो, फिर <em>अपना</em> सच बोलो। मयूर का शौक नृत्य है। शुक का शौक आमों की बात।');
+  phase(card,'L','1 👂 सुनो','पूरा परिचय सुनो।');
+  renderListenAll(card, ['मम नाम वेदार्कः अस्ति','अहं पञ्चवर्षीयः अस्मि','अहं षष्ठ्यां कक्षायां अस्मि','अहं हिन्दू अस्मि','मम रुचिः पठनम् अस्ति','अहं भारतात् आगच्छामि']);
+  renderEarPick(card, EAR_ITEMS.parichaya);
+  phase(card,'S','2 🗣️ बोलो','वेदार्कः का परिचय बोलो। अगली बार अपने सच डालो। अपनी ओर इशारा करो। यह नाटक भी गिना जाता है।');
+  renderChant(card, ['मम नाम','वर्षीयः','कक्षा','मम रुचिः'], 'गाओ: यह मैं हूँ', 'नाम — उम्र — कक्षा — शौक।', ['मेरा नाम','साल का/की','कक्षा','मेरा शौक']);
+  renderSpeakAlong(card, SPEAK_PHRASES.parichaya);
+  actBox(card, 'अब वेदार्कः की जगह तुम। बोलो: मम नाम (तुम्हारा नाम) अस्ति। अहं …वर्षीया/वर्षीयः अस्मि। छोटे नाटक-तारे की तरह अपनी ओर इशारा करो।');
+  phase(card,'R','3 📖 पढ़ो','ईंटें देखो। सुनने के लिए कोई भी टाइल दबाओ।');
+  [['Name', INTRO_NAME],['Age', INTRO_AGE],['Class', INTRO_CLASS],['Religion', INTRO_RELIGION],['Hobbies', INTRO_HOBBIES]].forEach(([title, rows])=>{
+    sectionLabel(card, title);
+    const tiles=document.createElement('div'); tiles.className='tiles';
+    rows.forEach(([sa,rom,en])=>tiles.appendChild(makeTile(sa, en, {rom})));
+    card.appendChild(tiles);
+  });
+  const relNote=document.createElement('div'); relNote.className='tipbox';
+  relNote.innerHTML=`<strong>धर्म — अपना वाक्य चुनो।</strong> ढर्रा है ${saHTML('अहम्')} + शब्द + ${saHTML('अस्मि')}। अगर नहीं कहना हो तो ज़ोर से मत बोलो।`;
+  card.appendChild(relNote);
+  sectionLabel(card,'यह भी काम का');
+  const extra=document.createElement('div'); extra.className='tiles';
+  INTRO_EXTRA.forEach(([sa,rom,en])=>extra.appendChild(makeTile(sa, en, {rom})));
+  card.appendChild(extra);
+  sectionLabel(card,'याद का जोड़ा');
+  renderMatch(card, [['मम नाम','मेरा नाम है'],['कक्षा','कक्षा'],['रुचिः','शौक'],['वर्षीयः','साल का']]);
+  phase(card,'W','4 ✍️ लिखो','वाक्य लिखो। फिर दीवार से अपना संस्करण बोलो। दीवारें बहुत अच्छी सुनती हैं।');
+  renderFillBlank(card,[
+    {prefix:'मम', answer:'nama', also:['नाम'], suffix:'वेदार्कः अस्ति।', audioHint:'मम नाम वेदार्कः अस्ति'},
+    {prefix:'अहं पञ्च', answer:'varshiyah', also:['वर्षीयः','वर्षीया','varshiya'], suffix:'अस्मि।', audioHint:'अहं पञ्चवर्षीयः अस्मि'},
+    {prefix:'मम', answer:'ruchih', also:['रुचिः','ruchi'], suffix:'पठनम् अस्ति।', audioHint:'मम रुचिः पठनम् अस्ति'},
+  ]);
+  renderWriteFromEnglish(card, WRITE_SENTENCES.parichaya);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'कैसे कहते हैं "मेरा नाम वेदार्कः है"?', opts:['अहं वेदार्कः अस्मि।','मम नाम वेदार्कः अस्ति।','मम आम्रम् खादामि।'], a:1, audio:'मम नाम वेदार्कः अस्ति'},
+    {q:'"अहं षष्ठ्यां कक्षायां अस्मि" का अर्थ है...', opts:['मैं छह साल का/की हूँ।','मैं कक्षा 6 में हूँ।','मेरा शौक कक्षा है।'], a:1, audio:'अहं षष्ठ्यां कक्षायां अस्मि'},
+    {q:'"मम रुचिः पठनम् अस्ति" का अर्थ है...', opts:['मेरा शौक पढ़ना है।','मेरा नाम पठनम् है।','मैं किताबें खाती हूँ।'], a:0, audio:'मम रुचिः पठनम् अस्ति'},
+    {q:'कैसे कहते हैं "I come from India"?', opts:['अहं भारतात् आगच्छामि।','अहं भारतम् अस्मि।','मम भारतः अस्ति।'], a:0, audio:'अहं भारतात् आगच्छामि'},
+  ], (score,total)=>{ if(score>=total-1) markDone('parichaya'); });
+  root.appendChild(card);
+}
+function renderVarnah(root){
+  renderRecap(root, 'varnah');
+  const card=moduleShell(`${saHTML('वर्णाः')} (रंग)`,'सुनने के लिए कोई रंग या स्पीकर दबाओ। चेतावनी: नारङ्ग रंग भी है, फल भी। संस्कृत ऐसा करती है।');
+  lsrwRail(card);
+  explainer(card, `<strong>आसान विषय!</strong> रंग शब्द अक्सर वर्णन करते हैं: ${saHTML('रक्तः पद्मः')} = लाल कमल। बच्चों के लिए एक मुख्य रूप रखते हैं। क्रम: सुनो → बोलो → पढ़ो → लिखो।`);
+  ottoSays(card, `अगर ${glossHTML('रक्तः','लाल')} भूल जाओ, नाटकीय दिन बिताते कमल की कल्पना करो। अगर ${glossHTML('हरितः','हरा')} भूल जाओ, शुक की कल्पना करो। रंग वही है।`);
+  phase(card,'L','1 👂 सुनो','रंग सुनो। हिन्दी अर्थ चुनो।');
+  renderListenAll(card, COLORS.map(c=>c[0]));
+  renderEarPick(card, EAR_ITEMS.varnah);
+  phase(card,'S','2 🗣️ बोलो','रंग शब्द और छोटे वाक्य ज़ोर से बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.varnah);
+  actBox(card, 'कमरे में खोजो। लाल चीज़ पर रक्तः! नीली पर नीलः! मोर मिल जाए तो बगीचा तुम्हारा।');
+  phase(card,'R','3 📖 पढ़ो','अब वर्तनी देखो और जोड़ो।');
+  sectionLabel(card,'शब्द-भंडार');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  COLORS.forEach(([sa,rom,en,hex])=>tiles.appendChild(makeTile(sa, en, {rom, swatch:true, hex})));
+  card.appendChild(tiles);
+  sectionLabel(card,'याद का जोड़ा');
+  renderMatch(card, COLORS.map(c=>[c[0],c[2]]));
+  phase(card,'W','4 ✍️ लिखो','संस्कृत रंग शब्द लिखो।');
+  renderWriteFromEnglish(card, WRITE_SENTENCES.varnah);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'कौन सा रंग है "नीलः"?', opts:['लाल','नीला','हरा'], a:1, audio:'नीलः'},
+    {q:'कैसे कहते हैं "पीला"?', opts:['पीतः','हरितः','धूम्रः'], a:0, audio:'पीतः'},
+    {q:'"कृष्णः" का अर्थ है...', opts:['सफ़ेद','काला','भूरा'], a:1, audio:'कृष्णः'},
+    {q:'कैसे कहते हैं "हरा"?', opts:['हरितः','धूम्रः','पीतः'], a:0, audio:'हरितः'},
+  ], (score,total)=>{ if(score>=total-1) markDone('varnah'); });
+  root.appendChild(card);
+}
+function renderVisheshanam(root){
+  renderRecap(root, 'visheshanam');
+  const card=moduleShell(`${saHTML('विशेषणम्')} (विशेषण)`,'सामान्य वर्णन शब्द, उलटी जोड़ियों में। गर्म/ठंडा। बड़ा/छोटा। मोर/कौआ नहीं।');
+  lsrwRail(card);
+  explainer(card, `<strong>विशेषण क्या है?</strong> यह संज्ञा का वर्णन करता है — जैसे “बड़ा”, “पुराना”, “गर्म”। उलटी जोड़ियों में शब्द चिपकते हैं। संस्कृत में उलटा है ${glossHTML('विपर्ययः','उलटा')}।`);
+  ottoSays(card, `${glossHTML('महान्','बड़ा')} और ${glossHTML('लघुः','छोटा')} उलटे हैं, जैसे “एक आम” और “पूरा पेड़”। शुक पेड़ के पक्ष में है।`);
+  phase(card,'L','1 👂 सुनो','वर्णन शब्द सुनो। हिन्दी अर्थ चुनो।');
+  renderListenAll(card, ADJ_PAIRS.flatMap(([a,, ,b])=>[a,b]));
+  renderEarPick(card, EAR_ITEMS.visheshanam);
+  phase(card,'S','2 🗣️ बोलो','उलटी जोड़ियाँ पूरे वाक्यों में बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.visheshanam);
+  phase(card,'R','3 📖 पढ़ो','जोड़ियाँ पढ़ो। देखो उलटे शब्द साथ कैसे बैठते हैं।');
+  sectionLabel(card,'उलटी जोड़ियाँ');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  ADJ_PAIRS.forEach(([a,ar,ae,b,br,be])=>{
+    tiles.appendChild(makeTile(a, ae, {rom:ar}));
+    tiles.appendChild(makeTile(b, be, {rom:br}));
+  });
+  card.appendChild(tiles);
+  phase(card,'W','4 ✍️ लिखो','उलटा शब्द लिखो, फिर पूरा वाक्य।');
+  renderFillBlank(card,[
+    {prefix:'महान् →', gloss:'“बड़ा” का उलटा है', answer:'laghuh', also:['लघुः','laghu'], suffix:'.', audioHint:'लघुः'},
+    {prefix:'उष्णः →', gloss:'“गर्म” का उलटा है', answer:'shitah', also:['शीतः','sita'], suffix:'.', audioHint:'शीतः'},
+    {prefix:'शीघ्रः →', gloss:'“तेज़” का उलटा है', answer:'mandah', also:['मन्दः'], suffix:'.', audioHint:'मन्दः'},
+  ]);
+  renderWriteFromEnglish(card, WRITE_SENTENCES.visheshanam);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'इसका उलटा क्या है "महान्"?', opts:['लघुः','उष्णः','नूतनः'], a:0, audio:'महान्'},
+    {q:'"शीतः" का अर्थ है...', opts:['गर्म','ठंडा','तेज़'], a:1, audio:'शीतः'},
+    {q:'इसका उलटा क्या है "शीघ्रः"?', opts:['मन्दः','महान्','सुन्दरः'], a:0, audio:'शीघ्रः'},
+    {q:'"सुन्दरः" का अर्थ है...', opts:['कुरूप','सुंदर','पुराना'], a:1, audio:'सुन्दरः'},
+  ], (score,total)=>{ if(score>=total-1) markDone('visheshanam'); });
+  root.appendChild(card);
+}
+function renderSankhya(root){
+  renderRecap(root, 'sankhya');
+  const card=moduleShell(`${saHTML('सङ्ख्या')} 0–100 (संख्याएँ)`,'0–20 और दहाई सीखो। बाकी इन्हीं ईंटों से बनता है।');
+  lsrwRail(card);
+  explainer(card, `<strong>100 संख्याएँ रटने की कोशिश मत करो!</strong> 0–20 और दहाई (20, 30, 40…) सीखो। 21 है ${saHTML('एकविंशतिः')} — “एक-बीस”। 31, 41… का वही विचार।`);
+  ottoSays(card, 'संस्कृत 21 “एक-बीस” है। खोया नहीं। बहुत पुरानी, बहुत आत्मविश्वासी पंक्ति में चल रहा है।');
+  phase(card,'L','1 👂 सुनो','संख्या सुनो। जो सुना वह चुनो।');
+  renderListenAll(card, [0,3,7,11,12,17,21,50,70,100].map(n=>numberWord(n)));
+  renderEarPick(card, EAR_ITEMS.sankhya);
+  phase(card,'S','2 🗣️ बोलो','उम्र और गिनती ज़ोर से बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.sankhya);
+  phase(card,'R','3 📖 पढ़ो','देखो संस्कृत संख्याएँ कैसे लिखती है।');
+  sectionLabel(card,'0 – 20');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  for(let i=0;i<=20;i++) tiles.appendChild(makeTile(numberWord(i), numberWord(i), {lead:String(i), say:numberWord(i)}));
+  card.appendChild(tiles);
+  sectionLabel(card,'दहाई (10–100)');
+  const tiles2=document.createElement('div'); tiles2.className='tiles';
+  [10,20,30,40,50,60,70,80,90,100].forEach(n=>tiles2.appendChild(makeTile(numberWord(n), numberWord(n), {lead:String(n), say:numberWord(n)})));
+  card.appendChild(tiles2);
+  const note=document.createElement('div'); note.className='tipbox';
+  note.innerHTML=`<strong>ढर्रा:</strong> 21 = ${saHTML('एकविंशतिः')}, 25 = ${saHTML('पञ्चविंशतिः')}। छोटी संख्या + बीस। 30, 40… का वही परिवार।`;
+  card.appendChild(note);
+  phase(card,'W','4 ✍️ लिखो','संख्या लिखो और सुनो।');
+  addNumberTry(card, 100, numberWord);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'"एकविंशतिः" क्या है?', opts:['12','21','30'], a:1, audio:'एकविंशतिः'},
+    {q:'कैसे कहते हैं 50?', opts:['पञ्चाशत्','पञ्चदश','पञ्च'], a:0, audio:'पञ्चाशत्'},
+    {q:'यह कौन सी संख्या है "सप्तदश"?', opts:['70','7','17'], a:2, audio:'सप्तदश'},
+    {q:'कैसे कहते हैं 100?', opts:['सहस्रम्','शतम्','दश'], a:1, audio:'शतम्'},
+  ], (score,total)=>{ if(score>=total-1) markDone('sankhya'); });
+  root.appendChild(card);
+}
+function renderSankhya100(root){
+  renderRecap(root, 'sankhya100');
+  const card=moduleShell(`${saHTML('सङ्ख्या')} 100+`,'सैकड़े और हज़ार — वही ईंटें, बड़ा क़िला।');
+  lsrwRail(card);
+  explainer(card, `${saHTML('शतम्')} = 100। ${saHTML('द्विशतम्')} = 200। ${saHTML('सहस्रम्')} = 1000। जो छोटी संख्याएँ आती हैं, उन्हें जोड़ो।`);
+  ottoSays(card, `${saHTML('द्विसहस्रम्')} पासवर्ड जैसा लगता है। बस 2000 लंबे कोट में है।`);
+  phase(card,'L','1 👂 सुनो','बड़ी संख्या सुनो। अंक चुनो।');
+  renderListenAll(card, [100,200,500,1000,2000].map(n=>numberWordBig(n)));
+  renderEarPick(card, EAR_ITEMS.sankhya100);
+  phase(card,'S','2 🗣️ बोलो','लंबे शब्द धीरे बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.sankhya100);
+  phase(card,'R','3 📖 पढ़ो','देखो सौ और हज़ार कैसे जुड़ते हैं।');
+  sectionLabel(card,'मुख्य गोल संख्याएँ');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  [100,200,300,400,500,600,700,800,900,1000,2000,5000].forEach(n=>{
+    tiles.appendChild(makeTile(numberWordBig(n), numberWordBig(n), {lead:n.toLocaleString('en-US'), say:numberWordBig(n), rate:0.75}));
+  });
+  card.appendChild(tiles);
+  phase(card,'W','4 ✍️ लिखो','संख्या लिखो और संस्कृत जाँचो।');
+  addNumberTry(card, 9999, numberWordBig);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'कैसे कहते हैं 200?', opts:['द्विशतम्','द्विसहस्रम्','द्वे'], a:0, audio:'द्विशतम्'},
+    {q:'यह कौन सी संख्या है "पञ्चशतम्"?', opts:['50','500','5000'], a:1, audio:'पञ्चशतम्'},
+    {q:'कैसे कहते हैं 1000?', opts:['शतम्','सहस्रम्','दशशतम्'], a:1, audio:'सहस्रम्'},
+    {q:'कैसे कहते हैं 2000?', opts:['द्विशतम्','द्विसहस्रम्','द्वे शतम्'], a:1, audio:'द्विसहस्रम्'},
+  ], (score,total)=>{ if(score>=total-1) markDone('sankhya100'); });
+  root.appendChild(card);
+}
+function renderKutumbam(root){
+  renderRecap(root, 'kutumbam');
+  const card=moduleShell(`${saHTML('कुटुम्बम्')} (परिवार)`,'परिवार के शब्द — सुनने के लिए दबाओ। मामा और चाचा के लिए संस्कृत को खास शब्द पसंद हैं।');
+  lsrwRail(card);
+  explainer(card, `<strong>छोटा तोहफा:</strong> ${saHTML('पिता')} और ${saHTML('माता')} अंग्रेज़ी “paternal” और “maternal” के आसान रिश्तेदार हैं। ${saHTML('मातुलः')} माँ के भाई हैं। ${saHTML('पितृव्यः')} पिता के भाई हैं।`);
+  ottoSays(card, 'हर परिवार में एक बोलने वाला होता है। इस बगीचे में वह मैं हूँ।');
+  phase(card,'L','1 👂 सुनो','परिवार का शब्द सुनो। हिन्दी अर्थ चुनो।');
+  renderListenAll(card, FAMILY.map(f=>f[0]));
+  renderEarPick(card, EAR_ITEMS.kutumbam);
+  phase(card,'S','2 🗣️ बोलो','परिवार में कौन है, बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.kutumbam);
+  phase(card,'R','3 📖 पढ़ो','पढ़ो और जोड़ो।');
+  sectionLabel(card,'शब्द-भंडार');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  FAMILY.forEach(([sa,rom,en])=>tiles.appendChild(makeTile(sa, en, {rom})));
+  card.appendChild(tiles);
+  sectionLabel(card,'संस्कृत को हिन्दी से मिलाओ');
+  renderMatch(card, FAMILY.slice(0,8).map(f=>[f[0],f[2]]));
+  phase(card,'W','4 ✍️ लिखो','परिवार के शब्द लिखो।');
+  renderWriteFromEnglish(card, WRITE_SENTENCES.kutumbam);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'"भगिनी" का अर्थ क्या है?', opts:['भाई','बहन','माता'], a:1, audio:'भगिनी'},
+    {q:'"पितामहः" का अर्थ क्या है?', opts:['दादा','पिता','चाचा'], a:0, audio:'पितामहः'},
+    {q:'कैसे कहते हैं "माता-पिता"?', opts:['बालकाः','मातापितरौ','पुत्रः'], a:1, audio:'मातापितरौ'},
+    {q:'"मातुलः" का अर्थ है...', opts:['मामा','बुआ / मौसी','चचेरा भाई-बहन'], a:0, audio:'मातुलः'},
+  ], (score,total)=>{ if(score>=total-1) markDone('kutumbam'); });
+  root.appendChild(card);
+}
+function renderSarvanama(root){
+  renderRecap(root, 'sarvanama');
+  const card=moduleShell(`${saHTML('सर्वनाम')} (सर्वनाम)`,'नाम की जगह छोटे शब्द: मैं, तुम, वह, हम।');
+  lsrwRail(card);
+  explainer(card, `<strong>सर्वनाम क्या है?</strong> “वेदार्कः खुश है” की जगह कह सकते हो ${saHTML('सः हृष्टः अस्ति')} — “वह खुश है”। ${saHTML('सः')} सर्वनाम है।`);
+  ottoSays(card, `${glossHTML('सः','वह लड़का')} और ${glossHTML('सा','वह लड़की')} एक जैसे लगते हैं। संदर्भ मित्र है। बेतहाशा अनुमान शुक का शौक है, पढ़ाई का हुनर नहीं।`);
+  phase(card,'L','1 👂 सुनो','अहम्, त्वम्, वयम् सुनो… हिन्दी अर्थ चुनो।');
+  renderListenAll(card, ['अहम्','त्वम्','सः','सा','वयम्','यूयम्','ते']);
+  renderEarPick(card, EAR_ITEMS.sarvanama);
+  phase(card,'S','2 🗣️ बोलो','छोटे वाक्य बोलो।');
+  renderSpeakAlong(card, SPEAK_PHRASES.sarvanama);
+  phase(card,'R','3 📖 पढ़ो','अब वर्तनी देखो।');
+  sectionLabel(card,'सर्वनाम');
+  const tiles=document.createElement('div'); tiles.className='tiles';
+  PRONOUNS.forEach(([sa,rom,en])=>tiles.appendChild(makeTile(sa, en, {rom})));
+  card.appendChild(tiles);
+  const note=document.createElement('div'); note.className='tipbox';
+  note.innerHTML=`<strong>यह जोड़ी देखो:</strong> ${saHTML('सः')} = वह (लड़का)। ${saHTML('सा')} = वह (लड़की)। ${saHTML('तत्')} = वह / यह। ${saHTML('ते')} = वे।`;
+  card.appendChild(note);
+  phase(card,'W','4 ✍️ लिखो','सही सर्वनाम चुनो और लिखो।');
+  renderWriteFromEnglish(card, WRITE_SENTENCES.sarvanama);
+  sectionLabel(card,'सही सर्वनाम चुनो');
+  renderQuiz(card,[
+    {q:'"___ बालिका अस्मि।" (मैं लड़की हूँ)', opts:['त्वम्','अहम्','सः'], a:1},
+    {q:'"___ मम भ्राता अस्ति।" (He is my brother)', opts:['सः','सा','वयम्'], a:0},
+    {q:'एक मित्र से बात में "तुम" है...', opts:['त्वम्','यूयम्','ते'], a:0, audio:'त्वम्'},
+    {q:'"___ मित्राणि स्मः।" (We are friends)', opts:['यूयम्','वयम्','ते'], a:1},
+  ], (score,total)=>{ if(score>=total-1) markDone('sarvanama'); });
+  root.appendChild(card);
+}
+function renderDhatu(root){
+  renderRecap(root, 'dhatu');
+  const card=moduleShell(`${glossHTML('धातवः','धातु / क्रिया')}: जाना, पढ़ना, खाना`,'तीन दोस्ताना क्रियाएँ साथ-साथ। मैं / तुम / वह के लिए अंत देखो।');
+  lsrwRail(card);
+  explainer(card, `<strong>अच्छी खबर:</strong> ${saHTML('गच्छति')}, ${saHTML('पठति')}, ${saHTML('खादति')} एक ढर्रा बाँटते हैं। मैं = -āmi, तुम = -asi, वह = -ati, हम = -āmaḥ… एक बार सुनो, नई क्रिया अनुमान लग जाएगी।`);
+  ottoSays(card, 'अंग्रेज़ी अंत को “go / goes” के अंदर छुपाती है। संस्कृत अंत को झंडे पर लहराती है। मददगार झंडा।');
+  phase(card,'L','1 👂 सुनो','कौन जा रहा, पढ़ रहा, खा रहा — सुनो।');
+  renderListenAll(card, ['अहं गच्छामि','त्वं पठसि','सः खादति','वयम् गच्छामः','ते पठन्ति']);
+  renderEarPick(card, EAR_ITEMS.dhatu);
+  phase(card,'S','2 🗣️ बोलो','अंत गाओ, फिर असली वाक्य बोलो।');
+  renderChant(card, ['अहं गच्छामि','त्वं गच्छसि','सः गच्छति','वयम् गच्छामः','यूयम् गच्छथ','ते गच्छन्ति'], 'गाओ: गच्छति (= जाता है)', 'पठति और खादति के लिए वही अंत-परिवार।', ['मैं जाता/जाती हूँ','तुम जाते हो','वह जाता है','हम जाते हैं','तुम सब जाते हो','वे जाते हैं']);
+  renderSpeakAlong(card, SPEAK_PHRASES.dhatu);
+  actBox(card, 'गच्छामि कहते समय छोटा चक्कर लगाओ। पठामि के लिए काल्पनिक किताब खोलो। खादामि के लिए आम खाने का नाटक। संस्कृत को शरीर पसंद है, केवल मेज़ नहीं।');
+  phase(card,'R','3 📖 पढ़ो','जाना / पढ़ना / खाना की तुलना करो।');
+  const wrap=document.createElement('div'); wrap.style.overflowX='auto';
+  const t=document.createElement('table'); t.className='conj';
+  t.innerHTML=`<tr><th>Who</th><th>${glossHTML('गम्','go')}</th><th>${glossHTML('पठ्','read')}</th><th>${glossHTML('खाद्','eat')}</th><th></th></tr>`+
+    VERB_ROWS.map(r=>`<tr><td class="pron">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="audio-td"></td></tr>`).join('');
+  wrap.appendChild(t); card.appendChild(wrap);
+  [...t.querySelectorAll('tr')].slice(1).forEach((tr,i)=>{
+    tr.querySelector('.audio-td').appendChild(speakerBtn(VERB_ROWS[i][0]+' '+VERB_ROWS[i][1]));
+  });
+  phase(card,'W','4 ✍️ लिखो','क्रिया भरो, फिर वाक्य लिखो।');
+  renderFillBlank(card,[
+    {prefix:'अहम्', answer:'gacchami', also:['गच्छामि'], suffix:'गृहम्। (मैं घर जाता हूँ)', audioHint:'अहं गच्छामि'},
+    {prefix:'त्वम्', answer:'pathasi', also:['पठसि'], suffix:'पुस्तकम्। (तुम पढ़ते हो)', audioHint:'त्वं पठसि'},
+    {prefix:'सः', answer:'khadati', also:['खादति'], suffix:'आम्रम्। (वह खाता है)', audioHint:'सः खादति'},
+    {prefix:'वयम्', answer:'gacchamah', also:['गच्छामः'], suffix:'वनम्। (हम जाते हैं)', audioHint:'वयम् गच्छामः'},
+  ]);
+  renderWriteFromEnglish(card, WRITE_SENTENCES.dhatu);
+  sectionLabel(card,'स्तर जाँच ⭐');
+  renderQuiz(card,[
+    {q:'"त्वं ___।" (तुम जाते हो)', opts:['गच्छसि','गच्छति','गच्छामि'], a:0},
+    {q:'"वयम् ___।" (हम पढ़ते हैं)', opts:['पठामः','पठति','पठसि'], a:0},
+    {q:'"खादति" का अर्थ क्या है?', opts:['पीता है','खाता है','जाता है'], a:1, audio:'खादति'},
+    {q:'"ते पठन्ति" का अर्थ है...', opts:['वे पढ़ते हैं।','तुम पढ़ते हो।','मैं पढ़ता/पढ़ती हूँ।'], a:0, audio:'ते पठन्ति'},
+  ], (score,total)=>{ if(score>=total-1) markDone('dhatu'); });
+  root.appendChild(card);
+}
+function renderKatha(root){
+  if(!STORIES.some(s=>s.id===state.storyId)) state.storyId='vedark';
+  const story=STORIES.find(s=>s.id===state.storyId) || STORIES[0];
+  const asShelf=state.current==='stories';
+  if(!asShelf) renderRecap(root, 'katha');
+  const card=moduleShell(
+    asShelf ? 'कहानी पेटिका — बच्चों की संस्कृत कथाएँ' : `एक छोटी कथा — ${glossHTML('कथा','story')}`,
+    'नीचे एक कहानी चुनो। '+STORIES.length+' छोटी कथाएँ हैं। बगीचे और वन के दोस्त, सब बच्चों के लिए सुरक्षित। शब्द मदद पाठ के नीचे है।'
+  );
+  const shelf=document.createElement('p'); shelf.className='story-shelf-label';
+  shelf.textContent='कहानी कार्ड दबाओ — चुनने के लिए '+STORIES.length+' कथाएँ';
+  card.appendChild(shelf);
+  const grid=document.createElement('div'); grid.className='story-grid';
+  STORIES.forEach((s)=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='story-card'+(s.id===story.id?' on':'');
+    b.innerHTML=`<span class="st">${s.id===story.id?'📖 ':''}${s.title}</span><span class="sb">${s.blurb}</span>`;
+    b.onclick=()=>{
+      state.storyId=s.id;
+      if(asShelf) state.current='stories';
+      render();
+      requestAnimationFrame(()=>document.getElementById('story-now')?.scrollIntoView({behavior:'smooth',block:'start'}));
+    };
+    grid.appendChild(b);
+  });
+  card.appendChild(grid);
+  lsrwRail(card);
+  explainer(card, `<strong>अगर हर शब्द न समझ आए तो घबराओ मत!</strong> ये बच्चों की कहानियाँ हैं। पहले सुनो, कुछ पंक्तियाँ बोलो, फिर पूरा पाठ पढ़ो। स्तर 11 के लिए एक प्रश्नोत्तरी काफी है। बाकी मज़े के लिए हैं।`);
+  ottoSays(card, story.shuka);
+  if(story.act) actBox(card, story.act);
+  phase(card,'L','1 👂 सुनो','पूरा पाठ चलाओ। पहले भाव पकड़ो। साथ में अभिनय करो — संस्कृत चलने-फिरने वालों को पसंद करती है।');
+  const listenRow=document.createElement('div'); listenRow.className='btnrow';
+  const speakStory=()=>speak(story.text.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.72));
+  const spkBtn=document.createElement('button'); spkBtn.className='btn'; spkBtn.textContent='🔊 पूरी कहानी सुनो';
+  spkBtn.onclick=speakStory;
+  listenRow.appendChild(spkBtn);
+  card.appendChild(listenRow);
+  phase(card,'S','2 🗣️ बोलो','एक-एक वाक्य दोहराओ।');
+  renderSpeakAlong(card, story.lines);
+  if(story.song){
+    sectionLabel(card, '🎶 '+story.song.title);
+    const note=document.createElement('p'); note.className='note';
+    note.textContent='इस ऐप के लिए बना छोटा बगीचे का गीत।';
+    card.appendChild(note);
+    const song=document.createElement('div'); song.className='songbox'; song.textContent=story.song.verses;
+    card.appendChild(song);
+    const songRow=document.createElement('div'); songRow.className='btnrow';
+    const hearSong=document.createElement('button'); hearSong.className='btn ghost'; hearSong.textContent='🔊 गीत सुनो';
+    hearSong.onclick=()=>speak(story.song.verses.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.72));
+    songRow.appendChild(hearSong);
+    card.appendChild(songRow);
+    renderSpeakAlong(card, story.song.lines);
+  }
+  phase(card,'R','3 📖 पढ़ो','इसे एक पाठ की तरह पढ़ो। अर्थ नीचे शब्द मदद में हैं।');
+  const now=document.createElement('div'); now.id='story-now';
+  card.appendChild(now);
+  sectionLabel(card, story.title);
+  const p=document.createElement('div'); p.className='passage';
+  story.text.split(/\n\s*\n/).forEach((chunk)=>{
+    const para=document.createElement('p'); para.textContent=chunk.trim();
+    p.appendChild(para);
+  });
+  card.appendChild(p);
+  const hearRow=document.createElement('div'); hearRow.className='btnrow';
+  const hearAll=document.createElement('button'); hearAll.className='btn ghost'; hearAll.textContent='🔊 पूरी कहानी सुनो';
+  hearAll.onclick=speakStory;
+  hearRow.appendChild(hearAll);
+  card.appendChild(hearRow);
+  const panel=document.createElement('div'); panel.className='glossary-panel';
+  panel.innerHTML=`<h3>शब्द मदद</h3><p class="hint">केवल इस कहानी के लिए। पहले पाठ पढ़ो। कोई शब्द अटके तो यहाँ झाँको।</p>`;
+  const g=document.createElement('div'); g.className='glossary-grid';
+  story.glossary.forEach(([w,m])=>{
+    const item=document.createElement('div'); item.className='glossary-item';
+    const strong=document.createElement('strong'); strong.textContent=w;
+    const en=document.createElement('span'); en.className='en'; en.textContent=' — '+m;
+    item.appendChild(strong); item.appendChild(en);
+    item.appendChild(speakerBtn(w));
+    g.appendChild(item);
+  });
+  panel.appendChild(g);
+  card.appendChild(panel);
+  if(story.shloka){
+    const sh=shlokaById(story.shloka);
+    if(sh){
+      sectionLabel(card, '📿 याद रखने योग्य पंचतंत्र श्लोक');
+      const note=document.createElement('p'); note.className='note';
+      note.textContent='इस कहानी में एक छोटा बुद्धिमान श्लोक है। सुनो। ताली बजाओ। जेब में रखो।';
+      card.appendChild(note);
+      renderShlokaCard(card, sh);
+    }
+  }
+  phase(card,'W','4 ✍️ लिखो','ये प्रश्न अभी पढ़ी कहानी पर हैं।');
+  sectionLabel(card,'समझ के प्रश्न');
+  renderQuiz(card, story.questions, (score,total)=>{ if(score>=total-1) markDone('katha'); });
+  root.appendChild(card);
+}
+function renderChallenge(root){
+  const card=moduleShell('मयूर-कक्षः — मयूर कप','बॉस स्तर! अब तक की सब सीख। कोई घड़ी नहीं। कोई डरावनी परीक्षा नहीं। मयूर को दिखाओ कि याद है।');
+  const startWrap=document.createElement('div');
+  const info=document.createElement('p'); info.className='note';
+  info.textContent='हर स्तर से मज़ेदार मिश्रण। समय लो। कोई हिस्सा डगमगाए तो बाद में अभ्यास बाग में उसी स्तर पर जाओ।';
+  startWrap.appendChild(info);
+  const startBtn=document.createElement('button'); startBtn.className='btn'; startBtn.textContent='मयूर कप शुरू करो 🏆';
+  startWrap.appendChild(startBtn);
+  card.appendChild(startWrap);
+  root.appendChild(card);
+  startBtn.onclick=()=>{ startWrap.remove(); runChallenge(card); };
+}
+function runChallenge(card){
+  const examQs=[
+    {topic:'नमस्ते', q:'"नमस्ते" का अर्थ है...', opts:['अलविदा','नमस्कार','कृपया'], a:1, audio:'नमस्ते'},
+    {topic:'नमस्ते', q:'कैसे कहते हैं "धन्यवाद"?', opts:['कृपया','धन्यवादः','आम्'], a:1, audio:'धन्यवादः'},
+    {topic:'अस्मि', q:'"अहम् ___।" (मैं हूँ)', opts:['अस्मि','असि','अस्ति'], a:0},
+    {topic:'अस्मि', q:'"मम शुकः अस्ति" का अर्थ है...', opts:['मैं तोता हूँ।','मेरा तोता है।','तोते के पास मैं हूँ।'], a:1, audio:'मम शुकः अस्ति'},
+    {topic:'परिचयः', q:'कैसे कहते हैं "मेरा नाम वेदार्कः है"?', opts:['अहं वेदार्कः अस्मि।','मम नाम वेदार्कः अस्ति।','मम आम्रम् अस्ति।'], a:1, audio:'मम नाम वेदार्कः अस्ति'},
+    {topic:'परिचयः', q:'"मम रुचिः पठनम् अस्ति" का अर्थ है...', opts:['मेरा शौक पढ़ना है।','मेरी कक्षा पढ़ना है।','मैं पढ़ना खाती हूँ।'], a:0, audio:'मम रुचिः पठनम् अस्ति'},
+    {topic:'वर्णाः', q:'"नीलः" का अर्थ है...', opts:['हरा','नीला','पीला'], a:1, audio:'नीलः'},
+    {topic:'वर्णाः', q:'कैसे कहते हैं "काला"?', opts:['कृष्णः','श्वेतः','धूम्रः'], a:0, audio:'कृष्णः'},
+    {topic:'विशेषणम्', q:'उलटा "महान्"?', opts:['लघुः','उष्णः','शीघ्रः'], a:0, audio:'महान्'},
+    {topic:'विशेषणम्', q:'"शीतः" का अर्थ है...', opts:['गर्म','ठंडा','तेज़'], a:1, audio:'शीतः'},
+    {topic:'सङ्ख्या', q:'"एकविंशतिः" क्या है?', opts:['12','21','30'], a:1, audio:'एकविंशतिः'},
+    {topic:'सङ्ख्या', q:'कैसे कहते हैं 50?', opts:['पञ्चाशत्','पञ्चदश','पञ्च'], a:0, audio:'पञ्चाशत्'},
+    {topic:'कुटुम्बम्', q:'"भ्राता" का अर्थ है...', opts:['बहन','भाई','पिता'], a:1, audio:'भ्राता'},
+    {topic:'कुटुम्बम्', q:'"पितामही" का अर्थ है...', opts:['दादी','बुआ / मौसी','माता'], a:0, audio:'पितामही'},
+    {topic:'सर्वनाम', q:'एक मित्र से बात में "तुम" है...', opts:['त्वम्','यूयम्','ते'], a:0, audio:'त्वम्'},
+    {topic:'सर्वनाम', q:'"वयम्" का अर्थ है...', opts:['तुम सब','हम','वे'], a:1, audio:'वयम्'},
+    {topic:'धातवः', q:'"त्वं ___।" (तुम जाते हो)', opts:['गच्छसि','गच्छति','गच्छामि'], a:0},
+    {topic:'धातवः', q:'"सः ___ आम्रम्।" (वह खाता है)', opts:['खादति','खादसि','खादामि'], a:0},
+    {topic:'कथा', q:'“वेदार्कः और आम” में आम का रंग...', opts:['नीला','पीला','काला'], a:1},
+    {topic:'कथा', q:'“शुक और मोदक” में शुक है...', opts:['मोर','तोता','मेंढक'], a:1},
+    {topic:'श्लोकाः', q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','पद्मानि'], a:0, audio:'कार्याणि'},
+    {topic:'श्लोकाः', q:'पंचतंत्र पंक्ति “संहतिः कार्यसाधिका” किस बारे में है...', opts:['सोना','साथ रहना','मिठाई खाना'], a:1, audio:'संहतिः कार्यसाधिका'},
+  ];
+  const topicScores={};
+  const quizHost=document.createElement('div');
+  card.appendChild(quizHost);
+  let idx=0, score=0;
+  examQs.forEach(e=>{ if(!(e.topic in topicScores)) topicScores[e.topic]={correct:0,total:0}; });
+  function showQ(){
+    quizHost.innerHTML='';
+    if(idx>=examQs.length){ finishChallenge(); return; }
+    const item=examQs[idx];
+    const box=document.createElement('div'); box.className='qwrap';
+    const prog=document.createElement('div'); prog.className='progressline'; prog.textContent=`Mayura Cup ${idx+1} / ${examQs.length} — ${item.topic}`;
+    box.appendChild(prog);
+    const p=document.createElement('div'); p.className='qprompt';
+    p.innerHTML = decorateQuotedSa(item.q);
+    if(item.audio) p.appendChild(speakerBtn(item.audio));
+    box.appendChild(p);
+    item.opts.forEach((opt,i)=>{
+      const b=document.createElement('button'); b.className='qopt';
+      const label=document.createElement('span'); label.textContent=opt; b.appendChild(label);
+      if(looksSanskrit(opt)) b.appendChild(speakerBtn(opt));
+      b.onclick=()=>{
+        [...box.querySelectorAll('.qopt')].forEach(x=>x.disabled=true);
+        topicScores[item.topic].total++;
+        if(i===item.a){ b.classList.add('correct'); score++; topicScores[item.topic].correct++; playSfx('ok'); }
+        else{ b.classList.add('incorrect'); [...box.querySelectorAll('.qopt')][item.a].classList.add('correct'); playSfx('bad'); }
+        setTimeout(()=>{ idx++; showQ(); },700);
+      };
+      box.appendChild(b);
+    });
+    quizHost.appendChild(box);
+  }
+  showQ();
+  function finishChallenge(){
+    quizHost.innerHTML='';
+    const summary=document.createElement('div'); summary.className='summarybox';
+    let html=`<div style="font-family:'Fredoka',sans-serif;font-size:22px;margin-bottom:8px;">मयूर कप अंक: ${score} / ${examQs.length}</div>`;
+    Object.entries(topicScores).forEach(([topic,{correct,total}])=>{
+      if(total===0) return;
+      const pct=Math.round(100*correct/total);
+      const cls = pct>=75?'strong':(pct<50?'weak':'');
+      html+=`<div class="summaryrow"><span>${topic}</span><span class="${cls}">${correct}/${total}</span></div>`;
+    });
+    summary.innerHTML=html;
+    card.appendChild(summary);
+    const weakTopics=Object.entries(topicScores).filter(([,{correct,total}])=>total>0 && correct/total<0.5).map(([t])=>t);
+    if(weakTopics.length){
+      const w=document.createElement('p'); w.className='note'; w.style.marginTop='12px';
+      w.innerHTML=`<strong>इन्हें अभ्यास बाग में फिर खेलो:</strong> ${weakTopics.join(', ')} — शुक की नरम संकेत सूची।`;
+      card.appendChild(w);
+    } else {
+      const w=document.createElement('p'); w.className='note'; w.style.marginTop='12px';
+      w.textContent='वाह। मयूर पंख का पदक देता, पर शुक उसे मिठाई पर खर्च कर चुका।';
+      card.appendChild(w);
+    }
+    if(score>=examQs.length-2){
+      const claim=document.createElement('button'); claim.className='btn'; claim.style.marginTop='14px';
+      claim.textContent='स्तर का तारा लो '+STORY_LEVELS.length+' ⭐';
+      claim.onclick=()=>markDone('challenge');
+      card.appendChild(claim);
+    } else {
+      const again=document.createElement('p'); again.className='note'; again.style.marginTop='12px';
+      again.textContent='लगभग! डगमगाते विषय फिर खेलो, फिर मयूर कप पर आओ।';
+      card.appendChild(again);
+    }
+  }
+}
+function renderRevision(root){
+  const card=moduleShell('अभ्यास बाग — फ़्लैशकार्ड','यह खेल का मैदान है, परीक्षा नहीं। सुनो, बोलो, पढ़ो, फिर जाँचो। पलटने से पहले संस्कृत ज़ोर से बोलो।');
+  const allCards=[
+    ...GREETINGS.map(([sa,,en])=>({front:sa,back:en,type:'नमस्ते'})),
+    ...INTRO_NAME.concat(INTRO_CLASS,INTRO_RELIGION,INTRO_HOBBIES).map(([sa,,en])=>({front:sa,back:en,type:'परिचयः'})),
+    ...COLORS.map(([sa,,en])=>({front:sa,back:en,type:'वर्णाः'})),
+    ...ADJ_PAIRS.flatMap(([a,,ae,b,,be])=>[{front:a,back:ae,type:'विशेषणम्'},{front:b,back:be,type:'विशेषणम्'}]),
+    ...FAMILY.map(([sa,,en])=>({front:sa,back:en,type:'कुटुम्बम्'})),
+    ...PRONOUNS.map(([sa,,en])=>({front:sa,back:en,type:'सर्वनाम'})),
+    ...SHLOKAS.map(sh=>({front:sh.lines.split('\n')[0], back:sh.moral, type:'श्लोकाः'})),
+    ...[5,12,17,21,50,70,100].map(n=>({front:String(n),back:numberWord(n),type:'सङ्ख्या'})),
+  ].sort(()=>Math.random()-0.5);
+  let i=0, flipped=false;
+  const cardEl=document.createElement('div'); cardEl.className='flashcard';
+  const spkHost=document.createElement('div');
+  function sanskritOf(c){ return c.type==='सङ्ख्या' ? c.back : c.front; }
+  const TYPE_EN={'नमस्ते':'नमस्कार','परिचयः':'यह मैं हूँ','वर्णाः':'रंग','विशेषणम्':'विशेषण','कुटुम्बम्':'परिवार','सर्वनाम':'सर्वनाम','सङ्ख्या':'संख्याएँ','श्लोकाः':'छोटे श्लोक'};
+  const counter=document.createElement('span');
+  function draw(){
+    flipped=false;
+    const c=allCards[i];
+    const typeLabel = TYPE_EN[c.type] ? `${c.type} (= ${TYPE_EN[c.type]})` : c.type;
+    cardEl.innerHTML=`<div>${c.front}</div><div class="hint">${typeLabel} · दिल से बोलो, फिर दबाओ</div>`;
+    spkHost.innerHTML='';
+    const first = firstSpeakerBtn(sanskritOf(c));
+    spkHost.appendChild(first || speakerBtn(sanskritOf(c)));
+    counter.textContent=`${i+1} / ${allCards.length}`;
+  }
+  cardEl.onclick=()=>{
+    const c=allCards[i];
+    flipped=!flipped;
+    if(flipped){ cardEl.innerHTML=`<div>${c.back}</div><div class="hint">वापस पलटने के लिए दबाओ</div>`; speak(sanskritOf(c)); }
+    else draw();
+  };
+  const nav=document.createElement('div'); nav.className='flashnav';
+  const prevBtn=document.createElement('button'); prevBtn.className='btn ghost'; prevBtn.textContent='← पीछे';
+  prevBtn.onclick=()=>{ i=(i-1+allCards.length)%allCards.length; draw(); };
+  const nextBtn=document.createElement('button'); nextBtn.className='btn ghost'; nextBtn.textContent='आगे →';
+  nextBtn.onclick=()=>{ i=(i+1)%allCards.length; draw(); };
+  nav.appendChild(prevBtn); nav.appendChild(counter); nav.appendChild(nextBtn);
+  card.appendChild(cardEl);
+  const listenRow=document.createElement('div'); listenRow.style.cssText='display:flex;justify-content:center;margin-bottom:12px;';
+  listenRow.appendChild(spkHost);
+  card.appendChild(listenRow);
+  card.appendChild(nav);
+  draw();
+  root.appendChild(card);
+}
+function renderShlokah(root){
+  const card=moduleShell(`${saHTML('श्लोकाः')} — पंचतंत्र के छोटे श्लोक`,'इतने छोटे कि याद रहें। इतने ज़ोर से कि गाए जा सकें। हर श्लोक की शिक्षा मंगलवार को भी काम आए।');
+  lsrwRail(card);
+  explainer(card, `<strong>एक ${saHTML('श्लोकः')} छोटी कविता है।</strong> पंचतंत्र ने बड़ी शिक्षा छोटी पंक्तियों में बाँधी, ताकि बच्चे चलते, खेलते, या आमों पर झगड़ते याद रखें। एक सुनो। एक पर ताली। एक का अभिनय। फिर एक शब्द छिपाओ — मुँह अभी याद है या नहीं।`);
+  ottoSays(card, 'मैं श्लोक याद करता हूँ क्योंकि वे गीत जैसे लगते हैं। और क्योंकि मयूर ने कहा था। ज़्यादातर गीतों की वजह से।');
+  actBox(card, 'एक श्लोक चुनो। तीन बार बोलो: फुसफुसाहट, तोता, मोर। फिर किसी से कहो जिसने नहीं माँगा। संस्कृत ऐसे चलती है।');
+  SHLOKAS.forEach((sh, i)=>{
+    phase(card, i%2?'S':'L', (i+1)+' · '+sh.title, sh.kicker);
+    renderShlokaCard(card, sh);
+    sectionLabel(card, 'खाली शब्द भरो — इससे याद बैठता है');
+    renderQuiz(card, [sh.missing], null);
+  });
+  sectionLabel(card, 'बगीचे की जाँच ⭐');
+  renderQuiz(card, [
+    {q:'“केवल इच्छा नहीं, मेहनत करो” किस श्लोक का अर्थ है...', opts:['उद्यमेन हि सिध्यन्ति…','प्रियवाक्यप्रदानेन…','नाभिषेको न संस्कारः…'], a:0, audio:'उद्यमेन हि सिध्यन्ति'},
+    {q:'संहतिः का अर्थ है...', opts:['सोना','साथ रहना / एकता','पीली पतंग'], a:1, audio:'संहतिः'},
+    {q:'मधुर वचन सबको सुखी करते हैं। वह श्लोक शुरू होता है...', opts:['आपत्काले','प्रियवाक्यप्रदानेन','उद्यमेन'], a:1, audio:'प्रियवाक्यप्रदानेन'},
+    {q:'मुसीबत में साथ देने वाला सच्चा मित्र। सही पंक्ति?', opts:['यन्मित्रं मित्रमेव तत्','यन्मित्रं मोदकमेव तत्','यन्मित्रं सिंहमेव तत्'], a:0, audio:'यन्मित्रं मित्रमेव तत्'},
+  ], (score,total)=>{ if(score>=total-1) markDone('shloka'); });
+  root.appendChild(card);
+}
+
+const RENDERERS={
+  namaste:renderNamaste, asmi:renderAsmi, parichaya:renderParichaya, varnah:renderVarnah, visheshanam:renderVisheshanam,
+  sankhya:renderSankhya, sankhya100:renderSankhya100, kutumbam:renderKutumbam, sarvanama:renderSarvanama,
+  dhatu:renderDhatu, katha:renderKatha, stories:renderKatha, shloka:renderShlokah, challenge:renderChallenge, revision:renderRevision
+};
+
+function render(){
+  const app=document.getElementById('app');
+  app.innerHTML='';
+  resetHeard();
+  if(!isUnlocked(state.current) || !RENDERERS[state.current]){
+    const playable=[...STORY_LEVELS].reverse().find(m=>RENDERERS[m.id] && isUnlocked(m.id));
+    state.current=playable?playable.id:'namaste';
+    saveProgress();
+  }
+  const masthead=document.createElement('div'); masthead.className='masthead';
+  const left=document.createElement('div');
+  left.innerHTML=`
+      <div class="rainbowbar" title="Peacock path"></div>
+      <h1>🦚 Sanskrit <span>Yatra</span></h1>
+      <div class="sub">${glossHTML('संस्कृत यात्रा','संस्कृत की यात्रा')} · बगीचे के दोस्त · संगीत चालू — 🎵 से बंद करो</div>
+  `;
+  left.querySelector('h1').appendChild(speakerBtn('संस्कृत यात्रा'));
+  const tools=document.createElement('div');
+  tools.style.cssText='display:flex;flex-direction:column;align-items:flex-end;gap:10px;';
+  const speed=document.createElement('div'); speed.className='speedbar';
+  const lbl=document.createElement('span'); lbl.className='lbl'; lbl.textContent='बोलने की गति';
+  const slowBtn=document.createElement('button'); slowBtn.className='btn ghost'; slowBtn.type='button'; slowBtn.textContent='🐢 धीरे';
+  const normBtn=document.createElement('button'); normBtn.className='btn'; normBtn.type='button'; normBtn.textContent='🚶 सामान्य';
+  function syncSpeed(){
+    const slow=state.rate<0.75;
+    slowBtn.className='btn'+(slow?'':' ghost');
+    normBtn.className='btn'+(slow?' ghost':'');
+  }
+  slowBtn.onclick=()=>{ state.rate=0.55; syncSpeed(); saveProgress(); };
+  normBtn.onclick=()=>{ state.rate=0.82; syncSpeed(); saveProgress(); };
+  syncSpeed();
+  const musicBtn=document.createElement('button');
+  musicBtn.type='button';
+  musicBtn.setAttribute('data-music-btn','bar');
+  musicBtn.className='btn'+(state.musicOn?'':' ghost');
+  musicBtn.textContent=labelMusic(false);
+  musicBtn.title='संगीत अपने आप चलता है। बंद/चालू करने के लिए दबाओ।';
+  musicBtn.onclick=toggleMusic;
+  speed.appendChild(lbl); speed.appendChild(slowBtn); speed.appendChild(normBtn); speed.appendChild(musicBtn);
+  const buddies=document.createElement('div'); buddies.className='buddies';
+  const mayura=document.createElement('div'); mayura.className='buddy peacock'; mayura.textContent='🦚';
+  mayura.title='मयूर मोर को दबाओ — वह बगीचे में रहती है और आसान संस्कृत बोलती है।';
+  mayura.onclick=()=>speak(pickOne(MAYURA_CHAT));
+  const shuka=document.createElement('div'); shuka.className='buddy'; shuka.textContent='🦜';
+  shuka.title='शुक को दबाओ — वह केवल संस्कृत बोलता है, और उसके पास करीब पाँच वाक्य हैं।';
+  shuka.onclick=()=>speak(pickOne(SHUKA_CHAT));
+  buddies.appendChild(mayura); buddies.appendChild(shuka);
+  tools.appendChild(speed); tools.appendChild(buddies);
+  masthead.appendChild(left); masthead.appendChild(tools);
+  app.appendChild(masthead);
+
+  const langRow=document.createElement('div'); langRow.className='btnrow'; langRow.style.margin='0 0 14px';
+  const enBtn=document.createElement('button'); enBtn.type='button'; enBtn.className='btn ghost'; enBtn.textContent='🇬🇧 English meanings';
+  enBtn.title='अंग्रेज़ी मदद वाली कॉपी खोलो';
+  enBtn.onclick=()=>{ window.location.href=OTHER_HREF; };
+  const hiBtn=document.createElement('button'); hiBtn.type='button'; hiBtn.className='btn'; hiBtn.textContent='🇮🇳 हिन्दी में सीखें';
+  hiBtn.title='तुम हिन्दी-मदद वाली कॉपी पर हो';
+  langRow.appendChild(enBtn); langRow.appendChild(hiBtn);
+  app.appendChild(langRow);
+
+  const welcome=document.createElement('div'); welcome.className='welcomebox';
+  const mapDone=STORY_LEVELS.every(m=>state.done.has(m.id));
+  welcome.innerHTML= mapDone
+    ? `<strong>बगीचे का नक्शा पूरा!</strong> तुमने सभी ${STORY_LEVELS.length} स्तर पूरे किए। कोई भी स्तर फिर खेलो, कहानी पेटिका में बैठो, या <strong>फिर से शुरू</strong> से नक्शा मिटाओ। सारे स्तर खुले चाहिए तो <strong>खुली खेल</strong>, क्रम से खोलने हों तो <strong>बंद रास्ता</strong>। बड़े होने पर नए स्तर आएँगे।<br><br><strong>मयूर मोर</strong> और <strong>शुक तोता</strong> साथी हैं। उन्हें दबाओ। छोटी संस्कृत। बड़ी चमक।`
+    : `<strong>संस्कृत यात्रा — बगीचे का रोमांच।</strong> संगीत धीरे चलता है — शांत चाहिए तो <strong>🎵 संगीत चालू</strong> दबाओ। <strong>बंद रास्ता</strong> से एक स्तर 🦚 खत्म करो तब अगला खुले, या <strong>खुली खेल</strong> से कहीं भी जाओ। हर स्तर LSRW है: <strong>सुनो</strong> → <strong>बोलो</strong> → <strong>पढ़ो</strong> → <strong>लिखो</strong>। चमकता 🔊 नया शब्द है। छोटे पंचतंत्र श्लोक के लिए <strong>श्लोकाः</strong> खोलो।<br><br><strong>मयूर मोर</strong> और <strong>शुक तोता</strong> साथ चलते हैं। उन्हें दबाओ। फिर खड़े होकर शब्द बोलो — संस्कृत चलने वालों को भाती है।`;
+  app.appendChild(welcome);
+  const musicRow=document.createElement('div'); musicRow.className='btnrow'; musicRow.style.margin='0 0 16px';
+  const bigMusic=document.createElement('button');
+  bigMusic.type='button';
+  bigMusic.setAttribute('data-music-btn','big');
+  bigMusic.className='btn'+(state.musicOn?'':' ghost');
+  bigMusic.textContent=labelMusic(true);
+  bigMusic.onclick=toggleMusic;
+  musicRow.appendChild(bigMusic);
+  app.appendChild(musicRow);
+
+  const overall=document.createElement('div');
+  const cleared=STORY_LEVELS.filter(m=>state.done.has(m.id)).length;
+  const pct=Math.round(100*cleared/STORY_LEVELS.length);
+  const toolsRow=document.createElement('div'); toolsRow.className='progress-tools';
+  const cap=document.createElement('div'); cap.className='progress-caption';
+  cap.textContent= mapDone ? '🪷 बगीचे का नक्शा पूरा!' : `🦚 स्तर ${Math.min(cleared+1, STORY_LEVELS.length)} / ${STORY_LEVELS.length} · ${cleared} पूरे`;
+  const resetBtn=document.createElement('button'); resetBtn.className='btn ghost'; resetBtn.type='button';
+  resetBtn.textContent='🔁 फिर से शुरू';
+  resetBtn.title='सभी तारे मिटाकर स्तर 1 से शुरू करो';
+  resetBtn.onclick=()=>{ state.confirmReset=true; render(); };
+  toolsRow.appendChild(cap); toolsRow.appendChild(resetBtn);
+  overall.innerHTML=`<div class="overallbar"><div style="width:${pct}%"></div></div>`;
+  overall.appendChild(toolsRow);
+
+  const modeRow=document.createElement('div'); modeRow.className='progress-tools'; modeRow.style.marginBottom='10px';
+  const modeLbl=document.createElement('div'); modeLbl.className='progress-caption';
+  modeLbl.textContent= state.locksOn ? 'रास्ता बंद: अगला स्तर खोलने के लिए यह पूरा करो' : 'खुली खेल: सारे स्तर खुले हैं';
+  const modeBtns=document.createElement('div'); modeBtns.style.cssText='display:flex;gap:8px;flex-wrap:wrap;';
+  const lockBtn=document.createElement('button'); lockBtn.type='button';
+  lockBtn.className='btn'+(state.locksOn?'':' ghost');
+  lockBtn.textContent='🔒 बंद रास्ता';
+  lockBtn.onclick=()=>{ state.locksOn=true; state.lockHint=null; saveProgress(); render(); };
+  const freeBtn=document.createElement('button'); freeBtn.type='button';
+  freeBtn.className='btn'+(!state.locksOn?'':' ghost');
+  freeBtn.textContent='🔓 खुली खेल';
+  freeBtn.onclick=()=>{ state.locksOn=false; state.lockHint=null; saveProgress(); render(); };
+  modeBtns.appendChild(lockBtn); modeBtns.appendChild(freeBtn);
+  modeRow.appendChild(modeLbl); modeRow.appendChild(modeBtns);
+  overall.appendChild(modeRow);
+  app.appendChild(overall);
+
+  if(state.lockHint){
+    const hint=document.createElement('div'); hint.className='lockhint'; hint.textContent=state.lockHint;
+    app.appendChild(hint);
+  }
+
+  const journey=document.createElement('div'); journey.className='journey';
+  LEVELS.forEach(m=>{
+    const unlocked=isUnlocked(m.id);
+    const s=document.createElement('div');
+    s.className='stamp'+(m.id===state.current?' active':'')+(state.done.has(m.id)?' done':'')+(!unlocked?' locked':'')+(m.extra?' extra':'');
+    const lv = m.level ? `<div class="lv">Lv ${m.level}</div>` : `<div class="lv">Play</div>`;
+    s.innerHTML=`${lv}<div class="icon">${unlocked?m.icon:'🔒'}</div><div>${m.label}</div><div class="stampen">${m.en}</div>`;
+    s.onclick=()=>goTo(m.id);
+    journey.appendChild(s);
+  });
+  app.appendChild(journey);
+
+  const moduleRoot=document.createElement('div');
+  RENDERERS[state.current](moduleRoot);
+  app.appendChild(moduleRoot);
+
+  const cur=levelById(state.current);
+  if(state.done.has(state.current) && cur && cur.level){
+    const b=document.createElement('div'); b.className='badge';
+    b.innerHTML= cur.level===STORY_LEVELS.length
+      ? '🦚 बॉस स्तर पूरा! मयूर गर्व से। शुक ज़ोर से। (शांत। ज़्यादातर।)'
+      : `🦚 स्तर ${cur.level} पूरा! मयूर गर्व से। शुक ने छोटी सी चोंच बजायी।`;
+    moduleRoot.appendChild(b);
+  }
+
+  const idx=LEVELS.findIndex(m=>m.id===state.current);
+  const nav=document.createElement('div'); nav.className='btnrow';
+  if(idx>0 && isUnlocked(LEVELS[idx-1].id)){
+    const pb=document.createElement('button'); pb.className='btn ghost';
+    const prev=LEVELS[idx-1];
+    pb.textContent='← '+(prev.level?('Level '+prev.level+' · '):'')+prev.label;
+    pb.onclick=()=>goTo(prev.id); nav.appendChild(pb);
+  }
+  const nxt=LEVELS[idx+1];
+  if(nxt){
+    if(isUnlocked(nxt.id)){
+      const nb=document.createElement('button'); nb.className='btn';
+      nb.textContent=(nxt.level?(state.locksOn?('Level '+nxt.level+' unlocked · '):('Level '+nxt.level+' · ')):'')+nxt.label+' →';
+      nb.onclick=()=>goTo(nxt.id); nav.appendChild(nb);
+    } else if(cur && cur.level && !state.done.has(cur.id)){
+      const wait=document.createElement('span'); wait.className='note'; wait.style.margin='8px 0 0';
+      wait.textContent='अगला स्तर खोलने के लिए यह जाँच ⭐ पूरी करो '+(cur.level+1)+'.';
+      nav.appendChild(wait);
+    }
+  }
+  app.appendChild(nav);
+
+  if(state.justCleared){
+    const clearedLv=levelById(state.justCleared);
+    const nxtLv=nextStoryLevel(state.justCleared);
+    const overlay=document.createElement('div'); overlay.className='level-up';
+    const box=document.createElement('div'); box.className='level-up-card';
+    const finishedAll=clearedLv && clearedLv.level===STORY_LEVELS.length;
+    box.innerHTML=`<div class="burst">${finishedAll?'🪷🦚':'🦚'}</div>
+      <h3>${finishedAll?'बगीचे का नक्शा पूरा!':'स्तर '+clearedLv.level+' पूरा!'}</h3>
+      <p>${finishedAll
+        ? 'तुमने हर शुरुआती स्तर पूरा किया। आगे और स्तर आएँगे। मयूर ने पंख पैक किए। शुक ने गर्व (और एक आम)।'
+        : (clearedLv.label+' तुम्हारा है। '+clearedLv.en+'। अगला बगीचे का फाटक खुल गया।')}</p>`;
+    const row=document.createElement('div'); row.className='btnrow'; row.style.justifyContent='center';
+    const stay=document.createElement('button'); stay.className='btn ghost'; stay.textContent='यहीं रहो';
+    stay.onclick=()=>{ state.justCleared=null; overlay.remove(); };
+    row.appendChild(stay);
+    if(nxtLv){
+      const go=document.createElement('button'); go.className='btn';
+      go.textContent='अगला: स्तर '+nxtLv.level+' · '+nxtLv.label+' →';
+      go.onclick=()=>{ state.justCleared=null; goTo(nxtLv.id); };
+      row.appendChild(go);
+    } else {
+      const park=document.createElement('button'); park.className='btn';
+      park.textContent='अभ्यास बाग जाओ →';
+      park.onclick=()=>{ state.justCleared=null; goTo('revision'); };
+      row.appendChild(park);
+      const again=document.createElement('button'); again.className='btn ghost';
+      again.textContent='🔁 Start again';
+      again.onclick=()=>{ state.justCleared=null; state.confirmReset=true; render(); };
+      row.appendChild(again);
+    }
+    box.appendChild(row);
+    overlay.appendChild(box);
+    app.appendChild(overlay);
+    speak('सम्यक्!');
+  }
+
+  if(state.confirmReset){
+    const overlay=document.createElement('div'); overlay.className='level-up';
+    const box=document.createElement('div'); box.className='level-up-card';
+    box.innerHTML=`<div class="burst">🔁</div>
+      <h3>फिर से शुरू करें?</h3>
+      <p>सारे तारे मिटेंगे। तुम स्तर 1 — नमस्ते से शुरू करोगे। बंद रास्ता या खुली खेल वैसा ही रहेगा। शुक नयी यात्रा का नाटक करेगा।</p>`;
+    const row=document.createElement('div'); row.className='btnrow'; row.style.justifyContent='center';
+    const cancel=document.createElement('button'); cancel.className='btn ghost'; cancel.textContent='मेरे तारे रखो';
+    cancel.onclick=()=>{ state.confirmReset=false; overlay.remove(); };
+    const yes=document.createElement('button'); yes.className='btn'; yes.textContent='हाँ, फिर से शुरू करो';
+    yes.onclick=()=>resetProgress();
+    row.appendChild(cancel); row.appendChild(yes);
+    box.appendChild(row);
+    overlay.appendChild(box);
+    app.appendChild(overlay);
+  }
+}
+
+render();
+['pointerdown','keydown'].forEach(ev=>{
+  document.addEventListener(ev, ensureMusic, true);
+});
+ensureMusic();
+</script>
+</body>
+</html>
