@@ -229,6 +229,25 @@ button.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
 .fillrow input:focus{outline:none;border-color:var(--berry);background:#fff8e8;}
 .fillrow input.ok{border-color:var(--grass);color:#0f8f84;background:#edfffb;}
 .fillrow input.bad{border-color:var(--berry);color:var(--berry);background:#fff0f6;}
+
+.sa-hint{width:100%;font-size:13px;font-weight:800;color:var(--peacock);margin:-4px 0 8px;flex:1 0 100%;}
+.btnrow .sarvam-tr{flex:1 0 100%;}
+.sarvam-wrap{position:relative;}
+.sarvam-panel{
+  position:absolute;right:0;top:calc(100% + 8px);z-index:40;width:min(320px,86vw);
+  background:var(--card);border:3px solid var(--ink);border-radius:18px;padding:12px 14px;
+  box-shadow:var(--shadow);text-align:left;
+}
+.sarvam-title{font-family:'Fredoka',sans-serif;font-weight:700;margin-bottom:6px;}
+.sarvam-panel input{
+  width:100%;border:3px solid var(--ink);border-radius:12px;padding:8px 10px;margin:8px 0;
+  font-family:inherit;font-weight:700;
+}
+.sarvam-status{font-size:13px;font-weight:800;margin-top:8px;color:var(--ink-soft);}
+.sarvam-status.ok{color:#0f8f84;}
+.sarvam-status.bad{color:var(--berry);}
+.sarvam-tr{background:#eef8ff;border:2px dashed #9ec9e8;border-radius:16px;padding:12px 14px;margin:10px 0;font-weight:700;line-height:1.5;}
+
 .matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .matchcol{display:flex;flex-direction:column;gap:8px;}
 .matchitem{
@@ -358,6 +377,7 @@ button.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
 <body>
 <div class="float-notes" aria-hidden="true"><i>♪</i><i>♫</i><i>🎵</i><i>🪷</i><i>🦚</i><i>♪</i></div>
 <div class="wrap" id="app"></div>
+<script src="../sarvam.js"></script>
 <script>
 /* ===================== DATA ===================== */
 const ONES=["शून्यम्","एकम्","द्वे","त्रीणि","चत्वारि","पञ्च","षट्","सप्त","अष्ट","नव"];
@@ -1444,12 +1464,50 @@ function stopSpeaking(){
   Speak.token++;
   Speak.queue=[];
   Speak.onend=null;
+  try{ if(Speak.audio){ Speak.audio.onended=null; Speak.audio.onerror=null; Speak.audio.pause(); Speak.audio.src=''; Speak.audio=null; } }catch(e){}
   try{ window.speechSynthesis.cancel(); }catch(e){}
+  if(window.Sarvam) Sarvam.abort();
   Music.speechOn=false;
   applyBgGain();
 }
+async function pumpSarvamSpeak(my){
+  if(Speak.token!==my) return;
+  if(!Speak.queue.length){
+    Music.speechOn=false;
+    applyBgGain();
+    const cb=Speak.onend; Speak.onend=null;
+    if(cb) cb();
+    return;
+  }
+  const chunk=Speak.queue.shift();
+  const text=toDevanagariSpeech(chunk);
+  try{
+    const url=await Sarvam.tts(text, Speak.rate);
+    if(Speak.token!==my) return;
+    const a=new Audio(url);
+    Speak.audio=a;
+    a.onended=()=>{ Speak.audio=null; setTimeout(()=>pumpSpeak(my), 60); };
+    a.onerror=()=>{ Speak.audio=null; setTimeout(()=>pumpSpeak(my), 40); };
+    await a.play();
+  }catch(e){
+    if(Speak.token!==my) return;
+    const voice=pickSanskritVoice();
+    const indic=!!(voice && isIndicVoice(voice));
+    const u=new SpeechSynthesisUtterance(prepSanskritSpeech(chunk, indic));
+    u.lang='hi-IN';
+    u.rate=Math.max(0.6, Math.min(1.05, Speak.rate));
+    if(voice) u.voice=voice;
+    u.onend=()=>setTimeout(()=>pumpSpeak(my), 80);
+    u.onerror=()=>setTimeout(()=>pumpSpeak(my), 80);
+    try{ window.speechSynthesis.speak(u); }catch(err){ pumpSpeak(my); }
+  }
+}
 function pumpSpeak(my){
   if(Speak.token!==my) return;
+  if(window.Sarvam && Sarvam.hasKey()){
+    pumpSarvamSpeak(my);
+    return;
+  }
   try{ if(window.speechSynthesis.paused) window.speechSynthesis.resume(); }catch(e){}
   if(!Speak.queue.length){
     Music.speechOn=false;
@@ -1481,8 +1539,37 @@ function speakNow(text, rate, onend){
   applyBgGain();
   setTimeout(()=>pumpSpeak(my), 60);
 }
+function addSarvamTranslate(row, text){
+  const b=document.createElement('button');
+  b.type='button'; b.className='btn ghost';
+  b.textContent = COPY_ID==='hi' ? '✦ Sarvam अनुवाद' : '✦ Translate with Sarvam';
+  const box=document.createElement('div'); box.className='sarvam-tr'; box.hidden=true;
+  b.onclick=async ()=>{
+    if(!window.Sarvam || !Sarvam.hasKey()){
+      box.hidden=false;
+      box.textContent = COPY_ID==='hi' ? 'ऊपर बार में Sarvam कुंजी सहेजो।' : 'Save a Sarvam key in the bar first.';
+      return;
+    }
+    b.disabled=true; box.hidden=false;
+    box.textContent = COPY_ID==='hi' ? 'अनुवाद आ रहा है…' : 'Translating…';
+    try{
+      const t=await Sarvam.translate(String(text||'').replace(/\s+/g,' ').trim(), 'sa-IN', COPY_ID==='hi'?'hi-IN':'en-IN');
+      box.textContent=t || (COPY_ID==='hi'?'अनुवाद नहीं मिला।':'No translation came back.');
+    }catch(e){
+      box.textContent = COPY_ID==='hi' ? 'अनुवाद नहीं हो पाया।' : 'Translation did not work.';
+    }
+    b.disabled=false;
+  };
+  row.appendChild(b);
+  box.style.flex = '1 0 100%';
+  row.appendChild(box);
+}
 function speak(text, rate, onend){
   try{
+    if(window.Sarvam && Sarvam.hasKey()){
+      speakNow(text, rate, onend);
+      return;
+    }
     if(!window.speechSynthesis){ return; }
     refreshVoices();
     if(voicesReady && cachedVoices.length){
@@ -1815,6 +1902,11 @@ function renderFillBlank(container, items){
       else{ input.classList.remove('ok'); input.classList.add('bad'); }
     };
     row.appendChild(input);
+    if(window.Sarvam) Sarvam.wireInput(input, (dev)=>{
+      if(answersMatch(dev, it.answer, it.also) || answersMatch(input.value, it.answer, it.also)){
+        input.classList.add('ok'); input.classList.remove('bad');
+      }
+    });
     const rest=document.createElement('span'); rest.textContent=it.suffix||'';
     row.appendChild(rest);
     row.appendChild(speakerBtn(it.audioHint || it.answerDev || it.answer));
@@ -1949,6 +2041,7 @@ function heardMatches(heard, expected, expectedEn){
   return false;
 }
 function canListen(){
+  if(window.Sarvam && Sarvam.hasKey() && window.isSecureContext && navigator.mediaDevices) return true;
   return !!(window.isSecureContext && (window.SpeechRecognition || window.webkitSpeechRecognition));
 }
 const Listen={rec:null, timer:null, snap:null, active:false, btn:null};
@@ -1962,10 +2055,69 @@ function stopListen(){
     r.onresult=r.onerror=r.onend=null;
     try{ r.abort(); }catch(e){}
   }
+  if(window.Sarvam) Sarvam.stopRec();
   Music.micMute=false;
   applyBgGain();
 }
+async function startListenSarvam(expected, expectedEn, btn, fb){
+  stopListen();
+  stopSpeaking();
+  Music.speechOn=false;
+  Music.micMute=true;
+  applyBgGain();
+  Listen.active=true;
+  Listen.btn=btn;
+  btn.classList.add('listening');
+  const cue=String(expected||'').replace(/[!.?।॥]+$/g,'').trim();
+  const shortLine=foldSa(expected).split(' ').filter(Boolean).length<=2;
+  fb.textContent = COPY_ID==='hi' ? ('सुन रहा हूँ… अभी “'+cue+'” बोलो!') : ('Listening… say “'+cue+'” now!');
+  fb.className='qfeedback';
+  try{
+    const heard=await Sarvam.listenOnce(shortLine?3200:5500);
+    if(!Listen.active) return;
+    btn.classList.remove('listening');
+    Listen.btn=null;
+    Listen.active=false;
+    Music.micMute=false;
+    applyBgGain();
+    if(heard && heardMatches(heard, expected, expectedEn)){
+      const looksLike=foldSa(heard).indexOf(foldSa(cue))>=0;
+      fb.textContent = COPY_ID==='hi'
+        ? (looksLike ? ('हाँ! मैंने सुना: “'+heard+'”। ✓') : ('हाँ! “'+cue+'” जैसा लगा। ✓'))
+        : (looksLike ? ('Yes! I heard you: “'+heard+'”. ✓') : ('Yes! That sounded like '+cue+'. ✓'));
+      fb.className='qfeedback ok';
+      playSfx('ok');
+    } else if(heard){
+      fb.textContent = COPY_ID==='hi'
+        ? ('मैंने सुना “'+heard+'”। फिर से बोलो, या “मैंने बोल दिया” दबाओ।')
+        : ('I heard “'+heard+'”. Brave try! Tap again, or “I said it” — that still counts.');
+      fb.className='qfeedback try';
+    } else {
+      fb.textContent = COPY_ID==='hi'
+        ? 'पकड़ नहीं पाया। थोड़ा ज़ोर से बोलो, या “मैंने बोल दिया” दबाओ।'
+        : 'I didn’t catch it. Speak a little louder after you tap, or tap “I said it”.';
+      fb.className='qfeedback try';
+    }
+  }catch(e){
+    if(!Listen.active) return;
+    Listen.active=false;
+    btn.classList.remove('listening');
+    Listen.btn=null;
+    Music.micMute=false;
+    applyBgGain();
+    const msg=String(e && e.message || e || '');
+    if(msg==='aborted') return;
+    fb.textContent = COPY_ID==='hi'
+      ? 'माइक चलाने दो, या “मैंने बोल दिया” दबाओ।'
+      : 'Allow the microphone, or tap “I said it”. Speaking out loud still counts.';
+    fb.className='qfeedback try';
+  }
+}
 function startListen(expected, expectedEn, btn, fb){
+  if(window.Sarvam && Sarvam.hasKey() && window.isSecureContext){
+    startListenSarvam(expected, expectedEn, btn, fb);
+    return;
+  }
   const Rec=window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!Rec || !window.isSecureContext){
     fb.textContent='The microphone needs https (or tap “I said it” — that still counts).';
@@ -2295,6 +2447,11 @@ function renderWriteFromEnglish(card, items){
       else { input.classList.remove('ok'); input.classList.add('bad'); }
     };
     row.appendChild(input);
+    if(window.Sarvam) Sarvam.wireInput(input, (dev)=>{
+      if(answersMatch(dev, it.answer, it.also) || answersMatch(input.value, it.answer, it.also)){
+        input.classList.add('ok'); input.classList.remove('bad');
+      }
+    });
     row.appendChild(speakerBtn(it.also && it.also.find(x=>/[\u0900-\u097F]/.test(x)) || it.answer));
     wrap.appendChild(row);
   });
@@ -2776,6 +2933,7 @@ function renderKatha(root){
   const spkBtn=document.createElement('button'); spkBtn.className='btn'; spkBtn.textContent='🔊 Listen to the whole story';
   spkBtn.onclick=speakStory;
   listenRow.appendChild(spkBtn);
+  addSarvamTranslate(listenRow, story.text);
   card.appendChild(listenRow);
   phase(card,'S','2 🗣️ Speak','Echo one sentence at a time.');
   renderSpeakAlong(card, story.lines);
@@ -2807,6 +2965,7 @@ function renderKatha(root){
   const hearAll=document.createElement('button'); hearAll.className='btn ghost'; hearAll.textContent='🔊 Hear the whole story';
   hearAll.onclick=speakStory;
   hearRow.appendChild(hearAll);
+  addSarvamTranslate(hearRow, story.text);
   card.appendChild(hearRow);
   const panel=document.createElement('div'); panel.className='glossary-panel';
   panel.innerHTML=`<h3>Word help — every word</h3><p class="hint">Little words too: च = and, अपि = also, न = not. Endings like उद्याने mean <em>in</em> the garden, मयूराय means <em>to</em> the peacock.</p>`;
@@ -3054,6 +3213,7 @@ function render(){
   musicBtn.title='Music plays by default. Tap to switch it off or on.';
   musicBtn.onclick=toggleMusic;
   speed.appendChild(lbl); speed.appendChild(slowBtn); speed.appendChild(normBtn); speed.appendChild(musicBtn);
+  if(window.Sarvam) Sarvam.mountBar(speed, COPY_ID);
   const buddies=document.createElement('div'); buddies.className='buddies';
   const mayura=document.createElement('div'); mayura.className='buddy peacock'; mayura.textContent='🦚';
   mayura.title='Tap Mayura the peacock — she lives in the garden and speaks easy Sanskrit.';
