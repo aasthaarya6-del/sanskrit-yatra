@@ -56,12 +56,11 @@ body::after{content:"🪷"; bottom:16px;right:12px;font-size:48px;opacity:0.3;}
 }
 .masthead h1 span{color:var(--saffron);}
 .masthead .sub{font-size:15px;color:var(--ink-soft);font-weight:700;margin-top:4px;}
-.otto{
-  margin:8px 0 16px;padding:10px 14px;background:#fff8ef;
-  border:2px dashed #e8c9a8;border-radius:18px;
-  font-size:15px;font-weight:700;line-height:1.45;
+.otto{display:none;}
+.wordgloss{
+  font-size:14px;color:var(--ink-soft);font-weight:700;line-height:1.6;
+  margin:2px 0 8px;
 }
-.otto strong{color:#c47a3a;}
 .buddy{
   font-size:52px;line-height:1;filter:drop-shadow(3px 3px 0 rgba(43,37,80,0.12));
   animation:bob 2.8s ease-in-out infinite;cursor:pointer;
@@ -403,9 +402,9 @@ const GREETINGS=[
   ["पुनर्मिलामः","punarmilamah","see you again"],
   ["स्वागतम्","svagatam","welcome"]
 ];
-const INTRO_NAME=[["मम नाम","mama nama","my name is"],["अहम्","aham","I"],["वेदार्कः","vedarkah","Vedark"],["ऋषिका","rishika","Rishika"],["अर्जुनः","arjunah","Arjun"],["काव्या","kavya","Kavya"]];
-const INTRO_AGE=[["वर्षीयः","varshiyah","years old (boy)"],["वर्षीया","varshiya","years old (girl)"],["पञ्च","pancha","five"],["दश","dasha","ten"],["एकादश","ekadasha","eleven"],["द्वादश","dvadasha","twelve"]];
-const INTRO_CLASS=[["कक्षा","kaksha","class / grade"],["पञ्चमी कक्षा","panchami kaksha","class 5"],["षष्ठी कक्षा","shashthi kaksha","class 6"],["सप्तमी कक्षा","saptami kaksha","class 7"]];
+const INTRO_NAME=[["मम नाम","mama nama","my name is"],["अहम्","aham","I"],["वेदार्कः","vedarkah","Vedark"],["हिमया","himaya","Himaya"],["अर्जुनः","arjunah","Arjun"],["आर्षेणा","aarshena","Aarshena"]];
+const INTRO_AGE=[["वर्षीयः","varshiyah","years old (boy)"],["वर्षीया","varshiya","years old (girl)"],["पञ्च","pancha","five"],["नव","nava","nine"],["दश","dasha","ten"],["एकादश","ekadasha","eleven"],["द्वादश","dvadasha","twelve"]];
+const INTRO_CLASS=[["कक्षा","kaksha","class / grade"],["चतुर्थी कक्षा","chaturthi kaksha","class 4"],["पञ्चमी कक्षा","panchami kaksha","class 5"],["षष्ठी कक्षा","shashthi kaksha","class 6"],["सप्तमी कक्षा","saptami kaksha","class 7"]];
 const INTRO_RELIGION=[["धर्मः","dharmah","religion / way"],["हिन्दू","hindu","Hindu"],["मुस्लिम","muslim","Muslim"],["ख्रीष्टीयः","khrishtiyah","Christian"],["सिखः","sikhah","Sikh"],["बौद्धः","bauddhah","Buddhist"]];
 const INTRO_HOBBIES=[["रुचिः","ruchih","hobby / interest"],["पठनम्","pathanam","reading"],["चित्रकला","chitrakala","drawing"],["नृत्यम्","nrityam","dancing"],["गानम्","ganam","singing"],["क्रीडा","krida","sport / play"]];
 const INTRO_EXTRA=[["अहं भारतात् आगच्छामि।","aham bharatat agacchami","I come from India."],["मम प्रियः वर्णः","mama priyah varnah","my favourite colour"]];
@@ -526,16 +525,22 @@ const STORIES=[
     blurb:'वेदार्कः, a garden, one very round mango.',
     shloka:'udyama',
     act:'Pretend to pick a mango. Sniff it. Share it with Mayura (even if she is only in the room as a peacock emoji).',
-    text:`नमस्ते। मम नाम वेदार्कः अस्ति। अहं पञ्चवर्षीयः अस्मि। अहं उद्याने क्रीडामि। तत्र एकं पीतं आम्रं अस्ति।
+    text:`नमस्ते। मम नाम वेदार्कः अस्ति। अहं पञ्चवर्षीयः अस्मि। अहं उद्याने क्रीडामि। उद्याने पुष्पाणि सन्ति। तत्र एकं पीतं आम्रं अस्ति। आम्रं वृक्षे अस्ति।
 
-वेदार्कः आम्रं पश्यति। सः वदति — “इदं सुन्दरं आम्रम् अस्ति।” सः आम्रं न केवलं खादति। सः मयूराय अपि ददाति। मयूरः नृत्यति।`,
+वेदार्कः आम्रं पश्यति। सः वदति — “इदं सुन्दरं आम्रम् अस्ति।” सः आम्रं गृह्णाति। सः आम्रं न केवलं खादति। सः मयूराय अपि ददाति। मयूरः हृष्टः अस्ति। मयूरः नृत्यति। शुकः अपि पश्यति। शुकः वदति — “सम्यक्! त्वं मित्रम् असि।”`,
     lines:[
       {sa:"नमस्ते। मम नाम वेदार्कः अस्ति।", en:"Hello. My name is Vedark."},
       {sa:"अहं पञ्चवर्षीयः अस्मि।", en:"I am five years old."},
       {sa:"अहं उद्याने क्रीडामि।", en:"I play in the garden."},
+      {sa:"उद्याने पुष्पाणि सन्ति।", en:"There are flowers in the garden."},
       {sa:"तत्र एकं पीतं आम्रं अस्ति।", en:"There is one yellow mango there."},
+      {sa:"आम्रं वृक्षे अस्ति।", en:"The mango is on the tree."},
+      {sa:"वेदार्कः आम्रं पश्यति।", en:"Vedark looks at the mango."},
       {sa:"इदं सुन्दरं आम्रम् अस्ति।", en:"This is a beautiful mango."},
-      {sa:"सः मयूराय अपि ददाति।", en:"He also gives it to the peacock."}
+      {sa:"सः आम्रं गृह्णाति।", en:"He takes the mango."},
+      {sa:"सः आम्रं न केवलं खादति।", en:"He does not only eat the mango."},
+      {sa:"सः मयूराय अपि ददाति।", en:"He also gives it to the peacock."},
+      {sa:"मयूरः नृत्यति।", en:"The peacock dances."}
     ],
     glossary:[["नमस्ते","hello"],["नाम","name"],["वेदार्कः","Vedark"],["अस्ति","is"],["उद्यानम्","garden"],["आम्रम्","mango"],["पीतम्","yellow"],["सुन्दरम्","beautiful"],["ददाति","gives"],["मयूरः","peacock"],["नृत्यति","dances"]],
     questions:[
@@ -547,43 +552,54 @@ const STORIES=[
     shuka:'Vedark found a mango and shared it. Sharing is a superpower. Also it makes peacocks dance. Science.'
   },
   {
-    id:'rishika',
-    title:'Rishika says hello',
-    blurb:'ऋषिका introduces herself — name, class, a loud parrot.',
+    id:'himaya',
+    title:'Himaya says hello',
+    blurb:'Himaya is nine. She says her name, class, and hobby — with a loud parrot.',
     shloka:'priya',
-    act:'Stand up. Say your own name in the Vedark-pattern: मम नाम … अस्ति। Then bow. Extra sparkle if you use a silly parrot voice second time.',
-    text:`नमस्ते। मम नाम ऋषिका अस्ति। अहं एकादशवर्षीया अस्मि। अहं पञ्चम्यां कक्षायां अस्मि। मम रुचिः गानम् अस्ति।
+    act:'Stand up. Say your own name: मम नाम … अस्ति। Then bow. Extra sparkle if you use a silly parrot voice the second time.',
+    text:`नमस्ते। मम नाम हिमया अस्ति। अहं नववर्षीया अस्मि। अहं चतुर्थ्यां कक्षायां अस्मि। मम रुचिः गानम् अस्ति। अहं उद्याने गायामि।
 
-ऋषिका शुकं पश्यति। सा वदति — “त्वं मित्रम् असि।” शुकः वदति — “आम्। त्वम् अपि मित्रम् असि। मम नाम शुकः अस्ति।” द्वे अपि हसतः।`,
+हिमया शुकं पश्यति। सा वदति — “त्वं मित्रम् असि।” शुकः वदति — “आम्। त्वम् अपि मित्रम् असि। मम नाम शुकः अस्ति।” हिमया गायति। शुकः अपि गायति। द्वे अपि हसतः। मयूरः नृत्यति।`,
     lines:[
-      {sa:"नमस्ते। मम नाम ऋषिका अस्ति।", en:"Hello. My name is Rishika."},
-      {sa:"अहं एकादशवर्षीया अस्मि।", en:"I am eleven years old."},
-      {sa:"अहं पञ्चम्यां कक्षायां अस्मि।", en:"I am in class 5."},
+      {sa:"नमस्ते। मम नाम हिमया अस्ति।", en:"Hello. My name is Himaya."},
+      {sa:"अहं नववर्षीया अस्मि।", en:"I am nine years old."},
+      {sa:"अहं चतुर्थ्यां कक्षायां अस्मि।", en:"I am in class 4."},
       {sa:"मम रुचिः गानम् अस्ति।", en:"My hobby is singing."},
-      {sa:"त्वं मित्रम् असि।", en:"You are a friend."}
+      {sa:"अहं उद्याने गायामि।", en:"I sing in the garden."},
+      {sa:"हिमया शुकं पश्यति।", en:"Himaya looks at the parrot."},
+      {sa:"त्वं मित्रम् असि।", en:"You are a friend."},
+      {sa:"आम्। त्वम् अपि मित्रम् असि।", en:"Yes. You are a friend too."},
+      {sa:"हिमया गायति।", en:"Himaya sings."},
+      {sa:"शुकः अपि गायति।", en:"The parrot also sings."},
+      {sa:"द्वे अपि हसतः।", en:"Both of them laugh."}
     ],
-    glossary:[["ऋषिका","Rishika"],["एकादश","eleven"],["कक्षा","class"],["रुचिः","hobby"],["गानम्","singing"],["मित्रम्","friend"],["हसतः","the two laugh"]],
+    glossary:[["हिमया","Himaya"],["नव","nine"],["कक्षा","class"],["रुचिः","hobby"],["गानम्","singing"],["मित्रम्","friend"],["हसतः","the two laugh"]],
     questions:[
-      {q:"ऋषिकायाः नाम किम्?",opts:["वेदार्कः","ऋषिका","काव्या"],a:1, audio:"ऋषिका"},
-      {q:"सा कस्यां कक्षायां अस्ति?",opts:["पञ्चम्याम्","षष्ठ्याम्","सप्तम्याम्"],a:0, audio:"पञ्चम्यां कक्षायाम्"},
+      {q:"हिमयायाः नाम किम्?",opts:["वेदार्कः","हिमया","आर्षेणा"],a:1, audio:"हिमया"},
+      {q:"सा कतिवर्षीया अस्ति?",opts:["नव","दश","एकादश"],a:0, audio:"हिमया नववर्षीया अस्ति"},
+      {q:"सा कस्यां कक्षायां अस्ति?",opts:["चतुर्थ्याम्","पञ्चम्याम्","षष्ठ्याम्"],a:0, audio:"चतुर्थ्यां कक्षायाम्"},
       {q:"तस्याः रुचिः का?",opts:["पठनम्","गानम्","नृत्यम्"],a:1, audio:"गानम्"}
     ],
-    shuka:'Rishika said I was a friend. I said she was a friend. This is called diplomacy. Also it is true.'
+    shuka:'Himaya said I was a friend. I said she was a friend. Two true sentences. Two happy birds.'
   },
   {
     id:'modaka',
     title:'Shuka and the sweet',
     blurb:'A parrot wants a sweet. The sweet has opinions.',
     act:'Rub your tummy and say अहं मोदकं इच्छामि। Then shake your head like Mayura: न तु मोदकः।',
-    text:`अहं शुकः अस्मि। अहं हरितः अस्मि। मम प्रियं भोजनं मोदकः अस्ति।
+    text:`अहं शुकः अस्मि। अहं हरितः अस्मि। मम प्रियं भोजनं मोदकः अस्ति। अद्य एकः मोदकः मेजे अस्ति।
 
-अद्य एकः मोदकः मेजे अस्ति। शुकः वदति — “अहं मोदकं इच्छामि।” मयूरः वदति — “त्वं शुकः असि, न तु मोदकः।” शुकः हसति। सः मोदकं खादति। तत् मधुरं अस्ति।`,
+शुकः वदति — “अहं मोदकं इच्छामि।” मयूरः वदति — “त्वं शुकः असि, न तु मोदकः।” शुकः हसति। सः मोदकं खादति। तत् मधुरं अस्ति। शुकः वदति — “धन्यवादः।” मयूरः अपि हसति।`,
     lines:[
       {sa:"अहं शुकः अस्मि।", en:"I am Shuka."},
       {sa:"अहं हरितः अस्मि।", en:"I am green."},
       {sa:"मम प्रियं भोजनं मोदकः अस्ति।", en:"My favourite food is a sweet."},
+      {sa:"अद्य एकः मोदकः मेजे अस्ति।", en:"Today a sweet is on the table."},
       {sa:"अहं मोदकं इच्छामि।", en:"I want the sweet."},
-      {sa:"त्वं शुकः असि, न तु मोदकः।", en:"You are a parrot, not a sweet."}
+      {sa:"त्वं शुकः असि, न तु मोदकः।", en:"You are a parrot, not a sweet."},
+      {sa:"सः मोदकं खादति।", en:"He eats the sweet."},
+      {sa:"तत् मधुरं अस्ति।", en:"It is sweet."},
+      {sa:"धन्यवादः।", en:"Thank you."}
     ],
     glossary:[["शुकः","parrot"],["हरितः","green"],["मोदकः","sweet"],["इच्छामि","I want"],["हसति","laughs"],["मधुरम्","sweet-tasting"]],
     questions:[
@@ -595,23 +611,29 @@ const STORIES=[
   },
   {
     id:'padma',
-    title:'Kavya and the red lotus',
-    blurb:'काव्या, a pond, a lotus, a very proud frog.',
+    title:'Aarshena and the red lotus',
+    blurb:'Aarshena is ten. A pond, a red lotus, and a very proud frog.',
     shloka:'simha',
     act:'Sit like a frog on an imaginary lotus. Say अहं राजा अस्मि। Then splash (quietly) when Mayura arrives.',
-    text:`काव्या सरः पश्यति। सरसि एकं रक्तं पद्मं अस्ति। तत् सुन्दरं अस्ति। एकः मण्डूकः पद्मस्य उपरि उपविशति। सः वदति — “अहं राजा अस्मि।”
+    text:`नमस्ते। मम नाम आर्षेणा अस्ति। अहं दशवर्षीया अस्मि। आर्षेणा सरः पश्यति। सरसि एकं रक्तं पद्मं अस्ति। तत् सुन्दरं अस्ति। एकः मण्डूकः पद्मस्य उपरि उपविशति। सः वदति — “अहं राजा अस्मि।”
 
-काव्या हसति। मयूरः आगच्छति। सः वदति — “त्वं मण्डूकः असि।” मण्डूकः हसति। सः जले पतति। पद्मं शान्तं अस्ति।`,
+आर्षेणा हसति। सा वदति — “न, त्वं मण्डूकः असि।” मयूरः आगच्छति। मयूरः वदति — “त्वं मण्डूकः असि, न तु राजा।” मण्डूकः हसति। सः जले पतति। पद्मं शान्तं अस्ति। आर्षेणा पद्मं पश्यति।`,
     lines:[
-      {sa:"काव्या सरः पश्यति।", en:"Kavya looks at the lake."},
+      {sa:"नमस्ते। मम नाम आर्षेणा अस्ति।", en:"Hello. My name is Aarshena."},
+      {sa:"अहं दशवर्षीया अस्मि।", en:"I am ten years old."},
+      {sa:"आर्षेणा सरः पश्यति।", en:"Aarshena looks at the lake."},
       {sa:"सरसि एकं रक्तं पद्मं अस्ति।", en:"There is a red lotus in the lake."},
       {sa:"एकः मण्डूकः पद्मस्य उपरि उपविशति।", en:"A frog sits on the lotus."},
       {sa:"अहं राजा अस्मि।", en:"I am a king."},
-      {sa:"त्वं मण्डूकः असि।", en:"You are a frog."}
+      {sa:"न, त्वं मण्डूकः असि।", en:"No, you are a frog."},
+      {sa:"त्वं मण्डूकः असि, न तु राजा।", en:"You are a frog, not a king."},
+      {sa:"सः जले पतति।", en:"He falls in the water."},
+      {sa:"पद्मं शान्तं अस्ति।", en:"The lotus is calm."}
     ],
-    glossary:[["काव्या","Kavya"],["सरस्","lake"],["पद्मम्","lotus"],["रक्तम्","red"],["मण्डूकः","frog"],["राजा","king"],["उपविशति","sits"],["पतति","falls"]],
+    glossary:[["आर्षेणा","Aarshena"],["दश","ten"],["सरस्","lake"],["पद्मम्","lotus"],["रक्तम्","red"],["मण्डूकः","frog"],["राजा","king"],["उपविशति","sits"],["पतति","falls"]],
     questions:[
-      {q:"का पश्यति?",opts:["वेदार्कः","काव्या","ऋषिका"],a:1, audio:"काव्या"},
+      {q:"आर्षेणा कतिवर्षीया अस्ति?",opts:["नव","दश","द्वादश"],a:1, audio:"आर्षेणा दशवर्षीया अस्ति"},
+      {q:"का पश्यति?",opts:["वेदार्कः","आर्षेणा","हिमया"],a:1, audio:"आर्षेणा"},
       {q:"पद्मस्य वर्णः कः?",opts:["नीलः","रक्तः","श्वेतः"],a:1, audio:"रक्तम्"},
       {q:"मण्डूकः किं वदति?",opts:["अहं राजा अस्मि","अहं मीनः अस्मि","अहं पद्मम् अस्मि"],a:0, audio:"अहं राजा अस्मि"}
     ],
@@ -623,15 +645,19 @@ const STORIES=[
     blurb:'A thirsty crow, a pot, and a pile of pebbles.',
     shloka:'udyama',
     act:'Mime dropping pebbles into a pot. After each pebble say सिध्यन्ति (they succeed). Drink an imaginary cup at the end.',
-    text:`एकः काकः अस्ति। सः तृषितः अस्ति। सः घटं पश्यति। घटे अल्पं जलं अस्ति।
+    text:`एकः काकः अस्ति। सः तृषितः अस्ति। सः घटं पश्यति। घटे अल्पं जलं अस्ति। काकः जलं न पिबति।
 
-काकः न केवलं इच्छति। सः पाषाणान् आनयति। सः पाषाणान् घटे क्षिपति। जलं ऊर्ध्वं आगच्छति। काकः जलं पिबति। सः हृष्टः अस्ति।`,
+काकः न केवलं इच्छति। सः पाषाणान् आनयति। सः पाषाणान् घटे क्षिपति। जलं ऊर्ध्वं आगच्छति। अधुना काकः जलं पिबति। सः हृष्टः अस्ति।`,
     lines:[
       {sa:"एकः काकः अस्ति।", en:"There is a crow."},
       {sa:"सः तृषितः अस्ति।", en:"He is thirsty."},
+      {sa:"सः घटं पश्यति।", en:"He looks at a pot."},
       {sa:"घटे अल्पं जलं अस्ति।", en:"There is a little water in the pot."},
+      {sa:"सः पाषाणान् आनयति।", en:"He brings pebbles."},
       {sa:"सः पाषाणान् घटे क्षिपति।", en:"He throws pebbles into the pot."},
-      {sa:"काकः जलं पिबति।", en:"The crow drinks the water."}
+      {sa:"जलं ऊर्ध्वं आगच्छति।", en:"The water comes up."},
+      {sa:"अधुना काकः जलं पिबति।", en:"Now the crow drinks the water."},
+      {sa:"सः हृष्टः अस्ति।", en:"He is happy."}
     ],
     glossary:[["काकः","crow"],["तृषितः","thirsty"],["घटः","pot"],["जलम्","water"],["पाषाणः","pebble / stone"],["पिबति","drinks"],["हृष्टः","happy"]],
     questions:[
@@ -688,25 +714,25 @@ const STORIES=[
   },
   {
     id:'dashama',
-    title:'Rishika counts mangoes',
-    blurb:'ऋषिका counts. A parrot “helps”. Maths gets delicious.',
+    title:'Himaya counts mangoes',
+    blurb:'Himaya counts mangoes. A parrot “helps”. Maths gets delicious.',
     act:'Count to ten on your fingers in Sanskrit. Then hide one finger. Say नव! Eat an imaginary mango. Do not eat the finger.',
-    text:`उद्याने दश आम्राणि सन्ति। ऋषिका गणयति — एकम्, द्वे, त्रीणि, चत्वारि, पञ्च। शुकः गणयति — षट्, सप्त, अष्ट, नव, दश।
+    text:`उद्याने दश आम्राणि सन्ति। हिमया गणयति — एकम्, द्वे, त्रीणि, चत्वारि, पञ्च। शुकः गणयति — षट्, सप्त, अष्ट, नव, दश।
 
-शुकः एकं आम्रं खादति। अधुना नव आम्राणि सन्ति। ऋषिका हसति। सा वदति — “त्वं गणकः असि, अपि च भक्षकः।”`,
+शुकः एकं आम्रं खादति। अधुना नव आम्राणि सन्ति। हिमया हसति। सा वदति — “त्वं गणकः असि, अपि च भक्षकः।”`,
     lines:[
       {sa:"उद्याने दश आम्राणि सन्ति।", en:"There are ten mangoes in the garden."},
-      {sa:"ऋषिका गणयति।", en:"Rishika counts."},
+      {sa:"हिमया गणयति।", en:"Himaya counts."},
       {sa:"शुकः एकं आम्रं खादति।", en:"Shuka eats one mango."},
       {sa:"अधुना नव आम्राणि सन्ति।", en:"Now there are nine mangoes."}
     ],
-    glossary:[["दश","ten"],["आम्राणि","mangoes"],["ऋषिका","Rishika"],["गणयति","counts"],["नव","nine"],["भक्षकः","eater"]],
+    glossary:[["दश","ten"],["आम्राणि","mangoes"],["हिमया","Himaya"],["गणयति","counts"],["नव","nine"],["भक्षकः","eater"]],
     questions:[
-      {q:"का गणयति?",opts:["वेदार्कः","ऋषिका","काव्या"],a:1, audio:"ऋषिका"},
+      {q:"का गणयति?",opts:["वेदार्कः","हिमया","आर्षेणा"],a:1, audio:"हिमया"},
       {q:"प्रथमतः कति आम्राणि?",opts:["नव","दश","एकम्"],a:1, audio:"दश"},
       {q:"अन्ते कति आम्राणि?",opts:["दश","नव","शून्यम्"],a:1, audio:"नव"}
     ],
-    shuka:'Counting is honest. Eating during counting is also honest. Just less popular. Rishika still likes me. Probably.'
+    shuka:'Counting is honest. Eating during counting is also honest. Just less popular. Himaya still likes me. Probably.'
   },
   {
     id:'pataka',
@@ -733,14 +759,14 @@ const STORIES=[
   {
     id:'mitram',
     title:'Forest friends',
-    blurb:'Vedark, Rishika, a peacock, a parrot — one small law: be kind.',
+    blurb:'Vedark, Himaya, a peacock, a parrot — one small law: be kind.',
     shloka:'mitram',
     act:'Find a person (or a cushion). Say त्वं मित्रम् असि। Wait for them to say it back. If they are a cushion, say it for them. Cushions are shy.',
-    text:`वने वेदार्कः च ऋषिका च क्रीडतः। मयूरः च शुकः च अपि वसतः। ते सर्वे मित्राणि सन्ति। मयूरः नृत्यति। शुकः वदति। ते गायतः।
+    text:`वने वेदार्कः च हिमया च क्रीडतः। मयूरः च शुकः च अपि वसतः। ते सर्वे मित्राणि सन्ति। मयूरः नृत्यति। शुकः वदति। ते गायतः।
 
-वेदार्कः वदति — “वयं मित्राणि स्मः।” ऋषिका वदति — “आम्। आपत्काले अपि वयं मित्राणि स्मः।” सिंहः अपि आगच्छति। सः न गर्जति। सः स्मयते। वने शान्तिः अस्ति।`,
+वेदार्कः वदति — “वयं मित्राणि स्मः।” हिमया वदति — “आम्। आपत्काले अपि वयं मित्राणि स्मः।” सिंहः अपि आगच्छति। सः न गर्जति। सः स्मयते। वने शान्तिः अस्ति।`,
     lines:[
-      {sa:"वने वेदार्कः च ऋषिका च क्रीडतः।", en:"Vedark and Rishika play in the forest."},
+      {sa:"वने वेदार्कः च हिमया च क्रीडतः।", en:"Vedark and Himaya play in the forest."},
       {sa:"ते सर्वे मित्राणि सन्ति।", en:"They are all friends."},
       {sa:"वयं मित्राणि स्मः।", en:"We are friends."},
       {sa:"वने शान्तिः अस्ति।", en:"There is peace in the forest."}
@@ -758,13 +784,13 @@ const STORIES=[
         {sa:"वनं सुन्दरं अस्ति।", en:"The forest is beautiful."}
       ]
     },
-    glossary:[["वनम्","forest"],["वेदार्कः","Vedark"],["ऋषिका","Rishika"],["मित्रम्","friend"],["गायतः","the two sing"],["शान्तिः","peace"],["सिंहः","lion"]],
+    glossary:[["वनम्","forest"],["वेदार्कः","Vedark"],["हिमया","Himaya"],["मित्रम्","friend"],["गायतः","the two sing"],["शान्तिः","peace"],["सिंहः","lion"]],
     questions:[
-      {q:"के क्रीडतः?",opts:["वेदार्कः च ऋषिका च","काकः च अजः च","मण्डूकः च चन्द्रः च"],a:0, audio:"वेदार्कः च ऋषिका च"},
+      {q:"के क्रीडतः?",opts:["वेदार्कः च हिमया च","काकः च अजः च","मण्डूकः च चन्द्रः च"],a:0, audio:"वेदार्कः च हिमया च"},
       {q:"मयूरः किं करोति?",opts:["गर्जति","नृत्यति","पिबति"],a:1, audio:"नृत्यति"},
       {q:"सिंहः किं करोति?",opts:["गर्जति","स्मयते","पतति"],a:1, audio:"स्मयते"}
     ],
-    shuka:'The jungle law in this garden is short: be a friend. Even the lion got the memo. Vedark and Rishika wrote it.'
+    shuka:'The jungle law in this garden is short: be a friend. Even the lion got the memo. Vedark and Himaya wrote it.'
   },
   {
     id:'varsha',
@@ -772,24 +798,98 @@ const STORIES=[
     blurb:'Rain, colours, and a peacock who was already dressed for it.',
     shloka:'priya',
     act:'If you cannot go outside, dance two steps in the room. Say अहम् अपि नृत्यामि। Indoor rain dancing is legal here.',
-    text:`अद्य वर्षा अस्ति। आकाशः धूम्रः अस्ति। वेदार्कः च ऋषिका च गृहे स्तः। ते चित्रं लिखतः। वेदार्कः रक्तं लिखति। ऋषिका नीलं लिखति।
+    text:`अद्य वर्षा अस्ति। आकाशः धूम्रः अस्ति। वेदार्कः च हिमया च गृहे स्तः। ते चित्रं लिखतः। वेदार्कः रक्तं लिखति। हिमया नीलं लिखति।
 
 मयूरः वर्षायां नृत्यति। तस्य वर्णाः बहवः सन्ति — नीलः, हरितः, पीतः, रक्तः। शुकः गवाक्षात् पश्यति। सः वदति — “अहम् अपि नृत्यामि... गृहे।”`,
     lines:[
       {sa:"अद्य वर्षा अस्ति।", en:"Today there is rain."},
-      {sa:"वेदार्कः च ऋषिका च चित्रं लिखतः।", en:"Vedark and Rishika draw a picture."},
+      {sa:"आकाशः धूम्रः अस्ति।", en:"The sky is grey."},
+      {sa:"वेदार्कः च हिमया च गृहे स्तः।", en:"Vedark and Himaya are at home."},
+      {sa:"ते चित्रं लिखतः।", en:"They draw a picture."},
+      {sa:"वेदार्कः रक्तं लिखति।", en:"Vedark draws in red."},
+      {sa:"हिमया नीलं लिखति।", en:"Himaya draws in blue."},
       {sa:"मयूरः वर्षायां नृत्यति।", en:"The peacock dances in the rain."},
-      {sa:"अहम् अपि नृत्यामि।", en:"I also dance."}
+      {sa:"शुकः गवाक्षात् पश्यति।", en:"The parrot looks from the window."},
+      {sa:"अहम् अपि नृत्यामि।", en:"I also dance."},
+      {sa:"गृहे।", en:"At home."}
     ],
-    glossary:[["वर्षा","rain"],["वेदार्कः","Vedark"],["ऋषिका","Rishika"],["चित्रम्","picture"],["लिखतः","the two draw"],["बहवः","many"],["गवाक्षः","window"]],
+    glossary:[["वर्षा","rain"],["वेदार्कः","Vedark"],["हिमया","Himaya"],["चित्रम्","picture"],["लिखतः","the two draw"],["बहवः","many"],["गवाक्षः","window"]],
     questions:[
       {q:"अद्य किं अस्ति?",opts:["हिमम्","वर्षा","चन्द्रः"],a:1, audio:"वर्षा"},
-      {q:"के चित्रं लिखतः?",opts:["अर्जुनः च शुकः च","वेदार्कः च ऋषिका च","मण्डूकः च सिंहः च"],a:1, audio:"वेदार्कः च ऋषिका च"},
+      {q:"के चित्रं लिखतः?",opts:["अर्जुनः च शुकः च","वेदार्कः च हिमया च","मण्डूकः च सिंहः च"],a:1, audio:"वेदार्कः च हिमया च"},
       {q:"मयूरः कुत्र नृत्यति?",opts:["गृहे","वर्षायाम्","नौकायाम्"],a:1, audio:"वर्षायाम्"}
     ],
     shuka:'Indoor dancing still counts. I checked the rules. I wrote the rules. I am the rules.'
   }
 ];
+
+const WORD_MEANINGS={
+  'नमस्ते':'hello','नमस्कारः':'respectful hello','धन्यवादः':'thank you','आम्':'yes','न':'not / no','तु':'but','केवलं':'only',
+  'अपि':'also / too','च':'and','हि':'indeed','वा':'or','इव':'like','अधुना':'now','अद्य':'today','अत्र':'here','तत्र':'there',
+  'अन्ते':'at the end','उपरि':'on / above','अधः':'under','इदं':'this','तत्':'that','एतत्':'this here',
+  'अहं':'I','अहम्':'I','त्वं':'you','त्वम्':'you','सः':'he','सा':'she','तौ':'those two','ते':'they','वयम्':'we','द्वे':'the two (girls)',
+  'मम':'my / of me','स्वस्य':'his own','अस्ति':'is','अस्मि':'I am','असि':'you are','सन्ति':'they are','स्मः':'we are',
+  'नाम':'name','वेदार्कः':'Vedark','हिमया':'Himaya','हिमयायाः':'of Himaya','आर्षेणा':'Aarshena','अर्जुनः':'Arjun',
+  'शुकः':'parrot (Shuka)','मयूरः':'peacock (Mayura)','मयूराय':'to the peacock','काकः':'crow','वानरः':'monkey',
+  'मण्डूकः':'frog','अजः':'goat','अजौ':'two goats','मत्स्यः':'fish','मत्स्याः':'fishes','सिंहः':'lion',
+  'उद्यानम्':'garden','उद्याने':'in the garden','वनम्':'forest','वने':'in the forest','गृहम्':'home','गृहे':'at home',
+  'सरस्':'lake','सरः':'lake','सरसि':'in the lake','नदी':'river','नद्याः':'of the river','सेतुः':'bridge','सेतौ':'on the bridge',
+  'वृक्षः':'tree','वृक्षे':'in/on the tree','आकाशः':'sky','आकाशे':'in the sky','भूमिः':'ground','भूमौ':'on the ground',
+  'जलम्':'water','जलं':'water','जले':'in the water','घटः':'pot','घटे':'in the pot','मेजे':'on the table',
+  'गवाक्षः':'window','गवाक्षात्':'from the window','कक्षा':'class','कक्षायां':'in class','चतुर्थ्यां':'in the fourth (class)',
+  'पुष्पाणि':'flowers','आम्रम्':'mango','आम्रं':'mango','आम्राणि':'mangoes','आम्रस्य':'of the mango',
+  'पद्मम्':'lotus','पद्मं':'lotus','पद्मस्य':'of the lotus','मोदकः':'sweet','मोदकं':'sweet',
+  'टोपिः':'cap','टोपिं':'cap','टोपेः':'of the cap','पताका':'kite','पताकां':'kite','रज्जुः':'string','रज्जुं':'string',
+  'चित्रम्':'picture','चित्रं':'picture','वर्षा':'rain','वर्षायां':'in the rain','वर्षायाम्':'in the rain',
+  'पञ्च':'five','नव':'nine','दश':'ten','एकं':'one','एकः':'one (boy)','एका':'one (girl)','द्वौ':'two (boys)',
+  'अल्पं':'a little','बहवः':'many','तनुः':'thin','प्रथमः':'first','अपरः':'the other',
+  'पीतम्':'yellow','पीतं':'yellow','पीता':'yellow (girl form)','रक्तम्':'red','रक्तं':'red','नीलम्':'blue','नीलं':'blue',
+  'हरितः':'green','सुन्दरम्':'beautiful','सुन्दरं':'beautiful','मधुरम्':'sweet-tasting','शान्तम्':'calm','शान्तं':'calm',
+  'तृषितः':'thirsty','हृष्टः':'happy','धूम्रः':'grey','राजा':'king',
+  'क्रीडामि':'I play','क्रीडतः':'the two play','पश्यति':'sees / looks','गायामि':'I sing','गायति':'sings','गायतः':'the two sing',
+  'वदति':'says','वदतः':'the two say','हसति':'laughs','हसतः':'the two laugh','नृत्यति':'dances',
+  'ददाति':'gives','गृह्णाति':'takes / holds','खादति':'eats','पिबति':'drinks','धारयति':'wears',
+  'उपविशति':'sits','पतति':'falls','पततः':'the two fall','क्षिपति':'throws','चालयति':'flies (a kite)','उड्डयते':'flies',
+  'आगच्छति':'comes','गच्छामि':'I go','गच्छावः':'let us two go','मिलतः':'the two meet','कलहतः':'the two quarrel',
+  'कम्पते':'shakes','गणयति':'counts','लिखति':'draws / writes','लिखतः':'the two draw','आनयति':'brings',
+  'इच्छामि':'I want','इच्छति':'wants','क्रुध्यति':'gets angry','स्मयते':'smiles','गर्जति':'roars','वसतः':'the two live',
+  'वर्षीयः':'years old (boy)','वर्षीया':'years old (girl)','पञ्चवर्षीयः':'five years old','नववर्षीया':'nine years old','दशवर्षीया':'ten years old',
+  'रुचिः':'hobby','गानम्':'singing','मित्रम्':'friend','मित्राणि':'friends','भोजनं':'food','प्रियं':'favourite',
+  'सम्यक्':'good / well','धन्यवादः':'thank you','शान्तिः':'peace','कार्यं':'work','उद्यमेन':'by effort',
+  'ऊर्ध्वं':'upwards','पाषाणान्':'pebbles','पाषाणः':'pebble','अल्पं':'a little',
+  'कतिवर्षीयः':'how many years old (boy)','कतिवर्षीया':'how many years old (girl)','किम्':'what','कः':'who (boy)','का':'who (girl)',
+  'शुकं':'parrot (object)','घटं':'pot (object)','इच्छति':'wants','हसन्ति':'they laugh','क्रीडति':'plays','सिध्यति':'succeeds',
+  'कुत्र':'where','कीदृशः':'what kind','कीदृशी':'what kind (girl form)','स्तः':'the two are','तस्य':'his',
+  'वर्णाः':'colours','नृत्यामि':'I dance','वायुः':'wind','मन्दः':'slow / gentle','चन्द्रः':'moon','निम्नं':'downwards',
+  'गणकः':'counter','भक्षकः':'eater','नीलः':'blue','पीतः':'yellow','रक्तः':'red'
+};
+
+function saTokens(text){
+  return String(text||'').replace(/[“”"‘’]/g,' ').split(/[\s,।॥.!?—\-:;]+/).map(w=>w.trim()).filter(w=>/[\u0900-\u097F]/.test(w));
+}
+function meaningOf(word){
+  if(WORD_MEANINGS[word]) return WORD_MEANINGS[word];
+  const cut=word.replace(/ः$/,'').replace(/म्$/,'म्');
+  if(WORD_MEANINGS[cut]) return WORD_MEANINGS[cut];
+  if(WORD_MEANINGS[word+'ः']) return WORD_MEANINGS[word+'ः'];
+  return '';
+}
+function fullGlossary(story){
+  const seen=new Set(), out=[];
+  function add(w,m){
+    if(!w || seen.has(w) || !m) return;
+    seen.add(w); out.push([w,m]);
+  }
+  (story.glossary||[]).forEach(([w,m])=>add(w,m));
+  saTokens(story.text).forEach(w=>add(w, meaningOf(w) || w));
+  return out;
+}
+function wordByWord(sa){
+  return saTokens(sa).map(w=>{
+    const m=meaningOf(w);
+    return m ? (w+' = '+m) : w;
+  }).join('  ·  ');
+}
 
 const SPEAK_PHRASES={
   namaste:[
@@ -1064,7 +1164,8 @@ function pickSanskritVoice(){
     else if(/hindi|हिन्दी|devanagari/.test(name)) n=female?185:65;
     else if(lang.startsWith('en-in') && female) n=45;
     else if(female) n=20;
-    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 50);
+    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 40);
+    if(/swara|kalpana|google हिन्दी|google hindi/.test(name)) n+=40;
     return n;
   };
   let best=null, bestN=-1;
@@ -1121,7 +1222,7 @@ function toDevanagariSpeech(text){
     mama:'मम', nama:'नाम', namaste:'नमस्ते', namaskarah:'नमस्कारः',
     aham:'अहम्', asmi:'अस्मि', asi:'असि', asti:'अस्ति', tvam:'त्वम्',
     vayam:'वयम्', sah:'सः', dhanyavadah:'धन्यवादः', punarmilamah:'पुनर्मिलामः',
-    vedark:'वेदार्कः', vedarkah:'वेदार्कः', rishika:'ऋषिका', shukah:'शुकः', mayurah:'मयूरः'
+    vedark:'वेदार्कः', vedarkah:'वेदार्कः', himaya:'हिमया', aarshena:'आर्षेणा', arshena:'आर्षेणा', shukah:'शुकः', mayurah:'मयूरः'
   };
   return String(text||'').split(/(\s+)/).map(part=>{
     if(!part.trim() || /[\u0900-\u097F]/.test(part)) return part;
@@ -1137,16 +1238,38 @@ function englishPhonetic(dev){
   r=r.replace(/a/g,'ah').replace(/e/g,'eh').replace(/o/g,'oh');
   r=r.replace(/AA/g,'aah').replace(/AI/g,'ai').replace(/AU/g,'au').replace(/II/g,'ee').replace(/UU/g,'oo');
   r=r.replace(/([aeiouh]{1,3})(?=[bcdfghjklmnpqrstvwxyz])/g,'$1-');
-  return r.replace(/mama/g,'mah-mah').replace(/mum/g,'mah');
+  return r.replace(/mama/g,'mah-mah').replace(/mum/g,'mah-mah').replace(/asty/g,'as-ti').replace(/asmi/g,'as-mi');
+}
+function sanskritForTTS(text){
+  let t=toDevanagariSpeech(text);
+  t=t.replace(/ं(?=\s|$|[।॥,.!?;:])/g,'म्');
+  t=t.replace(/ः/g,'ह');
+  const RESP={
+    'अस्ति':'अस् ति','अस्मि':'अस् मि','असि':'अ सि','सन्ति':'सन् ति','स्मः':'स्म ह',
+    'नमस्ते':'न मस् ते','धन्यवादह':'धन्य वा द ह','पुनर्मिलामह':'पुनर् मिला मह',
+    'वेदार्कह':'वे दार् क ह','मयूरह':'म यू र ह','शुकह':'शु क ह',
+    'पञ्चवर्षीयह':'पञ्च वर्षीय ह','नववर्षीया':'नव वर्षी या','दशवर्षीया':'दश वर्षी या',
+    'क्रीडामि':'क्री डा मि','पश्यति':'प श्य ति','वदति':'व द ति','ददाति':'द दा ति',
+    'नृत्यति':'नृ त्य ति','गृह्णाति':'गृह्णा ति','खादति':'खा द ति','पिबति':'पि ब ति',
+    'उद्याने':'उद्या ने','कक्षायां':'कक्षा याम्','सरसि':'सर सि','जले':'ज ले',
+    'भूमौ':'भू मौ','आकाशे':'आका शे','वृक्षे':'वृ क्षे','गृहे':'गृ हे',
+    'मयूराय':'मयू राय','गवाक्षात्':'गवाक्षात्','उपरि':'उ प रि','अधुना':'अधु ना'
+  };
+  t=t.split(/(\s+)/).map(part=>{
+    const core=part.replace(/[।॥,.!?;:]+$/,'');
+    const tail=part.slice(core.length);
+    return (RESP[core]||core)+tail;
+  }).join('');
+  t=t.replace(/[।॥]/g,'। ');
+  t=t.replace(/([^\s,।])\s+(?=[^\s])/g,'$1, ');
+  return t.replace(/\s+/g,' ').trim();
 }
 function prepSanskritSpeech(text, indic){
   let t=String(text||'').replace(/\s+/g,' ').trim();
   if(!t) return t;
-  t=t.replace(/[।॥]/g,'। ');
   t=toDevanagariSpeech(t);
-  if(indic) t=t.replace(/ः/g,'ह');
-  else t=englishPhonetic(t);
-  return t;
+  if(indic) return sanskritForTTS(t);
+  return englishPhonetic(t);
 }
 function chunkSaSpeech(text){
   const t=String(text||'').replace(/\s+/g,' ').trim();
@@ -1181,10 +1304,10 @@ function audioCtx(){
   if(!Music.ctx){
     Music.ctx=new AC();
     Music.master=Music.ctx.createGain();
-    Music.master.gain.value=0.32;
+    Music.master.gain.value=0.78;
     Music.master.connect(Music.ctx.destination);
     Music.bg=Music.ctx.createGain();
-    Music.bg.gain.value=0.42;
+    Music.bg.gain.value=0.92;
     Music.bg.connect(Music.master);
     Music.sfx=Music.ctx.createGain();
     Music.sfx.gain.value=0.85;
@@ -1227,9 +1350,9 @@ function startBand(){
     Music.playing=true; Music.step=0;
     document.body.classList.add('music-on');
     const now=ctx.currentTime;
-    playAt(SA, now, 0.8, 'triangle', 0.16);
-    playAt(GA, now+0.1, 0.8, 'triangle', 0.1);
-    playAt(PA, now+0.18, 0.85, 'triangle', 0.12);
+    playAt(SA, now, 0.8, 'triangle', 0.42);
+    playAt(GA, now+0.1, 0.8, 'triangle', 0.28);
+    playAt(PA, now+0.18, 0.85, 'triangle', 0.32);
     Music.nextTime=now+1.1;
     (function pump(){
       if(!Music.playing || !state.musicOn || !Music.ctx) return;
@@ -1237,7 +1360,7 @@ function startBand(){
       while(Music.nextTime < t+1.6){
         const note=TUNE[Music.step%TUNE.length];
         const f=note[0], beats=note[1];
-        if(f) playAt(f, Music.nextTime, Math.max(0.2, beats*0.55), 'triangle', 0.16, Music.bg);
+        if(f) playAt(f, Music.nextTime, Math.max(0.2, beats*0.55), 'triangle', 0.42, Music.bg);
         Music.step++;
         Music.nextTime+=beats*0.62;
       }
@@ -1277,7 +1400,7 @@ function ensureMusic(e){
 }
 function applyBgGain(){
   if(!Music.bg || !Music.ctx) return;
-  const target = Music.micMute ? 0.001 : (Music.speechOn ? 0.08 : 0.42);
+  const target = Music.micMute ? 0.001 : (Music.speechOn ? 0.18 : 0.92);
   Music.bg.gain.cancelScheduledValues(Music.ctx.currentTime);
   Music.bg.gain.setTargetAtTime(target, Music.ctx.currentTime, 0.05);
 }
@@ -1355,12 +1478,12 @@ function pumpSpeak(my){
   const voice=pickSanskritVoice();
   const indic=!!(voice && isIndicVoice(voice));
   const u=new SpeechSynthesisUtterance(prepSanskritSpeech(Speak.queue.shift(), indic));
-  u.lang = indic ? ((voice.lang||'hi-IN')) : (voice && (voice.lang||'').toLowerCase().startsWith('en-in') ? 'en-IN' : 'hi-IN');
-  u.rate = Math.max(0.45, Math.min(0.92, Speak.rate));
-  u.pitch = 1.18;
-  if(voice && (indic || !cachedVoices.some(isIndicVoice))) u.voice=voice;
-  u.onend=()=>pumpSpeak(my);
-  u.onerror=()=>pumpSpeak(my);
+  u.lang = 'hi-IN';
+  u.rate = Math.max(0.42, Math.min(0.72, Speak.rate));
+  u.pitch = 1.08;
+  if(voice) u.voice=voice;
+  u.onend=()=>setTimeout(()=>pumpSpeak(my), 280);
+  u.onerror=()=>setTimeout(()=>pumpSpeak(my), 80);
   try{ window.speechSynthesis.speak(u); }
   catch(e){ pumpSpeak(my); }
 }
@@ -1478,7 +1601,7 @@ const STORY_LEVELS=LEVELS.filter(m=>m.level);
 const state = {
   current:'namaste',
   done:new Set(),
-  rate:0.82,
+  rate:0.62,
   justCleared:null,
   lockHint:null,
   confirmReset:false,
@@ -1495,7 +1618,7 @@ function loadProgress(){
     if(state.done.size && !state.done.has('namaste')) state.done.add('namaste');
     if(d.current && LEVELS.some(m=>m.id===d.current)) state.current=d.current;
     if(typeof d.locksOn==='boolean') state.locksOn=d.locksOn;
-    if(typeof d.rate==='number' && d.rate>0) state.rate=d.rate;
+    if(typeof d.rate==='number' && d.rate>0) state.rate = d.rate>=0.75 ? 0.64 : Math.min(d.rate, 0.64);
     if(typeof d.musicOn==='boolean') state.musicOn=d.musicOn;
   }catch(e){}
 }
@@ -2029,6 +2152,8 @@ function renderSpeakAlong(card, phrases){
     row.appendChild(line);
     const en=document.createElement('div'); en.className='line-en'; en.textContent=ph.en;
     row.appendChild(en);
+    const wg=document.createElement('div'); wg.className='wordgloss'; wg.textContent=wordByWord(ph.sa);
+    if(wg.textContent) row.appendChild(wg);
     const btns=document.createElement('div'); btns.className='btnrow'; btns.style.marginTop='0';
     const hear=document.createElement('button'); hear.className='btn ghost'; hear.textContent='🔊 Hear';
     hear.onclick=()=>speak(ph.sa);
@@ -2134,11 +2259,7 @@ const SHUKA_NO=[
 ];
 const SHUKA_CHAT=['नमस्ते। अहं शुकः अस्मि।','अहं हरितः अस्मि।','मम प्रियं भोजनं मोदकः अस्ति।','वयं मित्राणि स्मः।','धन्यवादः।'];
 const MAYURA_CHAT=['नमस्ते। अहं मयूरः अस्मि।','अहं नृत्यामि।','वनं सुन्दरं अस्ति।','त्वं मित्रम् असि।','पुनर्मिलामः।'];
-function ottoSays(card, text){
-  const d=document.createElement('div'); d.className='otto';
-  d.innerHTML=`<strong>Shuka the parrot:</strong> ${text}`;
-  card.appendChild(d);
-}
+function ottoSays(){ /* no Otto / no Shuka commentary boxes */ }
 function lsrwRail(card){
   const d=document.createElement('div'); d.className='lsrw-rail';
   d.innerHTML=`
@@ -2668,7 +2789,7 @@ function renderKatha(root){
   if(story.act) actBox(card, story.act);
   phase(card,'L','1 👂 Listen','Play the whole passage. Get the gist first. Act along if you like — Sanskrit likes movers.');
   const listenRow=document.createElement('div'); listenRow.className='btnrow';
-  const speakStory=()=>speak(story.text.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.72));
+  const speakStory=()=>speak(story.text.replace(/\s+/g,' ').trim(), Math.min(state.rate, 0.55));
   const spkBtn=document.createElement('button'); spkBtn.className='btn'; spkBtn.textContent='🔊 Listen to the whole story';
   spkBtn.onclick=speakStory;
   listenRow.appendChild(spkBtn);
@@ -2705,9 +2826,9 @@ function renderKatha(root){
   hearRow.appendChild(hearAll);
   card.appendChild(hearRow);
   const panel=document.createElement('div'); panel.className='glossary-panel';
-  panel.innerHTML=`<h3>Word help</h3><p class="hint">For this story only. Read the passage first. Peek here if a word is stuck.</p>`;
+  panel.innerHTML=`<h3>Word help — every word</h3><p class="hint">Little words too: च = and, अपि = also, न = not. Endings like उद्याने mean <em>in</em> the garden, मयूराय means <em>to</em> the peacock.</p>`;
   const g=document.createElement('div'); g.className='glossary-grid';
-  story.glossary.forEach(([w,m])=>{
+  fullGlossary(story).forEach(([w,m])=>{
     const item=document.createElement('div'); item.className='glossary-item';
     const strong=document.createElement('strong'); strong.textContent=w;
     const en=document.createElement('span'); en.className='en'; en.textContent=' — '+m;
@@ -2935,12 +3056,12 @@ function render(){
   const slowBtn=document.createElement('button'); slowBtn.className='btn ghost'; slowBtn.type='button'; slowBtn.textContent='🐢 Slow';
   const normBtn=document.createElement('button'); normBtn.className='btn'; normBtn.type='button'; normBtn.textContent='🚶 Normal';
   function syncSpeed(){
-    const slow=state.rate<0.75;
+    const slow=state.rate<0.58;
     slowBtn.className='btn'+(slow?'':' ghost');
     normBtn.className='btn'+(slow?' ghost':'');
   }
-  slowBtn.onclick=()=>{ state.rate=0.55; syncSpeed(); saveProgress(); };
-  normBtn.onclick=()=>{ state.rate=0.82; syncSpeed(); saveProgress(); };
+  slowBtn.onclick=()=>{ state.rate=0.48; syncSpeed(); saveProgress(); };
+  normBtn.onclick=()=>{ state.rate=0.64; syncSpeed(); saveProgress(); };
   syncSpeed();
   const musicBtn=document.createElement('button');
   musicBtn.type='button';
