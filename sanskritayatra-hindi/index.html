@@ -1164,21 +1164,28 @@ function refreshVoices(){
 refreshVoices();
 if(window.speechSynthesis){
   window.speechSynthesis.onvoiceschanged = refreshVoices;
+  try{ window.speechSynthesis.addEventListener('voiceschanged', refreshVoices); }catch(e){}
+  setTimeout(refreshVoices, 250);
+  setTimeout(refreshVoices, 900);
 }
 function isIndicVoice(v){
   const lang=(v.lang||'').toLowerCase();
   const name=(v.name||'').toLowerCase();
   return lang.startsWith('sa') || lang.startsWith('hi') || /hindi|हिन्दी|devanagari|sanskrit/.test(name);
 }
+function isGoogleVoice(v){
+  return /google/i.test((v&&v.name)||'');
+}
 function isFemaleVoice(v){
   const lang=(v.lang||'').toLowerCase();
   const name=(v.name||'').toLowerCase();
-  if(/hemant|ravi|rishi|kumar|david|mark|george|daniel|guy|male|man\b/.test(name)) return false;
+  if(/hemant|ravi|rishi|prabhat|aarav|kumar|david|mark|george|daniel|guy|male|man\b/.test(name)) return false;
   if((lang.startsWith('hi') || lang.startsWith('sa')) && /google/.test(name)) return true;
   return /swara|kalpana|heera|neerja|vaani|vani|veena|aditi|shruti|ananya|pallavi|lekha|female|woman|girl|zira|samantha|kendra|aria|natural/.test(name)
     || /google हिन्दी|google hindi/.test(name);
 }
 function pickSanskritVoice(){
+  refreshVoices();
   const score=v=>{
     const lang=(v.lang||'').toLowerCase();
     const name=(v.name||'').toLowerCase();
@@ -1195,7 +1202,8 @@ function pickSanskritVoice(){
     else if(lang.startsWith('en-in') && female) n=80;
     else if(lang.startsWith('en-in')) n=50;
     else if(female) n=20;
-    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 25);
+    if(hindi && female && v.localService) n+=12;
+    if(/hemant|ravi|prabhat|male/.test(name)) n=Math.min(n, 25);
     return n;
   };
   let best=null, bestN=-1;
@@ -1302,22 +1310,23 @@ function speakableRoman(text){
   r=r.replace(/\bmum\b/g,'mama');
   return r;
 }
-function keepSanskritSchwa(s){
+function keepSanskritSchwa(s, style){
   const CONS=/[\u0915-\u0939\u0958-\u095F]/;
   const SKIP=/[\u093A-\u094D\u0901-\u0903\u093C\u0962\u0963]/;
+  const mark=style==='vowel'?'अ':'्अ';
   const chars=Array.from(String(s||''));
   let out='';
   for(let i=0;i<chars.length;i++){
     const ch=chars[i], next=chars[i+1]||'';
     if(CONS.test(ch) && !SKIP.test(next) && (!next || CONS.test(next) || /[\s।॥.,!?;:]/.test(next))){
-      out+=ch+'्अ';
+      out+=ch+mark;
     } else {
       out+=ch;
     }
   }
   return out;
 }
-function hindiSpeechFixes(dev){
+function speechNameFixes(dev){
   let d=String(dev||'');
   d=d.replace(/ऋषिका/g,'आर्षेणा');
   d=d.replace(/हिमया/g,'हिमाया');
@@ -1325,13 +1334,14 @@ function hindiSpeechFixes(dev){
   d=d.replace(/गृह्णाति/g,'गृहनति');
   d=d.replace(/सिध्यन्ति/g,'सिद्ध्यन्ति');
   d=d.replace(/न हि/g,'नहि');
-  d=keepSanskritSchwa(d);
-  d=d.replace(/ः/g,'ह');
   return d;
 }
 function prepSanskritSpeech(text, voice){
-  if(voice && isIndicVoice(voice)) return hindiSpeechFixes(toDevanagariSpeech(text));
-  return speakableRoman(text);
+  if(!voice || !isIndicVoice(voice)) return speakableRoman(text);
+  let d=speechNameFixes(toDevanagariSpeech(text));
+  d=keepSanskritSchwa(d, isGoogleVoice(voice) ? 'virama' : 'vowel');
+  d=d.replace(/ः/g,'ह');
+  return d;
 }
 function chunkSaSpeech(text){
   const t=String(text||'').replace(/\s+/g,' ').trim();
@@ -1339,17 +1349,17 @@ function chunkSaSpeech(text){
   const parts=t.split(/[।॥.!?]+/).map(s=>s.trim()).filter(Boolean);
   const out=[];
   parts.forEach(s=>{
-    if(s.length<=180){ out.push(s); return; }
+    if(s.length<=140){ out.push(s); return; }
     let piece='';
     s.split(/\s+/).forEach(w=>{
-      if(piece && (piece+' '+w).length>180){ out.push(piece); piece=w; }
+      if(piece && (piece+' '+w).length>140){ out.push(piece); piece=w; }
       else piece=piece?piece+' '+w:w;
     });
     if(piece) out.push(piece);
   });
   return out.length?out:[t];
 }
-const Speak={queue:[], token:0, onend:null, rate:0.82};
+const Speak={queue:[], token:0, onend:null, rate:0.82, utterance:null, watch:null};
 
 const Music={ctx:null, master:null, bg:null, sfx:null, playing:false, timer:null, step:0, nextTime:0, speechOn:false, sfxDuckTimer:null, micMute:false};
 const SA=261.63, RE=293.66, GA=329.63, MA=349.23, PA=392.00, DHA=440.00, NI=493.88, SA2=523.25;
@@ -1519,37 +1529,76 @@ function playSfx(kind){
     }
   });
 }
+function stopSpeakWatch(){
+  if(Speak.watch){ try{ clearInterval(Speak.watch); }catch(e){} Speak.watch=null; }
+}
+function startSpeakWatch(my){
+  stopSpeakWatch();
+  Speak.watch=setInterval(()=>{
+    if(Speak.token!==my){ stopSpeakWatch(); return; }
+    try{
+      if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+    }catch(e){}
+  }, 1000);
+}
 function stopSpeaking(){
   Speak.token++;
   Speak.queue=[];
   Speak.onend=null;
+  Speak.utterance=null;
+  stopSpeakWatch();
   try{ if(Speak.audio){ Speak.audio.onended=null; Speak.audio.onerror=null; Speak.audio.pause(); Speak.audio.src=''; Speak.audio=null; } }catch(e){}
   try{ window.speechSynthesis.cancel(); }catch(e){}
   Music.speechOn=false;
   applyBgGain();
 }
-function pumpSpeak(my){
+function bindUtteranceVoice(u, voice){
+  if(!voice) return;
+  u.voice=voice;
+  u.lang=voice.lang || (isIndicVoice(voice)?'hi-IN':'en-IN');
+}
+function pumpSpeak(my, retryRaw){
   if(Speak.token!==my) return;
   try{ if(window.speechSynthesis.paused) window.speechSynthesis.resume(); }catch(e){}
-  if(!Speak.queue.length){
+  if(!retryRaw && !Speak.queue.length){
+    stopSpeakWatch();
+    Speak.utterance=null;
     Music.speechOn=false;
     applyBgGain();
     const cb=Speak.onend; Speak.onend=null;
     if(cb) cb();
     return;
   }
+  const raw=retryRaw || Speak.queue.shift();
   const voice=pickSanskritVoice();
   const indic=voice && isIndicVoice(voice);
-  const said=prepSanskritSpeech(Speak.queue.shift(), voice);
+  const said=retryRaw ? speakableRoman(raw) : prepSanskritSpeech(raw, voice);
   const u=new SpeechSynthesisUtterance(said);
-  u.lang = indic ? (voice.lang || 'hi-IN') : ((voice && voice.lang) || 'en-IN');
-  u.rate = Math.max(0.62, Math.min(1.0, Speak.rate));
-  u.pitch = indic ? 1.0 : 1.08;
-  if(voice) u.voice=voice;
-  u.onend=()=>setTimeout(()=>pumpSpeak(my), 80);
-  u.onerror=()=>setTimeout(()=>pumpSpeak(my), 80);
+  Speak.utterance=u;
+  u.rate=Math.max(0.7, Math.min(1.0, Speak.rate));
+  u.pitch=1;
+  if(retryRaw){
+    bindUtteranceVoice(u, voice);
+    if(!indic) u.lang=(voice && voice.lang) || 'en-IN';
+  } else {
+    bindUtteranceVoice(u, voice);
+    if(!voice) u.lang='hi-IN';
+  }
+  startSpeakWatch(my);
+  u.onend=()=>setTimeout(()=>pumpSpeak(my), 120);
+  u.onerror=()=>{
+    if(Speak.token!==my) return;
+    if(!retryRaw && indic){
+      setTimeout(()=>pumpSpeak(my, raw), 140);
+      return;
+    }
+    setTimeout(()=>pumpSpeak(my), 120);
+  };
   try{ window.speechSynthesis.speak(u); }
-  catch(e){ pumpSpeak(my); }
+  catch(e){
+    if(!retryRaw && indic) setTimeout(()=>pumpSpeak(my, raw), 140);
+    else pumpSpeak(my);
+  }
 }
 function speakNow(text, rate, onend){
   stopSpeaking();
@@ -1560,7 +1609,7 @@ function speakNow(text, rate, onend){
   if(!Speak.queue.length){ if(onend) onend(); return; }
   Music.speechOn=true;
   applyBgGain();
-  setTimeout(()=>pumpSpeak(my), 60);
+  setTimeout(()=>pumpSpeak(my), 180);
 }
 function gardenMeaning(text){
   const raw=String(text||'').replace(/\s+/g,' ').trim();
@@ -1600,18 +1649,21 @@ function speak(text, rate, onend){
   try{
     if(!window.speechSynthesis){ return; }
     refreshVoices();
-    if(voicesReady && cachedVoices.length){
+    const ready=voicesReady && cachedVoices.length && cachedVoices.some(isIndicVoice);
+    if(ready){
       speakNow(text, rate, onend);
     } else {
       let attempts=0;
       const wait=setInterval(()=>{
         refreshVoices();
         attempts++;
-        if(voicesReady || attempts>12){
+        const gotHindi=cachedVoices.some(isIndicVoice);
+        const gotAny=voicesReady && cachedVoices.length;
+        if(gotHindi || (gotAny && attempts>8) || attempts>20){
           clearInterval(wait);
           speakNow(text, rate, onend);
         }
-      },150);
+      },200);
     }
   }catch(e){ console.warn('Speech not supported', e); }
 }
