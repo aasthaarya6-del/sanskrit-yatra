@@ -3,4 +3,8 @@ Thumbs.db
 *.log
 .vscode/
 .env
+.dev.vars
+workers/.dev.vars
+.wrangler/
+workers/.wrangler/
 node_modules/

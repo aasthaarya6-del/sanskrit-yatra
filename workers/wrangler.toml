@@ -1,0 +1,11 @@
+name = "sanskrit-yatra-sarvam"
+main = "sarvam-proxy.js"
+compatibility_date = "2026-08-01"
+
+# After this Worker is claimed on a real Cloudflare account:
+#   npx wrangler secret put SARVAM_API_KEY
+#   npx wrangler deploy
+# Never put the Sarvam key in this file or in sarvam.js.
+
+[vars]
+SARVAM_DICT_ID = "p_581e1a95"

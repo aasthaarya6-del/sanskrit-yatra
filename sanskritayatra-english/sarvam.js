@@ -1,31 +1,14 @@
-/* Sarvam AI — Hindi/Sanskrit voice, typing, and translation. */
+/* Sarvam AI — Hindi/Sanskrit voice, typing, and translation.
+   The API key lives in a Cloudflare Worker secret, never in this file. */
 (function (global) {
-  const KEY = 'sanskritayatra-sarvam-key';
-  const BUILTIN_KEY = 'sk_2itl400x_mQHV0pjBUk93LMJzYBuZvU3C';
-  const DICT_ID = 'p_581e1a95';
-  const BASE = 'https://api.sarvam.ai';
+  const BASE = 'https://sanskrit-yatra-sarvam.fluff-aluminum.workers.dev';
   const audioCache = new Map();
   const textCache = new Map();
   let gen = 0;
   let recStream = null;
   let rec = null;
 
-  function getKey() {
-    try {
-      const saved = (localStorage.getItem(KEY) || '').trim();
-      if (saved) return saved;
-    } catch (e) {}
-    return BUILTIN_KEY;
-  }
-  function setKey(v) {
-    const s = String(v || '').trim();
-    try {
-      if (s) localStorage.setItem(KEY, s);
-      else localStorage.removeItem(KEY);
-    } catch (e) {}
-    audioCache.clear();
-  }
-  function hasKey() { return !!getKey(); }
+  function hasKey() { return !!BASE; }
   function abort() { gen++; }
   function pace(rate) {
     const r = Number(rate);
@@ -89,10 +72,7 @@
     const my = gen;
     const res = await fetch(BASE + path, {
       method: 'POST',
-      headers: {
-        'api-subscription-key': getKey(),
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
     const data = await res.json().catch(() => ({}));
@@ -120,7 +100,6 @@
       output_audio_codec: 'mp3',
       speech_sample_rate: 24000
     };
-    if (DICT_ID) body.dict_id = DICT_ID;
     const data = await postJson('/text-to-speech', body);
     const b64 = (data.audios || []).join('');
     if (!b64) throw new Error('No audio');
@@ -177,7 +156,6 @@
     const my = gen;
     const res = await fetch(BASE + '/speech-to-text', {
       method: 'POST',
-      headers: { 'api-subscription-key': getKey() },
       body: fd
     });
     const data = await res.json().catch(() => ({}));
@@ -252,24 +230,16 @@
         btn: 'Sarvam',
         title: 'Sarvam AI — साफ़ उच्चारण और अनुवाद',
         help: 'Sarvam इस बगीचे में पहले से चालू है।',
-        ph: 'Sarvam API कुंजी चिपकाओ',
-        save: 'सहेजो',
-        clear: 'हटाओ',
         on: 'Sarvam आवाज़ चालू',
-        off: 'ब्राउज़र आवाज़',
-        bad: 'कुंजी काम नहीं आई।'
+        off: 'ब्राउज़र आवाज़'
       };
     }
     return {
       btn: 'Sarvam',
       title: 'Sarvam AI — clearer Sanskrit speech',
       help: 'Sarvam is already on in this garden.',
-      ph: 'Paste Sarvam API key',
-      save: 'Save',
-      clear: 'Remove',
       on: 'Sarvam voice on',
-      off: 'Browser voice',
-      bad: 'That key did not work.'
+      off: 'Browser voice'
     };
   }
 
@@ -395,8 +365,6 @@
   }
 
   global.Sarvam = {
-    getKey: getKey,
-    setKey: setKey,
     hasKey: hasKey,
     abort: abort,
     pace: pace,
