@@ -1177,7 +1177,7 @@ function isFemaleVoice(v){
   const name=(v.name||'').toLowerCase();
   if(/hemant|ravi|rishi|kumar|david|mark|george|daniel|guy|male|man\b/.test(name)) return false;
   if((lang.startsWith('hi') || lang.startsWith('sa')) && /google/.test(name)) return true;
-  return /swara|kalpana|heera|neerja|vaani|vani|veena|female|woman|girl|zira|samantha|kendra|aria|natural/.test(name)
+  return /swara|kalpana|heera|neerja|vaani|vani|veena|aditi|shruti|ananya|pallavi|lekha|female|woman|girl|zira|samantha|kendra|aria|natural/.test(name)
     || /google हिन्दी|google hindi/.test(name);
 }
 function pickSanskritVoice(){
@@ -1185,15 +1185,19 @@ function pickSanskritVoice(){
     const lang=(v.lang||'').toLowerCase();
     const name=(v.name||'').toLowerCase();
     const female=isFemaleVoice(v);
+    const hindi=lang.startsWith('hi') || /hindi|हिन्दी/.test(name);
+    const sanskrit=lang.startsWith('sa') || /sanskrit|संस्कृत/.test(name);
     let n=0;
-    if(lang.startsWith('en-in') && female) n=220;
-    else if(lang.startsWith('en-in')) n=170;
-    else if(lang.startsWith('en') && female) n=150;
-    else if((lang.startsWith('hi') || /hindi|हिन्दी/.test(name)) && female) n=120;
-    else if(lang.startsWith('sa') && female) n=110;
-    else if(female) n=70;
-    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 30);
-    if(/google uk english|samantha|zira|aria/.test(name)) n+=20;
+    if(sanskrit && female) n=320;
+    else if(hindi && female && /google/.test(name)) n=300;
+    else if(hindi && female && /swara|kalpana|heera|vaani|vani|neerja/.test(name)) n=290;
+    else if(hindi && female) n=270;
+    else if(sanskrit) n=240;
+    else if(hindi) n=200;
+    else if(lang.startsWith('en-in') && female) n=80;
+    else if(lang.startsWith('en-in')) n=50;
+    else if(female) n=20;
+    if(/hemant|ravi|male/.test(name)) n=Math.min(n, 25);
     return n;
   };
   let best=null, bestN=-1;
@@ -1250,7 +1254,7 @@ function toDevanagariSpeech(text){
     mama:'मम', nama:'नाम', namaste:'नमस्ते', namaskarah:'नमस्कारः',
     aham:'अहम्', asmi:'अस्मि', asi:'असि', asti:'अस्ति', tvam:'त्वम्',
     vayam:'वयम्', sah:'सः', dhanyavadah:'धन्यवादः', punarmilamah:'पुनर्मिलामः',
-    vedark:'वेदार्कः', vedarkah:'वेदार्कः', himaya:'हिमया', aarshena:'आर्षेणा', arshena:'आर्षेणा', shukah:'शुकः', mayurah:'मयूरः'
+    vedark:'वेदार्कः', vedarkah:'वेदार्कः', himaya:'हिमाया', himaaya:'हिमाया', aarshena:'आर्षेणा', arshena:'आर्षेणा', shukah:'शुकः', mayurah:'मयूरः'
   };
   return String(text||'').split(/(\s+)/).map(part=>{
     if(!part.trim() || /[\u0900-\u097F]/.test(part)) return part;
@@ -1300,7 +1304,35 @@ function speakableRoman(text){
   r=r.replace(/\bmum\b/g,'mama');
   return r;
 }
-function prepSanskritSpeech(text){
+function keepSanskritSchwa(s){
+  const CONS=/[\u0915-\u0939\u0958-\u095F]/;
+  const SKIP=/[\u093A-\u094D\u0901-\u0903\u093C\u0962\u0963]/;
+  const chars=Array.from(String(s||''));
+  let out='';
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i], next=chars[i+1]||'';
+    if(CONS.test(ch) && !SKIP.test(next) && (!next || CONS.test(next) || /[\s।॥.,!?;:]/.test(next))){
+      out+=ch+'्अ';
+    } else {
+      out+=ch;
+    }
+  }
+  return out;
+}
+function hindiSpeechFixes(dev){
+  let d=String(dev||'');
+  d=d.replace(/ऋषिका/g,'आर्षेणा');
+  d=d.replace(/हिमया/g,'हिमाया');
+  d=d.replace(/वेदार्क(?!ः)/g,'वेदार्कः');
+  d=d.replace(/गृह्णाति/g,'गृहनति');
+  d=d.replace(/सिध्यन्ति/g,'सिद्ध्यन्ति');
+  d=d.replace(/न हि/g,'नहि');
+  d=keepSanskritSchwa(d);
+  d=d.replace(/ः/g,'ह');
+  return d;
+}
+function prepSanskritSpeech(text, voice){
+  if(voice && isIndicVoice(voice)) return hindiSpeechFixes(toDevanagariSpeech(text));
   return speakableRoman(text);
 }
 function chunkSaSpeech(text){
@@ -1509,11 +1541,12 @@ function pumpSpeak(my){
     return;
   }
   const voice=pickSanskritVoice();
-  const said=prepSanskritSpeech(Speak.queue.shift());
+  const indic=voice && isIndicVoice(voice);
+  const said=prepSanskritSpeech(Speak.queue.shift(), voice);
   const u=new SpeechSynthesisUtterance(said);
-  u.lang = (voice && voice.lang) || 'en-IN';
-  u.rate = Math.max(0.6, Math.min(1.05, Speak.rate));
-  u.pitch = 1.08;
+  u.lang = indic ? (voice.lang || 'hi-IN') : ((voice && voice.lang) || 'en-IN');
+  u.rate = Math.max(0.62, Math.min(1.0, Speak.rate));
+  u.pitch = indic ? 1.0 : 1.08;
   if(voice) u.voice=voice;
   u.onend=()=>setTimeout(()=>pumpSpeak(my), 80);
   u.onerror=()=>setTimeout(()=>pumpSpeak(my), 80);
