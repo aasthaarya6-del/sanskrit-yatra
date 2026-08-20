@@ -1336,10 +1336,25 @@ function speechNameFixes(dev){
   d=d.replace(/न हि/g,'नहि');
   return d;
 }
+function speakBindi(dev){
+  let s=String(dev||'');
+  s=s.replace(/[ंँ](?=[कखगघङ])/g,'ङ्');
+  s=s.replace(/[ंँ](?=[चछजझञ])/g,'ञ्');
+  s=s.replace(/[ंँ](?=[टठडढण])/g,'ण्');
+  s=s.replace(/[ंँ](?=[तथदधन])/g,'न्');
+  s=s.replace(/[ंँ](?=[पफबभम])/g,'म्');
+  s=s.replace(/[ंँ](?=[यरलवशषसह])/g,'म्');
+  s=s.replace(/[ंँ](?=[\s।॥.,!?;:]|$)/g,'\uE000');
+  s=s.replace(/म्(?=[\s।॥.,!?;:]|$)/g,'\uE000');
+  s=s.replace(/[ंँ]/g,'\uE000');
+  return s;
+}
 function prepSanskritSpeech(text, voice){
   if(!voice || !isIndicVoice(voice)) return speakableRoman(text);
   let d=speechNameFixes(toDevanagariSpeech(text));
+  d=speakBindi(d);
   d=keepSanskritSchwa(d, isGoogleVoice(voice) ? 'virama' : 'vowel');
+  d=d.replace(/\uE000/g,'म');
   d=d.replace(/ः/g,'ह');
   return d;
 }
