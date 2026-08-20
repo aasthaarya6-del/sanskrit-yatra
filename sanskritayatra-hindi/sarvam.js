@@ -2,6 +2,7 @@
 (function (global) {
   const KEY = 'sanskritayatra-sarvam-key';
   const BUILTIN_KEY = 'sk_2itl400x_mQHV0pjBUk93LMJzYBuZvU3C';
+  const DICT_ID = 'p_581e1a95';
   const BASE = 'https://api.sarvam.ai';
   const audioCache = new Map();
   const textCache = new Map();
@@ -33,6 +34,57 @@
     return 1;
   }
 
+  /* Hindi TTS reads Sanskrit better after visarga/anusvara/ऋ tweaks.
+     Spaces only on a few names — never between every word. */
+  const SAY = {
+    'नमस्ते': 'नमस्ते',
+    'धन्यवादः': 'धन्यवाद',
+    'धन्यवादह': 'धन्यवाद',
+    'वेदार्कः': 'वेदार्क',
+    'वेदार्कह': 'वेदार्क',
+    'आर्षेणा': 'आरशेना',
+    'मयूरः': 'मयूर',
+    'मयूरह': 'मयूर',
+    'शुकः': 'शुक',
+    'शुकह': 'शुक',
+    'अर्जुनः': 'अर्जुन',
+    'अर्जुनह': 'अर्जुन',
+    'हिमया': 'हिमया',
+    'अस्ति': 'अस्ति',
+    'अस्मि': 'अस्मि',
+    'पुनर्मिलामः': 'पुनर मिलाम',
+    'पुनर्मिलामह': 'पुनर मिलाम',
+    'नमस्कारः': 'नमस्कार',
+    'संस्कृत': 'संस्कृत',
+    'यात्रा': 'यात्रा',
+    'गच्छामि': 'गच्छामि',
+    'पठामि': 'पठामि',
+    'खादामि': 'खादामि',
+    'उद्याने': 'उद्याने',
+    'कक्षायां': 'कक्षायाम',
+    'पितृव्यः': 'पितृव्य',
+    'मातुलः': 'मातुल',
+    'भगिनी': 'भगिनी',
+    'एकविंशतिः': 'एक विंशति'
+  };
+
+  function speakable(text) {
+    let t = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!t) return t;
+    t = t.split(/(\s+)/).map(function (part) {
+      const core = part.replace(/[।॥,.!?;:]+$/g, '');
+      const tail = part.slice(core.length);
+      return (SAY[core] || core) + tail;
+    }).join('');
+    t = t.replace(/ः/g, 'ह');
+    t = t.replace(/ं(?=\s|$|[।॥,.!?;:])/g, 'म्');
+    t = t.replace(/ऋ/g, 'रि');
+    t = t.replace(/ॠ/g, 'री');
+    t = t.replace(/ज्ञ/g, 'ग्य');
+    t = t.replace(/[।॥]/g, '। ');
+    return t.replace(/\s+/g, ' ').trim();
+  }
+
   async function postJson(path, body) {
     const my = gen;
     const res = await fetch(BASE + path, {
@@ -53,20 +105,23 @@
   }
 
   async function tts(text, rate) {
-    const t = String(text || '').replace(/\s+/g, ' ').trim();
+    const t = speakable(text);
     if (!t) return '';
     const p = pace(rate);
     const cacheKey = p + '\n' + t;
     if (audioCache.has(cacheKey)) return audioCache.get(cacheKey);
-    const data = await postJson('/text-to-speech', {
+    const body = {
       text: t.slice(0, 2400),
       language_code: 'hi-IN',
       model: 'bulbul:v3',
       speaker: 'priya',
       pace: p,
+      temperature: 0.3,
       output_audio_codec: 'mp3',
       speech_sample_rate: 24000
-    });
+    };
+    if (DICT_ID) body.dict_id = DICT_ID;
+    const data = await postJson('/text-to-speech', body);
     const b64 = (data.audios || []).join('');
     if (!b64) throw new Error('No audio');
     const bin = atob(b64);

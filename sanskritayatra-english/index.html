@@ -964,7 +964,7 @@ const SPEAK_PHRASES={
     {sa:"सहस्रम्।", en:"One thousand."}
   ],
   kutumbam:[
-    {sa:"अयम् मम पिता।", en:"This is my father."},
+    {sa:"अयं मम पिता।", en:"This is my father."},
     {sa:"मम भगिनी अस्ति।", en:"I have a sister."},
     {sa:"कुटुम्बं महत् अस्ति।", en:"The family is big."},
     {sa:"मम मातुः नाम काव्या अस्ति।", en:"My mother’s name is Kavya."}
@@ -2811,7 +2811,7 @@ function renderKutumbam(root){
   renderRecap(root, 'kutumbam');
   const card=moduleShell(`${saHTML('कुटुम्बम्')} (Family)`,'Family words — tap to hear. Sanskrit loves special words for mother’s brother and father’s brother.');
   lsrwRail(card);
-  explainer(card, `<strong>Little gift:</strong> ${saHTML('पिता')} and ${saHTML('माता')} are easy cousins of “paternal” and “maternal” in English. ${saHTML('मातुलः')} is mother’s brother. ${saHTML('पितृव्यः')} is father’s brother.`);
+  explainer(card, `<strong>Little gift:</strong> ${saHTML('पिता')} and ${saHTML('माता')} are easy to remember. ${saHTML('मातुलः')} is mother’s brother (mama). ${saHTML('पितृव्यः')} is father’s brother (chacha).`);
   ottoSays(card, 'Every family has a talker. In this garden, it is me.');
   phase(card,'L','1 👂 Listen','Hear the family word. Pick the English.');
   renderListenAll(card, FAMILY.map(f=>f[0]));
@@ -2870,7 +2870,7 @@ function renderDhatu(root){
   renderRecap(root, 'dhatu');
   const card=moduleShell(`${glossHTML('धातवः','verb roots')}: go, read, eat`,'Three friendly verbs side by side. Watch the endings change for I / you / he.');
   lsrwRail(card);
-  explainer(card, `<strong>Good news:</strong> ${saHTML('गच्छति')}, ${saHTML('पठति')}, ${saHTML('खादति')} share a pattern. I = -āmi, you = -asi, he/she = -ati, we = -āmaḥ… Once you hear it, you can guess new verbs.`);
+  explainer(card, `<strong>Good news:</strong> ${saHTML('गच्छति')}, ${saHTML('पठति')}, ${saHTML('खादति')} share a pattern. I = ${saHTML('आमि')}, you = ${saHTML('असि')}, he/she = ${saHTML('अति')}, we = ${saHTML('आमः')}. Once you hear it, you can guess new verbs.`);
   ottoSays(card, 'English hides the ending inside “go / goes”. Sanskrit puts the ending on a flagpole and waves it. Helpful flagpole.');
   phase(card,'L','1 👂 Listen','Hear who is going, reading, eating.');
   renderListenAll(card, ['अहं गच्छामि','त्वं पठसि','सः खादति','वयम् गच्छामः','ते पठन्ति']);
