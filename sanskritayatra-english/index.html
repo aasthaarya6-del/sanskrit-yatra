@@ -1271,12 +1271,18 @@ function sanskritRoman(dev){
     if(ind[ch]){ out+=ind[ch]; continue; }
     if(cons[ch]){
       if(next==='्'){ out+=cons[ch]; i++; continue; }
-      if(mat[next]){ out+=cons[ch]+mat[next]; i++; continue; }
+      if(mat[next]){
+        const vis=chars[i+2]==='ः';
+        out+=cons[ch]+mat[next]+(vis?'h':'');
+        i+=vis?2:1;
+        continue;
+      }
       if(next==='ं'||next==='ँ'){ out+=cons[ch]+'am'; i++; continue; }
-      if(next==='ः'){ out+=cons[ch]+'a'; i++; continue; }
+      if(next==='ः'){ out+=cons[ch]+'ah'; i++; continue; }
       out+=cons[ch]+'a';
       continue;
     }
+    if(ch==='ः'){ out+='h'; continue; }
     if(ch==='।'||ch==='॥'){ out+=' '; continue; }
     if(/\s/.test(ch)) out+=' ';
     else if(/[.,!?;:]/.test(ch)) out+=ch;
@@ -1285,6 +1291,8 @@ function sanskritRoman(dev){
 }
 function speakableRoman(text){
   let r=sanskritRoman(toDevanagariSpeech(text));
+  r=r.replace(/vedaarkah/gi,'vedarkah').replace(/\bvedaarka\b/gi,'vedarkah').replace(/\bvedarka\b/gi,'vedarkah');
+  r=r.replace(/himayaa/gi,'himaya').replace(/himaaya/gi,'himaya');
   r=r.replace(/\bgrihnaati\b/g,'grihanati').replace(/\bgrihnati\b/g,'grihanati');
   r=r.replace(/\bkridami\b/g,'kreedaami');
   r=r.replace(/\bsidhyanti\b/g,'siddhyanti');
