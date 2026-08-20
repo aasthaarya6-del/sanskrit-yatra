@@ -1290,7 +1290,7 @@ function sanskritRoman(dev){
 function speakableRoman(text){
   let r=sanskritRoman(toDevanagariSpeech(text));
   r=r.replace(/vedaarkah/gi,'vedarkah').replace(/\bvedaarka\b/gi,'vedarkah').replace(/\bvedarka\b/gi,'vedarkah');
-  r=r.replace(/himayaa/gi,'himaya').replace(/himaaya/gi,'himaya');
+  r=r.replace(/\bhimayaa\b/gi,'himaaya').replace(/\bhimaya\b/gi,'himaaya');
   r=r.replace(/\bgrihnaati\b/g,'grihanati').replace(/\bgrihnati\b/g,'grihanati');
   r=r.replace(/\bkridami\b/g,'kreedaami');
   r=r.replace(/\bsidhyanti\b/g,'siddhyanti');
