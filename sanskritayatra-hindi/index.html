@@ -485,13 +485,13 @@ const SHLOKAS=[
     id:'udyama',
     title:'मेहनत से काम बनता है',
     kicker:'पंचतंत्र · मेहनत',
-    lines:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः ।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः ॥',
-    rom:'udyamena hi sidhyanti karyani na manorathaih\nna hi suptasya simhasya pravishanti mukhe mrigah',
-    speak:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।',
+    lines:'उद्यमेन हि सिद्ध्यन्ति कार्याणि न मनोरथैः ।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः ॥',
+    rom:'udyamena hi siddhyanti karyani na manorathaih\nna hi suptasya simhasya pravishanti mukhe mrigah',
+    speak:'उद्यमेन हि सिद्ध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।',
     en:'मेहनत से काम बनते हैं, सिर्फ़ चाहने से नहीं। सोए शेर के मुँह में हिरन खुद नहीं चले जाते।',
     moral:'सिर्फ़ सोचने से पानी नहीं मिलता। उठो, कोशिश करो — तब काम बनता है।',
-    chant:['उद्यमेन','हि','सिध्यन्ति','कार्याणि','न','मनोरथैः'],
-    missing:{q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','सिंहस्य'], a:0, audio:'कार्याणि'},
+    chant:['उद्यमेन','हि','सिद्ध्यन्ति','कार्याणि','न','मनोरथैः'],
+    missing:{q:'उद्यमेन हि सिद्ध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','सिंहस्य'], a:0, audio:'कार्याणि'},
     act:'पहली पंक्ति गाते हुए कदम बढ़ाओ। दूसरी पर सोए शेर बनो। खर्राटे मर्ज़ी से।'
   },
   {
@@ -675,7 +675,7 @@ const STORIES=[
     title:'प्यासा कौआ',
     blurb:'कौआ प्यासा है। घड़े में थोड़ा पानी है। कंकड़ डालो, पानी ऊपर आए।',
     shloka:'udyama',
-    act:'घड़े में कंकड़ डालने का नाटक। हर कंकड़ के बाद सिध्यन्ति बोलो। अंत में काल्पनिक कप पीओ।',
+    act:'घड़े में कंकड़ डालने का नाटक। हर कंकड़ के बाद सिद्ध्यन्ति बोलो। अंत में काल्पनिक कप पीओ।',
     text:`एकः काकः अस्ति। सः तृषितः अस्ति। सः घटं पश्यति। घटे अल्पं जलं अस्ति। काकः जलं न पिबति।
 
 काकः न केवलं इच्छति। सः पाषाणान् आनयति। सः पाषाणान् घटे क्षिपति। जलं ऊर्ध्वं आगच्छति। अधुना काकः जलं पिबति। सः हृष्टः अस्ति।`,
@@ -1261,20 +1261,54 @@ function toDevanagariSpeech(text){
     return romanToDevanagari(part) || part;
   }).join('');
 }
+function keepOpenA(s){
+  const chars=Array.from(s);
+  let out='';
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i], next=chars[i+1]||'';
+    const c=ch.charCodeAt(0);
+    const cons=(c>=0x0915&&c<=0x0939)||(c>=0x0958&&c<=0x095F);
+    const comb=next && ((next.charCodeAt(0)>=0x0900&&next.charCodeAt(0)<=0x0903)||next.charCodeAt(0)===0x093A||next.charCodeAt(0)===0x093B||(next.charCodeAt(0)>=0x093C&&next.charCodeAt(0)<=0x094F)||next.charCodeAt(0)===0x0962||next.charCodeAt(0)===0x0963);
+    if(cons && !comb) out+=ch+'्अ';
+    else out+=ch;
+  }
+  return out;
+}
+function sanskritRoman(dev){
+  const ind={'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ऋ':'ri','ए':'e','ऐ':'ai','ओ':'o','औ':'au'};
+  const cons={'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'n','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'n','ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','ळ':'l'};
+  const mat={'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','ृ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au'};
+  const chars=Array.from(String(dev||''));
+  let out='';
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i], next=chars[i+1]||'';
+    if(ind[ch]){ out+=ind[ch]; continue; }
+    if(cons[ch]){
+      if(next==='्'){ out+=cons[ch]; i++; continue; }
+      if(mat[next]){ out+=cons[ch]+mat[next]; i++; continue; }
+      if(next==='ं'||next==='ँ'){ out+=cons[ch]+'am'; i++; continue; }
+      if(next==='ः'){ out+=cons[ch]+'a'; i++; continue; }
+      out+=cons[ch]+'a';
+      continue;
+    }
+    if(ch==='।'||ch==='॥'){ out+=' '; continue; }
+    if(/\s/.test(ch)) out+=' ';
+    else if(/[.,!?;:]/.test(ch)) out+=ch;
+  }
+  return out.replace(/\s+/g,' ').trim();
+}
 function englishPhonetic(dev){
-  let r=foldSa(dev);
-  r=r.replace(/aa/g,'AA').replace(/ai/g,'AI').replace(/au/g,'AU').replace(/ii/g,'II').replace(/uu/g,'UU');
-  r=r.replace(/a/g,'ah').replace(/e/g,'eh').replace(/o/g,'oh');
-  r=r.replace(/AA/g,'aah').replace(/AI/g,'ai').replace(/AU/g,'au').replace(/II/g,'ee').replace(/UU/g,'oo');
-  r=r.replace(/([aeiouh]{1,3})(?=[bcdfghjklmnpqrstvwxyz])/g,'$1-');
-  return r.replace(/mama/g,'mah-mah').replace(/mum/g,'mah-mah').replace(/asty/g,'as-ti').replace(/asmi/g,'as-mi');
+  return sanskritRoman(dev);
 }
 function sanskritForTTS(text){
   let t=toDevanagariSpeech(text);
-  t=t.replace(/ं(?=\s|$|[।॥,.!?;:])/g,'म्');
-  t=t.replace(/ः/g,'ह');
+  t=t.replace(/(^|[\s।॥])न हि(?=[\s।॥]|$)/g,'$1नहि').replace(/गृह्णाति/g,'ग्रिहनाति').replace(/क्रीडामि/g,'करीडामि');
+  t=t.replace(/सिंहस्य/g,'सिम्हस्य').replace(/सिंह/g,'सिम्ह');
+  t=t.replace(/सिद्ध्यन्ति/g,'सिद्धयन्ति');
+  t=t.replace(/ः/g,'');
+  t=t.replace(/ऋ/g,'रि').replace(/ॠ/g,'री').replace(/ज्ञ/g,'ग्य');
   t=t.replace(/[।॥]/g,'। ');
-  return t.replace(/\s+/g,' ').trim();
+  return keepOpenA(t).replace(/\s+/g,' ').trim();
 }
 function prepSanskritSpeech(text, indic){
   let t=String(text||'').replace(/\s+/g,' ').trim();
@@ -3038,7 +3072,7 @@ function runChallenge(card){
     {topic:'धातवः', q:'"सः ___ आम्रम्।" (वह खाता है)', opts:['खादति','खादसि','खादामि'], a:0},
     {topic:'कथा', q:'“वेदार्कः और आम” में आम का रंग...', opts:['नीला','पीला','काला'], a:1},
     {topic:'कथा', q:'“शुक और मोदक” में शुक है...', opts:['मोर','तोता','मेंढक'], a:1},
-    {topic:'श्लोकाः', q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','पद्मानि'], a:0, audio:'कार्याणि'},
+    {topic:'श्लोकाः', q:'उद्यमेन हि सिद्ध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','पद्मानि'], a:0, audio:'कार्याणि'},
     {topic:'श्लोकाः', q:'पंचतंत्र पंक्ति “संहतिः कार्यसाधिका” किस बारे में है...', opts:['सोना','साथ रहना','मिठाई खाना'], a:1, audio:'संहतिः कार्यसाधिका'},
   ];
   const topicScores={};
@@ -3169,7 +3203,7 @@ function renderShlokah(root){
   });
   sectionLabel(card, 'बगीचे की जाँच ⭐');
   renderQuiz(card, [
-    {q:'“केवल इच्छा नहीं, मेहनत करो” किस श्लोक का अर्थ है...', opts:['उद्यमेन हि सिध्यन्ति…','प्रियवाक्यप्रदानेन…','नाभिषेको न संस्कारः…'], a:0, audio:'उद्यमेन हि सिध्यन्ति'},
+    {q:'“केवल इच्छा नहीं, मेहनत करो” किस श्लोक का अर्थ है...', opts:['उद्यमेन हि सिद्ध्यन्ति…','प्रियवाक्यप्रदानेन…','नाभिषेको न संस्कारः…'], a:0, audio:'उद्यमेन हि सिद्ध्यन्ति'},
     {q:'संहतिः का अर्थ है...', opts:['सोना','साथ रहना / एकता','पीली पतंग'], a:1, audio:'संहतिः'},
     {q:'मधुर वचन सबको सुखी करते हैं। वह श्लोक शुरू होता है...', opts:['आपत्काले','प्रियवाक्यप्रदानेन','उद्यमेन'], a:1, audio:'प्रियवाक्यप्रदानेन'},
     {q:'मुसीबत में साथ देने वाला सच्चा मित्र। सही पंक्ति?', opts:['यन्मित्रं मित्रमेव तत्','यन्मित्रं मोदकमेव तत्','यन्मित्रं सिंहमेव तत्'], a:0, audio:'यन्मित्रं मित्रमेव तत्'},

@@ -485,13 +485,13 @@ const SHLOKAS=[
     id:'udyama',
     title:'Work, don’t just wish',
     kicker:'Panchatantra · effort',
-    lines:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः ।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः ॥',
-    rom:'udyamena hi sidhyanti karyani na manorathaih\nna hi suptasya simhasya pravishanti mukhe mrigah',
-    speak:'उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।',
+    lines:'उद्यमेन हि सिद्ध्यन्ति कार्याणि न मनोरथैः ।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः ॥',
+    rom:'udyamena hi siddhyanti karyani na manorathaih\nna hi suptasya simhasya pravishanti mukhe mrigah',
+    speak:'उद्यमेन हि सिद्ध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।',
     en:'Work gets things done — not daydreams. Deer do not walk into a sleeping lion’s mouth.',
     moral:'Wishing for water does not fill the pot. Doing does. Get up and try.',
-    chant:['उद्यमेन','हि','सिध्यन्ति','कार्याणि','न','मनोरथैः'],
-    missing:{q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','सिंहस्य'], a:0, audio:'कार्याणि'},
+    chant:['उद्यमेन','हि','सिद्ध्यन्ति','कार्याणि','न','मनोरथैः'],
+    missing:{q:'उद्यमेन हि सिद्ध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','सिंहस्य'], a:0, audio:'कार्याणि'},
     act:'March on the spot while you chant the first line. Sleep-lion pose for the second. (Snore optional.)'
   },
   {
@@ -675,7 +675,7 @@ const STORIES=[
     title:'The clever crow',
     blurb:'A thirsty crow, a pot, and a pile of pebbles.',
     shloka:'udyama',
-    act:'Mime dropping pebbles into a pot. After each pebble say सिध्यन्ति (they succeed). Drink an imaginary cup at the end.',
+    act:'Mime dropping pebbles into a pot. After each pebble say सिद्ध्यन्ति (they succeed). Drink an imaginary cup at the end.',
     text:`एकः काकः अस्ति। सः तृषितः अस्ति। सः घटं पश्यति। घटे अल्पं जलं अस्ति। काकः जलं न पिबति।
 
 काकः न केवलं इच्छति। सः पाषाणान् आनयति। सः पाषाणान् घटे क्षिपति। जलं ऊर्ध्वं आगच्छति। अधुना काकः जलं पिबति। सः हृष्टः अस्ति।`,
@@ -1263,20 +1263,54 @@ function toDevanagariSpeech(text){
     return romanToDevanagari(part) || part;
   }).join('');
 }
+function keepOpenA(s){
+  const chars=Array.from(s);
+  let out='';
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i], next=chars[i+1]||'';
+    const c=ch.charCodeAt(0);
+    const cons=(c>=0x0915&&c<=0x0939)||(c>=0x0958&&c<=0x095F);
+    const comb=next && ((next.charCodeAt(0)>=0x0900&&next.charCodeAt(0)<=0x0903)||next.charCodeAt(0)===0x093A||next.charCodeAt(0)===0x093B||(next.charCodeAt(0)>=0x093C&&next.charCodeAt(0)<=0x094F)||next.charCodeAt(0)===0x0962||next.charCodeAt(0)===0x0963);
+    if(cons && !comb) out+=ch+'्अ';
+    else out+=ch;
+  }
+  return out;
+}
+function sanskritRoman(dev){
+  const ind={'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ऋ':'ri','ए':'e','ऐ':'ai','ओ':'o','औ':'au'};
+  const cons={'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'n','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'n','ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','ळ':'l'};
+  const mat={'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','ृ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au'};
+  const chars=Array.from(String(dev||''));
+  let out='';
+  for(let i=0;i<chars.length;i++){
+    const ch=chars[i], next=chars[i+1]||'';
+    if(ind[ch]){ out+=ind[ch]; continue; }
+    if(cons[ch]){
+      if(next==='्'){ out+=cons[ch]; i++; continue; }
+      if(mat[next]){ out+=cons[ch]+mat[next]; i++; continue; }
+      if(next==='ं'||next==='ँ'){ out+=cons[ch]+'am'; i++; continue; }
+      if(next==='ः'){ out+=cons[ch]+'a'; i++; continue; }
+      out+=cons[ch]+'a';
+      continue;
+    }
+    if(ch==='।'||ch==='॥'){ out+=' '; continue; }
+    if(/\s/.test(ch)) out+=' ';
+    else if(/[.,!?;:]/.test(ch)) out+=ch;
+  }
+  return out.replace(/\s+/g,' ').trim();
+}
 function englishPhonetic(dev){
-  let r=foldSa(dev);
-  r=r.replace(/aa/g,'AA').replace(/ai/g,'AI').replace(/au/g,'AU').replace(/ii/g,'II').replace(/uu/g,'UU');
-  r=r.replace(/a/g,'ah').replace(/e/g,'eh').replace(/o/g,'oh');
-  r=r.replace(/AA/g,'aah').replace(/AI/g,'ai').replace(/AU/g,'au').replace(/II/g,'ee').replace(/UU/g,'oo');
-  r=r.replace(/([aeiouh]{1,3})(?=[bcdfghjklmnpqrstvwxyz])/g,'$1-');
-  return r.replace(/mama/g,'mah-mah').replace(/mum/g,'mah-mah').replace(/asty/g,'as-ti').replace(/asmi/g,'as-mi');
+  return sanskritRoman(dev);
 }
 function sanskritForTTS(text){
   let t=toDevanagariSpeech(text);
-  t=t.replace(/ं(?=\s|$|[।॥,.!?;:])/g,'म्');
-  t=t.replace(/ः/g,'ह');
+  t=t.replace(/(^|[\s।॥])न हि(?=[\s।॥]|$)/g,'$1नहि').replace(/गृह्णाति/g,'ग्रिहनाति').replace(/क्रीडामि/g,'करीडामि');
+  t=t.replace(/सिंहस्य/g,'सिम्हस्य').replace(/सिंह/g,'सिम्ह');
+  t=t.replace(/सिद्ध्यन्ति/g,'सिद्धयन्ति');
+  t=t.replace(/ः/g,'');
+  t=t.replace(/ऋ/g,'रि').replace(/ॠ/g,'री').replace(/ज्ञ/g,'ग्य');
   t=t.replace(/[।॥]/g,'। ');
-  return t.replace(/\s+/g,' ').trim();
+  return keepOpenA(t).replace(/\s+/g,' ').trim();
 }
 function prepSanskritSpeech(text, indic){
   let t=String(text||'').replace(/\s+/g,' ').trim();
@@ -3040,7 +3074,7 @@ function runChallenge(card){
     {topic:'धातवः', q:'"सः ___ आम्रम्।" (he eats)', opts:['खादति','खादसि','खादामि'], a:0},
     {topic:'कथा', q:'In “Vedark and the mango”, the mango is...', opts:['blue','yellow','black'], a:1},
     {topic:'कथा', q:'In “Shuka and the sweet”, Shuka is a...', opts:['peacock','parrot','frog'], a:1},
-    {topic:'श्लोकाः', q:'उद्यमेन हि सिध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','पद्मानि'], a:0, audio:'कार्याणि'},
+    {topic:'श्लोकाः', q:'उद्यमेन हि सिद्ध्यन्ति ___ न मनोरथैः।', opts:['कार्याणि','मृगाः','पद्मानि'], a:0, audio:'कार्याणि'},
     {topic:'श्लोकाः', q:'The Panchatantra line “संहतिः कार्यसाधिका” is about...', opts:['sleeping','sticking together','eating sweets'], a:1, audio:'संहतिः कार्यसाधिका'},
   ];
   const topicScores={};
@@ -3171,7 +3205,7 @@ function renderShlokah(root){
   });
   sectionLabel(card, 'Garden check ⭐');
   renderQuiz(card, [
-    {q:'“Work, don’t just wish” is the moral of...', opts:['उद्यमेन हि सिध्यन्ति…','प्रियवाक्यप्रदानेन…','नाभिषेको न संस्कारः…'], a:0, audio:'उद्यमेन हि सिध्यन्ति'},
+    {q:'“Work, don’t just wish” is the moral of...', opts:['उद्यमेन हि सिद्ध्यन्ति…','प्रियवाक्यप्रदानेन…','नाभिषेको न संस्कारः…'], a:0, audio:'उद्यमेन हि सिद्ध्यन्ति'},
     {q:'संहतिः means...', opts:['sleeping','sticking together / unity','a yellow kite'], a:1, audio:'संहतिः'},
     {q:'Kind words make everyone happy. That shloka starts with...', opts:['आपत्काले','प्रियवाक्यप्रदानेन','उद्यमेन'], a:1, audio:'प्रियवाक्यप्रदानेन'},
     {q:'A friend in trouble is a real friend. True line?', opts:['यन्मित्रं मित्रमेव तत्','यन्मित्रं मोदकमेव तत्','यन्मित्रं सिंहमेव तत्'], a:0, audio:'यन्मित्रं मित्रमेव तत्'},

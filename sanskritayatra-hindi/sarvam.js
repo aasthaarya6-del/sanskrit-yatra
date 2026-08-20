@@ -17,54 +17,61 @@
     return 1;
   }
 
-  /* Hindi TTS reads Sanskrit better after visarga/anusvara/ऋ tweaks.
-     Spaces only on a few names — never between every word. */
+  /* Hindi TTS drops Sanskrit’s inherent “a” (मम → mum). A full letter
+     without a halant is still “ma / ra / na” — like mama, rama, karna. */
   const SAY = {
-    'नमस्ते': 'नमस्ते',
-    'धन्यवादः': 'धन्यवाद',
-    'धन्यवादह': 'धन्यवाद',
-    'वेदार्कः': 'वेदार्क',
-    'वेदार्कह': 'वेदार्क',
     'आर्षेणा': 'आरशेना',
-    'मयूरः': 'मयूर',
-    'मयूरह': 'मयूर',
-    'शुकः': 'शुक',
-    'शुकह': 'शुक',
-    'अर्जुनः': 'अर्जुन',
-    'अर्जुनह': 'अर्जुन',
-    'हिमया': 'हिमया',
-    'अस्ति': 'अस्ति',
-    'अस्मि': 'अस्मि',
-    'पुनर्मिलामः': 'पुनर मिलाम',
-    'पुनर्मिलामह': 'पुनर मिलाम',
-    'नमस्कारः': 'नमस्कार',
-    'संस्कृत': 'संस्कृत',
-    'यात्रा': 'यात्रा',
-    'गच्छामि': 'गच्छामि',
-    'पठामि': 'पठामि',
-    'खादामि': 'खादामि',
-    'उद्याने': 'उद्याने',
+    'गृह्णाति': 'ग्रिहनाति',
+    'क्रीडामि': 'करीडामि',
+    'सिंहस्य': 'सिम्हस्य',
+    'सिंह': 'सिम्ह',
+    'सिंहाः': 'सिम्हा',
+    'न हि': 'नहि',
+    'सिध्यन्ति': 'सिद्धयन्ति',
+    'सिद्ध्यन्ति': 'सिद्धयन्ति',
+    'पुनर्मिलामः': 'पुनर्मिलाम',
     'कक्षायां': 'कक्षायाम',
-    'पितृव्यः': 'पितृव्य',
-    'मातुलः': 'मातुल',
-    'भगिनी': 'भगिनी',
-    'एकविंशतिः': 'एक विंशति'
+    'एकविंशतिः': 'एकविंशति'
   };
+
+  function isSaCons(ch) {
+    if (!ch) return false;
+    const c = ch.charCodeAt(0);
+    return (c >= 0x0915 && c <= 0x0939) || (c >= 0x0958 && c <= 0x095F);
+  }
+  function isSaComb(ch) {
+    if (!ch) return false;
+    const c = ch.charCodeAt(0);
+    return (c >= 0x0900 && c <= 0x0903) || c === 0x093A || c === 0x093B ||
+      (c >= 0x093C && c <= 0x094F) || c === 0x0962 || c === 0x0963;
+  }
+  function keepOpenA(s) {
+    const chars = Array.from(s);
+    let out = '';
+    for (let i = 0; i < chars.length; i++) {
+      const ch = chars[i];
+      const next = chars[i + 1] || '';
+      if (isSaCons(ch) && !isSaComb(next)) out += ch + '्अ';
+      else out += ch;
+    }
+    return out;
+  }
 
   function speakable(text) {
     let t = String(text || '').replace(/\s+/g, ' ').trim();
     if (!t) return t;
+    t = t.replace(/(^|[\s।॥])न हि(?=[\s।॥]|$)/g, '$1नहि');
     t = t.split(/(\s+)/).map(function (part) {
-      const core = part.replace(/[।॥,.!?;:]+$/g, '');
-      const tail = part.slice(core.length);
-      return (SAY[core] || core) + tail;
+      const cut = part.match(/[।॥,.!?;:“”"‘’—\-]+$/);
+      const core = cut ? part.slice(0, -cut[0].length) : part;
+      return (SAY[core] || core) + (cut ? cut[0] : '');
     }).join('');
-    t = t.replace(/ः/g, 'ह');
-    t = t.replace(/ं(?=\s|$|[।॥,.!?;:])/g, 'म्');
+    t = t.replace(/ः/g, '');
     t = t.replace(/ऋ/g, 'रि');
     t = t.replace(/ॠ/g, 'री');
     t = t.replace(/ज्ञ/g, 'ग्य');
     t = t.replace(/[।॥]/g, '। ');
+    t = keepOpenA(t);
     return t.replace(/\s+/g, ' ').trim();
   }
 
